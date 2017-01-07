@@ -23,11 +23,6 @@ class NewsletterType extends AbstractType
             ->add('name',TextType::class,array('required' => true))
             ->add('week',TextType::class,array('required' => true))
             ->add('auteur',TextType::class,array('required' => false))
-            ->add('rubriques',CollectionType::class, array(
-                'entry_type'    => RubriqueType::class,
-                'allow_add'     => true,
-                'allow_delete'  => true
-            ))
             ->add('save',SubmitType::class);
     }
     

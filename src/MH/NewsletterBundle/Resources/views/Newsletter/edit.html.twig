@@ -1,14 +1,28 @@
 {% extends "MHNewsletterBundle::layout.html.twig" %}
 
 {% block title %}
-    Creation - {{ parent() }}
+    Edition - {{ parent() }}
 {% endblock %}
 
 {% block bundle_body %}
     <h2>Edition Newsletter</h2>
 
-    <div id="contain" class="row">
-
+    <div id="contain" >
+        {% for rubrique in newsletter.rubriques %}
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ rubrique.name }}<br>
+                        {% for post in rubrique %}
+                           {{ post.title }}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-4">
+                        <a class="btn btn-warning">Modifier</a>    <a class="btn btn-danger">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 
 
