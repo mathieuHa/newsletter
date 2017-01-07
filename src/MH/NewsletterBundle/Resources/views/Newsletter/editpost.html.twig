@@ -1,0 +1,84 @@
+{% extends "MHNewsletterBundle::layout.html.twig" %}
+
+{% block title %}
+    Creation - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Edition Newsletter</h2>
+    <div class="col-md-9">
+        <div id="entete" class="collapse">
+            {{ form_start(form) }}
+
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name) }}
+
+            {{ form_row(form.week) }}
+
+            {{ form_row(form.auteur) }}
+
+            {{ form_row(form.rubriques) }}
+            <a href="#" id="ajouter_rubrique" class="btn btn-primary">Ajouter une rubrique</a>
+
+            {{ form_rest(form) }}
+
+
+            {{ form_widget(form.Save,{'attr':{'class':'btn btn-primary'}}) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#entete">Cacher la Rubrique</button>
+    </div>
+    <hr>
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $container = $('div#mh_newsletterbundle_newsletter_rubriques');
+            var index = $container.find(':input').length;
+
+            $('#ajouter_rubrique').click(function (e) {
+                addRubrique($container);
+                e.preventDefault()
+                return false;
+            });
+
+            if (index == 0){
+                addRubrique($container);
+            } else {
+                $container.children('div').each(function () {
+                    addDeleteLink($(this));
+                });
+            }
+
+            function addRubrique($container) {
+                var template = $container.attr('data-prototype').replace(/__name__label__/g, 'Rubrique n_'+(+index+1)).replace(/__name__/g,index)
+                    ;
+
+                var $prototype = $(template);
+                addDeleteLink($prototype);
+                $container.append($prototype);
+                index++;
+            }
+
+            function addDeleteLink($prototype) {
+                var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+                $prototype.append($deleteLink);
+                $deleteLink.click(function (e) {
+                    $prototype.remove();
+                    e.preventDefault();
+                    return false;
+                });
+            }
+        });
+    </script>
+
+{% endblock %}
+

@@ -1,0 +1,33 @@
+mh_newsletter_home:
+    path:     /
+    defaults: { _controller: MHNewsletterBundle:Newsletter:index }
+
+mh_newsletter_create:
+    path:     /creation
+    defaults: { _controller: MHNewsletterBundle:Newsletter:create }
+
+mh_newsletter_view:
+    path:     /view/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:view
+    requirements:
+            id:   \d+
+
+mh_newsletter_edit:
+    path:     /edit/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:edit
+    requirements:
+            id:   \d+
+
+mh_newsletter_get:
+    path:     /editget/
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:get
+
+mh_newsletter_delete:
+    path:     /delete/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:delete
+    requirements:
+            id:   \d+

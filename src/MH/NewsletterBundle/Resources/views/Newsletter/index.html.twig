@@ -1,0 +1,44 @@
+{% extends "MHNewsletterBundle::layout.html.twig" %}
+
+{% block title %}
+     {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+        <a href="{{ path('mh_newsletter_create') }}" class="btn btn-primary">Créer une newsletter</a>
+    <h2>Liste des newsletters</h2>
+    <hr>
+
+    {% for newsletter in listNewsletter %}
+        <div class="panel panel-default">
+
+            <div class="panel-body" data-toggle="collapse" data-target="#info{{ newsletter.id }}">
+                <h3>{{ newsletter.name }} {{ newsletter.week }}</h3>
+                <i>   crée le {{ newsletter.date|date("m/d/Y à H:i:s", "Europe/Paris")|raw }}</i>
+
+                <div id="info{{ newsletter.id }}" class="collapse">
+                    <a href="{{ path('mh_newsletter_edit',{'id':newsletter.id}) }}" class="btn btn-default">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        Modifier la Newsletter
+                    </a>
+                    <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
+                        <i class="glyphicon glyphicon-expand"></i>
+                        Afficher la Newsletter
+                    </a>
+                    <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        Telecharger la Newsletter
+                    </a>
+                    <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        Supprimer la Newsletter
+                    </a>
+                    <br>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    <hr>
+ {% endblock %}
