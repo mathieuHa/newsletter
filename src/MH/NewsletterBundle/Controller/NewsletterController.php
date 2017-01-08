@@ -41,24 +41,40 @@ class NewsletterController extends Controller
         $rubrique->
             setPosition(0)
             ->setIcone("http://esiea.fr/e-bdo/icone-actu.png")
-            ->setImage("https://www.esiea.fr/wp-content/uploads/2016/09/actu-2.png")
+            ->setImage("https://www.esiea.fr/wp-content/uploads/2017/01/actu-ebdo-1.jpg")
             ->setName("Quoi de neuf");
-        $post = new Post();
-        $post
-            ->setTitre("Un post")
-            ->setContent("du Texte")
-            ->setPosition(0);
-        $rubrique
-            ->addPost($post);
         $newsletter->addRubrique($rubrique);
-
 
         $rubrique = new Rubrique();
         $rubrique->
         setPosition(1)
             ->setIcone("http://esiea.fr/e-bdo/icone-presse.png")
-            ->setImage("https://www.esiea.fr/wp-content/uploads/2016/09/presse-2.png")
+            ->setImage("https://www.esiea.fr/wp-content/uploads/2017/01/actu-ebdo-2.jpg")
             ->setName("Les écoles dans la presse");
+        $newsletter->addRubrique($rubrique);
+
+        $rubrique = new Rubrique();
+        $rubrique->
+        setPosition(2)
+            ->setIcone("http://esiea.fr/e-bdo/icone-campus.png")
+            ->setImage("https://www.esiea.fr/wp-content/uploads/2017/01/actu-ebdo-3.jpg")
+            ->setName("Vie des campus");
+        $newsletter->addRubrique($rubrique);
+
+        $rubrique = new Rubrique();
+        $rubrique->
+        setPosition(3)
+            ->setIcone("http://esiea.fr/e-bdo/icone-projet.png")
+            ->setImage("https://www.esiea.fr/wp-content/uploads/2017/01/actu-ebdo-4.jpg")
+            ->setName("Challenges & projets");
+        $newsletter->addRubrique($rubrique);
+
+        $rubrique = new Rubrique();
+        $rubrique->
+        setPosition(4)
+            ->setIcone("http://esiea.fr/e-bdo/icone-calendrier.png")
+            ->setImage("https://www.esiea.fr/wp-content/uploads/2017/01/actu-ebdo-5.jpg")
+            ->setName("A vos agendas");
         $newsletter->addRubrique($rubrique);
 
         $form = $this

@@ -574,14 +574,24 @@
                           </h2>
                         </td>
                       </tr>
-                      {#
+
                       <!-- ACTU -->
                       {% for post in rubrique.posts %}
-                          {% include "@App/newsletter/templates/post-#{post.type.slug}.html.twig" ignore missing %}
+                        <tr>
+                          <td class="column_cell one_column"
+                              style="padding: 5px 32px 5px 32px;vertical-align: top;text-align: left;">
+                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;padding: 0;font-weight: 600;font-size: large;line-height: 1.5;margin-top: 10px;margin-bottom: 0;color: #4c4c4c;">
+                              <span class="une" style="color:#4c4c4c">{{ post.titre }}</span>
+                            </h3>
+                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: medium;line-height: 1.5;margin-top: 16px;margin-bottom: 24px;color: #4c4c4c;">
+                                {{ post.content }}
+                            </p>
+                          </td>
+                        </tr>
                       {% endfor %}
 
                       {% if loop.last %}
-                      #}
+
                         <tr>
                           <td class="column_cell one_column list"
                               style="padding: 5px 32px 5px 32px;vertical-align: top;text-align: left;">
@@ -589,7 +599,7 @@
                               &nbsp;</p>
                           </td>
                         </tr>
-                      {#{% endif %}#}
+                      {% endif %}
                       </tbody>
                     </table><!-- end .content -->
 
