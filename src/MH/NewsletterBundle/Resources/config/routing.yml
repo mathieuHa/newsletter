@@ -31,3 +31,45 @@ mh_newsletter_delete:
         _controller: MHNewsletterBundle:Newsletter:delete
     requirements:
             id:   \d+
+
+mh_newsletter_rubrique_add:
+    path:     /rubrique/add/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Rubrique:add
+    requirements:
+            id:   \d+
+
+mh_newsletter_rubrique_edit:
+    path:     /rubrique/edit/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Rubrique:edit
+    requirements:
+            id:   \d+
+
+mh_newsletter_rubrique_delete:
+    path:     /rubrique/delete/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Rubrique:delete
+    requirements:
+            id:   \d+
+
+mh_newsletter_post_add:
+    path:     /post/add/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Post:edit
+    requirements:
+            id:   \d+
+
+mh_newsletter_post_edit:
+    path:     /post/edit/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Post:edit
+    requirements:
+            id:   \d+
+
+mh_newsletter_post_delete:
+    path:     /rubrique/delete/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Post:delete
+    requirements:
+            id:   \d+

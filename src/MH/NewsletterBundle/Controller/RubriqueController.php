@@ -57,25 +57,7 @@ class RubriqueController extends Controller
 
     }
 
-    public function getAction(Request $request)
-    {
-        $id = $request->query->get('id');
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
 
-        $normalizer->setCircularReferenceHandler(function ($newsletter) {
-            return $newsletter->getName();
-        });
-
-        $serializer = new Serializer(array($normalizer), array($encoder));
-        $json = $serializer->serialize($newsletter, 'json');
-        return new Response($json);
-
-    }
 
     public function addAction(Request $request)
     {
@@ -99,7 +81,6 @@ class RubriqueController extends Controller
         $form = $this
             ->get('form.factory')
             ->create();
-        /* la suppression des rubriques n'est pas fonctionnelle*/
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
             $em->remove($rubrique);
@@ -119,4 +100,24 @@ class RubriqueController extends Controller
                 'form'=>$form->createView()
             ));
     }
+
+    /* public function getAction(Request $request)
+    {
+        $id = $request->query->get('id');
+        $newsletter = $this
+            ->getDoctrine()
+            ->getRepository('MHNewsletterBundle:Newsletter')
+            ->find($id);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->setCircularReferenceHandler(function ($newsletter) {
+            return $newsletter->getName();
+        });
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+        $json = $serializer->serialize($newsletter, 'json');
+        return new Response($json);
+
+    }*/
 }

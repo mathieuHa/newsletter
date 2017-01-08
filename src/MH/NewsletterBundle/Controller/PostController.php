@@ -48,32 +48,13 @@ class PostController extends Controller
         }
 
 
-        return $this->render('MHNewsletterBundle:Rubrique:edit.html.twig', array(
+        return $this->render('MHNewsletterBundle:Post:edit.html.twig', array(
             'form'=>$form->createView(),
             'post'=>$post,
         ));
 
     }
 
-    public function getAction(Request $request)
-    {
-        $id = $request->query->get('id');
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-
-        $normalizer->setCircularReferenceHandler(function ($newsletter) {
-            return $newsletter->getName();
-        });
-
-        $serializer = new Serializer(array($normalizer), array($encoder));
-        $json = $serializer->serialize($newsletter, 'json');
-        return new Response($json);
-
-    }
 
     public function addAction(Request $request)
     {
@@ -85,35 +66,34 @@ class PostController extends Controller
         $em = $this
             ->getDoctrine()
             ->getManager();
-        $rubrique = $this
+        $post = $this
             ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Rubrique')
+            ->getRepository('MHNewsletterBundle:Post')
             ->find($id);
 
-        if (null === $rubrique) {
-            throw new NotFoundHttpException("La Rubrique ".$id." n'existe pas");
+        if (null === $post) {
+            throw new NotFoundHttpException("Le Post ".$id." n'existe pas");
         }
 
         $form = $this
             ->get('form.factory')
             ->create();
-        /* la suppression des rubriques n'est pas fonctionnelle*/
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
-            $em->remove($rubrique);
+            $em->remove($post);
             $em->flush();
 
             $this->addFlash(
                 'notice',
-                'Rubrique supprimée'
+                'Post supprimé'
             );
 
             return $this->redirectToRoute('mh_newsletter_home');
         }
 
         return $this
-            ->render('MHNewsletterBundle:Rubrique:delete.html.twig',array(
-                'rubrique'=>$rubrique,
+            ->render('MHNewsletterBundle:Post:delete.html.twig',array(
+                'post'=>$post,
                 'form'=>$form->createView()
             ));
     }
