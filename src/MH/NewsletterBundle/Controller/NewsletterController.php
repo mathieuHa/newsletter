@@ -3,6 +3,7 @@
 namespace MH\NewsletterBundle\Controller;
 
 use MH\NewsletterBundle\Entity\Newsletter;
+use MH\NewsletterBundle\Entity\Post;
 use MH\NewsletterBundle\Entity\Rubrique;
 use MH\NewsletterBundle\Form\NewsletterType;
 use MH\NewsletterBundle\Form\RubriqueType;
@@ -42,7 +43,16 @@ class NewsletterController extends Controller
             ->setIcone("http://esiea.fr/e-bdo/icone-actu.png")
             ->setImage("https://www.esiea.fr/wp-content/uploads/2016/09/actu-2.png")
             ->setName("Quoi de neuf");
+        /*$post = new Post();
+        $post
+            ->setTitre("Un post")
+            ->setContent("du Texte")
+            ->setPosition(0);
+        $rubrique
+            ->addPost($post);*/
         $newsletter->addRubrique($rubrique);
+
+
         $rubrique = new Rubrique();
         $rubrique->
         setPosition(1)
@@ -202,9 +212,7 @@ class NewsletterController extends Controller
             ->create();
         /* la suppression des rubriques n'est pas fonctionnelle*/
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-            foreach ($newsletter->getRubriques() as $rubrique){
-                $newsletter->removeRubrique($rubrique);
-            }
+
             $em->remove($newsletter);
             $em->flush();
 

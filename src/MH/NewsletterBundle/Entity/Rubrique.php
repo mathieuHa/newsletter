@@ -159,6 +159,8 @@ class Rubrique
     {
         $this->posts[] = $post;
 
+        $post->setRubrique($this);
+
         return $this;
     }
 

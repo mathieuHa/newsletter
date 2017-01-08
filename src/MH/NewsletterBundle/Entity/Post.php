@@ -36,7 +36,7 @@ class Post
     private $titre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MH\NewsletterBundle\Entity\Rubrique",inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="MH\NewsletterBundle\Entity\Rubrique",inversedBy="posts", cascade={"persist", "remove"})
      */
     private $rubrique;
 
