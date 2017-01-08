@@ -18,11 +18,11 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class RubriqueController extends Controller
 {
-    public function editAction (Request $request, $id)
+    public function editAction (Request $request, $id, $newsletter_id)
     {
         $rubrique = $this
             ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
+            ->getRepository('MHNewsletterBundle:Rubrique')
             ->find($id);
 
         $form = $this
@@ -44,8 +44,8 @@ class RubriqueController extends Controller
                     'notice','Rubrique mise à jour'
                 );
 
-            return $this->redirectToRoute('mh_rubrique_edit',array(
-                'id'=>$id
+            return $this->redirectToRoute('mh_newsletter_edit',array(
+                'id'=>$rubrique->getNewsletter()->getId()
             ));
         }
 
@@ -53,6 +53,8 @@ class RubriqueController extends Controller
         return $this->render('MHNewsletterBundle:Rubrique:edit.html.twig', array(
             'form'=>$form->createView(),
             'rubrique'=>$rubrique,
+            'id'=>$id,
+            'newsletter_id'=>$newsletter_id
         ));
 
     }
@@ -75,6 +77,7 @@ class RubriqueController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHNewsletterBundle:Newsletter')
                 ->find($id);
+            $rubrique->setPosition(0); // TEMPORAIRE A ENLEVER
             $newsletter->addRubrique($rubrique);
 
             $em->persist($newsletter);
@@ -86,17 +89,18 @@ class RubriqueController extends Controller
                 );
 
             return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$newsletter->getId()
+                'id'=>$id
             ));
         }
 
         return $this->render('MHNewsletterBundle:Rubrique:add.html.twig', array(
             'form'=>$form->createView(),
-            '$rubrique'=>$rubrique,
+            'rubrique'=>$rubrique,
+            'id'=>$id
         ));
     }
 
-    public function deleteAction (Request $request, $id)
+    public function deleteAction (Request $request, $id, $newsletter_id)
     {
         $em = $this
             ->getDoctrine()
@@ -129,6 +133,7 @@ class RubriqueController extends Controller
         return $this
             ->render('MHNewsletterBundle:Rubrique:delete.html.twig',array(
                 'rubrique'=>$rubrique,
+                'newsletter_id'=>$newsletter_id,
                 'form'=>$form->createView()
             ));
     }

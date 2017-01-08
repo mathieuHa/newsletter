@@ -15,14 +15,11 @@ class RubriqueType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('Icone')->add('Image')->add('position')->add('name')
-            /*->add('post',CollectionType::class, array(
-                'entry_type'    => PostType::class,
-                'allow_add'     => true,
-                'allow_delete'  => true
-            ))        */
+        $builder
+            ->add('name')
+            ->add('Icone')
+            ->add('Image')
             ->add('save',SubmitType::class);
-
     }
     
     /**

@@ -84,8 +84,6 @@ class NewsletterController extends Controller
             ));
         }
 
-
-
         return $this->render('MHNewsletterBundle:Newsletter:create.html.twig', array(
             'form'=>$form->createView(),
             '$newsletter'=>$newsletter,

@@ -11,10 +11,11 @@
     Souhaitez-vous poursuivre ?</p>
 
     <div class="well">
-        <form action="{{ path('mh_newsletter_post_delete', {'id':post.id}) }}" method="post">
+        <form action="{{ path('mh_newsletter_post_delete', {'id':post.id, 'newsletter_id':newsletter_id, 'rubrique_id':rubrique_id}) }}" method="post">
             <input type="submit" value="Supprimer" class="btn btn-danger"/>
             {{ form_rest(form) }}
         </form>
     </div>
+    <a class="btn btn-default" href="{{ path('mh_newsletter_edit', {'id': newsletter_id}) }}">Retour</a>
     <hr>
 {% endblock %}

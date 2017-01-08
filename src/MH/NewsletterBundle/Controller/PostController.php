@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class PostController extends Controller
 {
-    public function editAction (Request $request, $id)
+    public function editAction (Request $request, $id, $newsletter_id)
     {
         $post = $this
             ->getDoctrine()
@@ -43,8 +43,8 @@ class PostController extends Controller
                     'notice','Newsletter mise à jour'
                 );
 
-            return $this->redirectToRoute('mh_post_edit',array(
-                'id'=>$id
+            return $this->redirectToRoute('mh_newsletter_edit',array(
+                'id'=>$newsletter_id
             ));
         }
 
@@ -52,12 +52,14 @@ class PostController extends Controller
         return $this->render('MHNewsletterBundle:Post:edit.html.twig', array(
             'form'=>$form->createView(),
             'post'=>$post,
+            'id'=>$id,
+            'newsletter_id'=>$newsletter_id
         ));
 
     }
 
 
-    public function addAction(Request $request, $id)
+    public function addAction(Request $request, $id, $newsletter_id)
     {
         $post = new Post();
         $form = $this
@@ -73,6 +75,7 @@ class PostController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHNewsletterBundle:Rubrique')
                 ->find($id);
+            $post->setPosition(0);
             $rubrique->addPost($post);
 
             $em->persist($rubrique);
@@ -83,22 +86,24 @@ class PostController extends Controller
                     'notice','Post crée'
                 );
 
-            return $this->redirectToRoute('mh_newsletter_home');
+            return $this->redirectToRoute('mh_newsletter_edit',array(
+                'id'=>$newsletter_id
+            ));
         }
 
         return $this->render('MHNewsletterBundle:Post:add.html.twig', array(
             'form'=>$form->createView(),
-            '$post'=>$post,
+            'post'=>$post,
+            'id'=>$newsletter_id,
         ));
     }
 
-    public function deleteAction (Request $request, $id)
+    public function deleteAction (Request $request, $id, $newsletter_id, $rubrique_id)
     {
         $em = $this
             ->getDoctrine()
             ->getManager();
-        $post = $this
-            ->getDoctrine()
+        $post = $em
             ->getRepository('MHNewsletterBundle:Post')
             ->find($id);
 
@@ -111,7 +116,10 @@ class PostController extends Controller
             ->create();
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
-            $em->remove($post);
+            $rubrique = $em
+                ->getRepository('MHNewsletterBundle:Rubrique')
+                ->find($rubrique_id);
+            $rubrique->removePost($post);
             $em->flush();
 
             $this->addFlash(
@@ -119,13 +127,17 @@ class PostController extends Controller
                 'Post supprimé'
             );
 
-            return $this->redirectToRoute('mh_newsletter_home');
+            return $this->redirectToRoute('mh_newsletter_edit',array(
+                'id'=>$newsletter_id
+            ));
         }
 
         return $this
             ->render('MHNewsletterBundle:Post:delete.html.twig',array(
                 'post'=>$post,
-                'form'=>$form->createView()
+                'form'=>$form->createView(),
+                'newsletter_id'=>$newsletter_id,
+                'rubrique_id'=>$rubrique_id
             ));
     }
 }

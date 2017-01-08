@@ -39,11 +39,12 @@ mh_newsletter_rubrique_add:
     requirements:
             id:   \d+
 mh_newsletter_rubrique_edit:
-    path:     /rubrique/edit/{id}
+    path:     /rubrique/edit/{id}/{newsletter_id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:edit
     requirements:
             id:   \d+
+            newsletter_id:   \d+
 
 mh_newsletter_rubrique_delete:
     path:     /rubrique/delete/{id}
@@ -53,22 +54,26 @@ mh_newsletter_rubrique_delete:
             id:   \d+
 
 mh_newsletter_post_add:
-    path:     /post/add/{id}
+    path:     /post/add/{id}/{newsletter_id}
     defaults:
         _controller: MHNewsletterBundle:Post:add
     requirements:
             id:   \d+
+            newsletter_id:   \d+
 
 mh_newsletter_post_edit:
-    path:     /post/edit/{id}
+    path:     /post/edit/{id}/{newsletter_id}
     defaults:
         _controller: MHNewsletterBundle:Post:edit
     requirements:
             id:   \d+
+            newsletter_id:   \d+
 
 mh_newsletter_post_delete:
-    path:     /rubrique/delete/{id}
+    path:     /rubrique/delete/{id}/{newsletter_id}/{rubrique_id}
     defaults:
         _controller: MHNewsletterBundle:Post:delete
     requirements:
             id:   \d+
+            newsletter_id:   \d+
+            rubrique_id:   \d+
