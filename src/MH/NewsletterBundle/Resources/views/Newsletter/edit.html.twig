@@ -8,21 +8,30 @@
     <h2>Edition Newsletter</h2>
 
     <div id="contain" >
-        {% for rubrique in newsletter.rubriques %}
-            <div class="well">
-                <div class="row">
-                    <div class="col-md-8">
-                        {{ rubrique.name }}<br>
-                        {% for post in rubrique.posts %}
-                           {{ post.titre }}
-                        {% endfor %}
+        <div class="panel-group" id="accordion">
+            {% for rubrique in newsletter.rubriques %}
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#{{ rubrique.id }}">
+                                {{ rubrique.name }}</a>
+                        </h4>
                     </div>
-                    <div class="col-md-4">
-                        <a class="btn btn-warning">Modifier</a>    <a class="btn btn-danger">Supprimer</a>
+                    <div id="{{ rubrique.id }}" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            {% for post in rubrique.posts %}
+                                <div class="well well-sm">
+                                    {{ post.titre }}<br>
+                                </div>
+                            {% endfor %}
+                            <a class="btn btn-primary" href="{{ path('mh_newsletter_post_add', {'id': rubrique.id}    ) }}">new Post</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+            <br>
+            <a class="btn btn-primary" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" target="_blank">Ajouter une rubrique</a>
+        </div>
     </div>
 
 

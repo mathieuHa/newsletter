@@ -59,9 +59,41 @@ class RubriqueController extends Controller
 
 
 
-    public function addAction(Request $request)
+    public function addAction(Request $request, $id)
     {
+        $rubrique = new Rubrique();
+        $form = $this
+            ->get('form.factory')
+            ->create(RubriqueType::class,$rubrique);
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+            $newsletter = $this
+                ->getDoctrine()
+                ->getRepository('MHNewsletterBundle:Newsletter')
+                ->find($id);
+            $newsletter->addRubrique($rubrique);
+
+            $em->persist($newsletter);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Rubrique crée'
+                );
+
+            return $this->redirectToRoute('mh_newsletter_edit',array(
+                'id'=>$newsletter->getId()
+            ));
+        }
+
+        return $this->render('MHNewsletterBundle:Rubrique:add.html.twig', array(
+            'form'=>$form->createView(),
+            '$rubrique'=>$rubrique,
+        ));
     }
 
     public function deleteAction (Request $request, $id)

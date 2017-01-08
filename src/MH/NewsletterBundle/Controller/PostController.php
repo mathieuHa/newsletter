@@ -6,6 +6,7 @@ use MH\NewsletterBundle\Entity\Newsletter;
 use MH\NewsletterBundle\Entity\Post;
 use MH\NewsletterBundle\Entity\Rubrique;
 use MH\NewsletterBundle\Form\NewsletterType;
+use MH\NewsletterBundle\Form\PostType;
 use MH\NewsletterBundle\Form\RubriqueType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,9 +57,39 @@ class PostController extends Controller
     }
 
 
-    public function addAction(Request $request)
+    public function addAction(Request $request, $id)
     {
+        $post = new Post();
+        $form = $this
+            ->get('form.factory')
+            ->create(PostType::class,$post);
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+            $rubrique = $this
+                ->getDoctrine()
+                ->getRepository('MHNewsletterBundle:Rubrique')
+                ->find($id);
+            $rubrique->addPost($post);
+
+            $em->persist($rubrique);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Post crée'
+                );
+
+            return $this->redirectToRoute('mh_newsletter_home');
+        }
+
+        return $this->render('MHNewsletterBundle:Post:add.html.twig', array(
+            'form'=>$form->createView(),
+            '$post'=>$post,
+        ));
     }
 
     public function deleteAction (Request $request, $id)

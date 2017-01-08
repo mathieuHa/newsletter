@@ -38,7 +38,6 @@ mh_newsletter_rubrique_add:
         _controller: MHNewsletterBundle:Rubrique:add
     requirements:
             id:   \d+
-
 mh_newsletter_rubrique_edit:
     path:     /rubrique/edit/{id}
     defaults:
@@ -56,7 +55,7 @@ mh_newsletter_rubrique_delete:
 mh_newsletter_post_add:
     path:     /post/add/{id}
     defaults:
-        _controller: MHNewsletterBundle:Post:edit
+        _controller: MHNewsletterBundle:Post:add
     requirements:
             id:   \d+
 

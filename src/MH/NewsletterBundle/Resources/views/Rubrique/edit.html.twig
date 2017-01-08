@@ -8,18 +8,9 @@
     <h2>Edition Rubrique</h2>
 
     <div id="contain" >
-        {% for posts in rubrique.posts %}
-            <div class="well">
-                <div class="row">
-                    <div class="col-md-8">
-                        {{ post.titre }}<br>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="btn btn-warning">Modifier</a>    <a class="btn btn-danger">Supprimer</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+        <div class="well">
+            {{ form(form) }}
+        </div>
     </div>
 
 

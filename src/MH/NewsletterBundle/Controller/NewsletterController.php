@@ -43,13 +43,13 @@ class NewsletterController extends Controller
             ->setIcone("http://esiea.fr/e-bdo/icone-actu.png")
             ->setImage("https://www.esiea.fr/wp-content/uploads/2016/09/actu-2.png")
             ->setName("Quoi de neuf");
-        /*$post = new Post();
+        $post = new Post();
         $post
             ->setTitre("Un post")
             ->setContent("du Texte")
             ->setPosition(0);
         $rubrique
-            ->addPost($post);*/
+            ->addPost($post);
         $newsletter->addRubrique($rubrique);
 
 
@@ -98,7 +98,7 @@ class NewsletterController extends Controller
             ->getDoctrine()
             ->getRepository('MHNewsletterBundle:Newsletter')
             ->find($id);
-        return $this->render('MHNewsletterBundle:Newsletter:newsletter.html.twig',array(
+        return $this->render('MHNewsletterBundle:Template:newsletter.html.twig',array(
             'newsletter'=>$newsletter
         ));
     }
@@ -109,12 +109,6 @@ class NewsletterController extends Controller
             ->getDoctrine()
             ->getRepository('MHNewsletterBundle:Newsletter')
             ->find($id);
-        $rubrique = new Rubrique();
-
-        $formR = $this
-            ->get('form.factory')
-            ->create(RubriqueType::class,$rubrique);
-
         $form = $this
             ->get('form.factory')
             ->create(NewsletterType::class,$newsletter);
@@ -137,32 +131,10 @@ class NewsletterController extends Controller
             return $this->redirectToRoute('mh_newsletter_edit',array(
                 'id'=>$newsletter->getId()
             ));
-        } else if ($request->isMethod('POST') && $formR->handleRequest($request)->isValid())
-        {
-            $em = $this
-                ->getDoctrine()
-                ->getManager();
-
-            $newsletter->addRubrique($rubrique);
-
-            $em->persist($newsletter);
-            $em->flush();
-
-            $this
-                ->addFlash(
-                    'notice','Newsletter mise à jour'
-                );
-
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$newsletter->getId()
-            ));
         }
-
-
 
         return $this->render('MHNewsletterBundle:Newsletter:edit.html.twig', array(
             'form'=>$form->createView(),
-            'formR'=>$formR->createView(),
             'newsletter'=>$newsletter,
         ));
 
@@ -185,11 +157,6 @@ class NewsletterController extends Controller
         $serializer = new Serializer(array($normalizer), array($encoder));
         $json = $serializer->serialize($newsletter, 'json');
         return new Response($json);
-
-    }
-
-    public function addRubriqueAction(Request $request)
-    {
 
     }
 
