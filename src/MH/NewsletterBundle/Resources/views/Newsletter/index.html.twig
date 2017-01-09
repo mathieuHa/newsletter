@@ -14,7 +14,7 @@
 
             <div class="panel-body" data-toggle="collapse" data-target="#info{{ newsletter.id }}">
                 <h3>{{ newsletter.name }} {{ newsletter.week }}</h3>
-                <i>   crée le {{ newsletter.date|date("m/d/Y à H:i:s", "Europe/Paris")|raw }}</i>
+                <i>   crée le {{ newsletter.date|date("m/d/Y à H:i:s", "Europe/Paris")|raw }} par {{ newsletter.auteur }}</i>
 
                 <div id="info{{ newsletter.id }}" class="collapse">
                     <a href="{{ path('mh_newsletter_edit',{'id':newsletter.id}) }}" class="btn btn-default">

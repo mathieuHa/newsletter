@@ -8,8 +8,10 @@ use MH\NewsletterBundle\Entity\Rubrique;
 use MH\NewsletterBundle\Form\NewsletterType;
 use MH\NewsletterBundle\Form\RubriqueType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -138,6 +140,27 @@ class RubriqueController extends Controller
                 'newsletter_id'=>$newsletter_id,
                 'form'=>$form->createView()
             ));
+    }
+
+    public function orderAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        if ($request->isMethod('POST') && $request->request->has('rubriques') && is_array($rubriques = $request->request->get('rubriques'))) {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('MHNewsletterBundle:Rubrique');
+            foreach ((array)$rubriques as $i => $rubrique_id) {
+                $rubrique = $repository->find($rubrique_id);
+                $rubrique->setPosition($i);
+            }
+            $em->flush();
+            return new JsonResponse(array(
+                'status' => 'ok',
+            ));
+        } else {
+            throw new BadRequestHttpException('No posts in request');
+        }
     }
 
     /* public function getAction(Request $request)

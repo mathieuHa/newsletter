@@ -54,6 +54,11 @@ mh_newsletter_rubrique_delete:
             id:   \d+
             newsletter_id:   \d+
 
+mh_newsletter_rubrique_order:
+    path:     /rubrique/order
+    defaults:
+        _controller: MHNewsletterBundle:Rubrique:order
+
 mh_newsletter_post_add:
     path:     /post/add/{id}/{newsletter_id}
     defaults:
@@ -66,7 +71,6 @@ mh_newsletter_post_order:
     path:     /post/order
     defaults:
         _controller: MHNewsletterBundle:Post:order
-    requirements:
 
 mh_newsletter_post_edit:
     path:     /post/edit/{id}/{newsletter_id}
