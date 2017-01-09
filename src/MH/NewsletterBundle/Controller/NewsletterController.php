@@ -179,8 +179,7 @@ class NewsletterController extends Controller
         $em = $this
             ->getDoctrine()
             ->getManager();
-        $newsletter = $this
-            ->getDoctrine()
+        $newsletter = $em
             ->getRepository('MHNewsletterBundle:Newsletter')
             ->find($id);
 
@@ -191,7 +190,6 @@ class NewsletterController extends Controller
         $form = $this
             ->get('form.factory')
             ->create();
-        /* la suppression des rubriques n'est pas fonctionnelle*/
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
             $em->remove($newsletter);

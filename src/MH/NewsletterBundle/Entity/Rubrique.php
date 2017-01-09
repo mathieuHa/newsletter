@@ -36,7 +36,7 @@ class Rubrique
     private $Image;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MH\NewsletterBundle\Entity\Newsletter",inversedBy="rubriques", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="MH\NewsletterBundle\Entity\Newsletter",inversedBy="rubriques", cascade={"persist"})
      */
     private $newsletter;
 

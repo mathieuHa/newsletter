@@ -116,10 +116,7 @@ class PostController extends Controller
             ->create();
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
-            $rubrique = $em
-                ->getRepository('MHNewsletterBundle:Rubrique')
-                ->find($rubrique_id);
-            $rubrique->removePost($post);
+            $em->remove($post);
             $em->flush();
 
             $this->addFlash(

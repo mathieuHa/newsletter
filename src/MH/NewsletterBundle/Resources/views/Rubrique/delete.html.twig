@@ -11,7 +11,7 @@
     Souhaitez-vous poursuivre ?</p>
 
     <div class="well">
-        <form action="{{ path('mh_newsletter_rubrique_delete', {'id':rubrique.id}) }}" method="post">
+        <form action="{{ path('mh_newsletter_rubrique_delete', {'id':rubrique.id, 'newsletter_id':newsletter_id}) }}" method="post">
             <input type="submit" value="Supprimer" class="btn btn-danger"/>
             {{ form_rest(form) }}
         </form>

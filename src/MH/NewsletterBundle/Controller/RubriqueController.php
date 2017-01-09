@@ -105,8 +105,7 @@ class RubriqueController extends Controller
         $em = $this
             ->getDoctrine()
             ->getManager();
-        $rubrique = $this
-            ->getDoctrine()
+        $rubrique = $em
             ->getRepository('MHNewsletterBundle:Rubrique')
             ->find($id);
 
@@ -127,12 +126,15 @@ class RubriqueController extends Controller
                 'Rubrique supprimée'
             );
 
-            return $this->redirectToRoute('mh_newsletter_home');
+            return $this->redirectToRoute('mh_newsletter_edit',array(
+                'id'=>$newsletter_id
+            ));
         }
 
         return $this
             ->render('MHNewsletterBundle:Rubrique:delete.html.twig',array(
                 'rubrique'=>$rubrique,
+                'id'=>$id,
                 'newsletter_id'=>$newsletter_id,
                 'form'=>$form->createView()
             ));

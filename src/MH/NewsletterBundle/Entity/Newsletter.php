@@ -11,7 +11,7 @@ use MH\NewsletterBundle\Form\NewsletterType;
  *
  * @ORM\Table(name="newsletter")
  * @ORM\Entity(repositoryClass="MH\NewsletterBundle\Repository\NewsletterRepository")
- * @ORM\HasLifeCycleCallBacks()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Newsletter
 {
@@ -60,7 +60,7 @@ class Newsletter
     private $updateAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="MH\NewsletterBundle\Entity\Rubrique",mappedBy="newsletter" , cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="MH\NewsletterBundle\Entity\Rubrique",mappedBy="newsletter" , cascade={"persist","remove"})
      */
     private $rubriques;
 

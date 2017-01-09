@@ -47,11 +47,12 @@ mh_newsletter_rubrique_edit:
             newsletter_id:   \d+
 
 mh_newsletter_rubrique_delete:
-    path:     /rubrique/delete/{id}
+    path:     /rubrique/delete/{id}/{newsletter_id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:delete
     requirements:
             id:   \d+
+            newsletter_id:   \d+
 
 mh_newsletter_post_add:
     path:     /post/add/{id}/{newsletter_id}
