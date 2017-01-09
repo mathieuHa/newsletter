@@ -62,6 +62,12 @@ mh_newsletter_post_add:
             id:   \d+
             newsletter_id:   \d+
 
+mh_newsletter_post_order:
+    path:     /post/order
+    defaults:
+        _controller: MHNewsletterBundle:Post:order
+    requirements:
+
 mh_newsletter_post_edit:
     path:     /post/edit/{id}/{newsletter_id}
     defaults:

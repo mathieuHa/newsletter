@@ -9,8 +9,10 @@ use MH\NewsletterBundle\Form\NewsletterType;
 use MH\NewsletterBundle\Form\PostType;
 use MH\NewsletterBundle\Form\RubriqueType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -136,5 +138,26 @@ class PostController extends Controller
                 'newsletter_id'=>$newsletter_id,
                 'rubrique_id'=>$rubrique_id
             ));
+    }
+
+    public function orderAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        if ($request->isMethod('POST') && $request->request->has('posts') && is_array($posts = $request->request->get('posts'))) {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('MHNewsletterBundle:Post');
+            foreach ((array)$posts as $i => $post_id) {
+                $post = $repository->find($post_id);
+                $post->setPosition($i);
+            }
+            $em->flush();
+            return new JsonResponse(array(
+                'status' => 'ok',
+            ));
+        } else {
+            throw new BadRequestHttpException('No posts in request');
+        }
     }
 }
