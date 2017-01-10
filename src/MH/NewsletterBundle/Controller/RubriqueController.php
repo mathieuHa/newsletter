@@ -159,7 +159,7 @@ class RubriqueController extends Controller
                 'status' => 'ok',
             ));
         } else {
-            throw new BadRequestHttpException('No posts in request');
+            throw new BadRequestHttpException('No rubriques in request');
         }
     }
 

@@ -20,6 +20,11 @@ mh_newsletter_edit:
     requirements:
             id:   \d+
 
+mh_newsletter_order:
+    path:     /order
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:order
+
 mh_newsletter_edit_header:
     path:     /edit/header/{id}
     defaults:

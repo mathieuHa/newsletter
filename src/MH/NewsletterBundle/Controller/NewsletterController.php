@@ -8,8 +8,10 @@ use MH\NewsletterBundle\Entity\Rubrique;
 use MH\NewsletterBundle\Form\NewsletterType;
 use MH\NewsletterBundle\Form\RubriqueType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -35,7 +37,8 @@ class NewsletterController extends Controller
         $newsletter = new Newsletter();
         $newsletter
             ->setName("une newsletter")
-            ->setWeek("Semaine 1");
+            ->setWeek("Semaine 1")
+            ->setPosition(0);
 
         $rubrique = new Rubrique();
         $rubrique->
@@ -242,5 +245,26 @@ class NewsletterController extends Controller
                 'newsletter'=>$newsletter,
                 'form'=>$form->createView()
             ));
+    }
+
+    public function orderAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        if ($request->isMethod('POST') && $request->request->has('newsletters') && is_array($newsletters = $request->request->get('newsletters'))) {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('MHNewsletterBundle:Newsletter');
+            foreach ((array)$newsletters as $i => $newsletter_id) {
+                $newsletter = $repository->find($newsletter_id);
+                $newsletter->setPosition($i);
+            }
+            $em->flush();
+            return new JsonResponse(array(
+                'status' => 'ok',
+            ));
+        } else {
+            throw new BadRequestHttpException('No Newsletter in request');
+        }
     }
 }
