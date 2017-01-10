@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="MH\NewsletterBundle\Repository\PostRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Post
 {
@@ -38,14 +39,14 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="lien", type="string", length=255)
+     * @ORM\Column(name="lien", type="string", length=255, nullable=true)
      */
     private $lien;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="textelien", type="string", length=255)
+     * @ORM\Column(name="textelien", type="string", length=255, nullable=true)
      */
     private $textelien;
 
@@ -261,6 +262,16 @@ class Post
     }
 
     /**
+     * @ORM\PostUpdate
+     * @ORM\PostRemove
+     * @ORM\PostPersist
+     */
+    public function updateDate ()
+    {
+        $this->getRubrique()->getNewsletter()->updateDate();
+    }
+
+    /**
      * Get textelien
      *
      * @return string
@@ -269,6 +280,8 @@ class Post
     {
         return $this->textelien;
     }
+
+
 
 
 }

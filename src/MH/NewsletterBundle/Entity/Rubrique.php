@@ -267,6 +267,16 @@ class Rubrique
     }
 
     /**
+     * @ORM\PostUpdate
+     * @ORM\PostRemove
+     * @ORM\PostPersist
+     */
+    public function updateDate ()
+    {
+        $this->getNewsletter()->updateDate();
+    }
+
+    /**
      * Get soustitre
      *
      * @return string
