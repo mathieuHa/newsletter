@@ -1,0 +1,21 @@
+{% extends "MHNewsletterBundle::layout.html.twig" %}
+
+{% block title %}
+    Envoi - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Envoyer une Newsletter</h2>
+    <hr>
+
+    <i>Newsletter : {{ newsletter.name }} crée le {{ newsletter.date|date("m/d/Y à H:i:s", "Europe/Paris") }} par {{ newsletter.auteur }}</i>
+
+    <div class="well">
+            <a href="{{ path('mh_newsletter_home') }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour à la liste
+            </a>
+            {{ form(form) }}
+    </div>
+    <hr>
+{% endblock %}

@@ -5,8 +5,10 @@ namespace MH\NewsletterBundle\Controller;
 use MH\NewsletterBundle\Entity\Newsletter;
 use MH\NewsletterBundle\Entity\Post;
 use MH\NewsletterBundle\Entity\Rubrique;
+use MH\NewsletterBundle\Entity\User;
 use MH\NewsletterBundle\Form\NewsletterType;
 use MH\NewsletterBundle\Form\RubriqueType;
+use MH\NewsletterBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -243,6 +245,58 @@ class NewsletterController extends Controller
         return $this
             ->render('MHNewsletterBundle:Newsletter:delete.html.twig',array(
                 'newsletter'=>$newsletter,
+                'form'=>$form->createView()
+            ));
+    }
+
+    public function mailAction (Request $request, $id)
+    {
+        $em = $this
+            ->getDoctrine()
+            ->getManager();
+        $newsletter = $em
+            ->getRepository('MHNewsletterBundle:Newsletter')
+            ->find($id);
+
+        if (null === $newsletter) {
+            throw new NotFoundHttpException("La newsletter ".$id." n'existe pas");
+        }
+
+        $user = new User();
+        $user->setMail('hanotaux@et.esiea.fr')->setNom('Mathieu');
+
+        $form = $this
+            ->get('form.factory')
+            ->create(UserType::class,$user);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Email Ebdo Test')
+                ->setFrom('hanotaux@et.esiea.fr')
+                ->setTo($user->getMail())
+                ->setBody(
+                    $this->renderView(
+                    // app/Resources/views/Emails/registration.html.twig
+                        'MHNewsletterBundle:Template:newsletter.html.twig',
+                        array('newsletter' => $newsletter)
+                    ),
+                    'text/html'
+                )
+
+            ;
+            $this->get('mailer')->send($message);
+
+            $this->addFlash(
+                'notice',
+                'Newsletter envoyé à '.$user->getMail()
+            );
+
+            return $this->redirectToRoute('mh_newsletter_home');
+        }
+
+        return $this
+            ->render('MHNewsletterBundle:Newsletter:mail.html.twig',array(
+                'newsletter'=>$newsletter,
+                'user'=>$user,
                 'form'=>$form->createView()
             ));
     }

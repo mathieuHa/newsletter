@@ -95,6 +95,12 @@
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <a class="btn btn-warning" href="{{ path('mh_newsletter_edit_header',  {'id': newsletter.id}    ) }}">Modifier L'entête</a>
                 </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <a href="{{ path('mh_newsletter_mail',{'id':newsletter.id}) }}" class="btn btn-default" target="_blank">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        Mail
+                    </a>
+                </div>
             </div>
 
         </div>

@@ -25,6 +25,13 @@ mh_newsletter_order:
     defaults:
         _controller: MHNewsletterBundle:Newsletter:order
 
+mh_newsletter_mail:
+    path:     /mail/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:mail
+    requirements:
+            id:   \d+
+
 mh_newsletter_edit_header:
     path:     /edit/header/{id}
     defaults:
