@@ -64,6 +64,7 @@ class PostController extends Controller
     public function addAction(Request $request, $id, $newsletter_id)
     {
         $post = new Post();
+        $post->setTextelien('Lire');
         $form = $this
             ->get('form.factory')
             ->create(PostType::class,$post);

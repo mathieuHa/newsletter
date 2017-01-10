@@ -542,7 +542,7 @@
                   </tbody>
                 </table><!-- end .header -->
 
-                  {% for rubrique in newsletter.rubriques %}
+                  {% for rubrique in newsletter.rubriques | sortbyfield('position') %}
 
                     <!-- IMAGE ACTU -->
                     <table class="content_image" width="100%" border="0" cellspacing="0" cellpadding="0"
@@ -576,18 +576,12 @@
                       </tr>
 
                       <!-- ACTU -->
-                      {% for post in rubrique.posts %}
-                        <tr>
-                          <td class="column_cell one_column"
-                              style="padding: 5px 32px 5px 32px;vertical-align: top;text-align: left;">
-                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;padding: 0;font-weight: 600;font-size: large;line-height: 1.5;margin-top: 10px;margin-bottom: 0;color: #4c4c4c;">
-                              <span class="une" style="color:#4c4c4c">{{ post.titre }}</span>
-                            </h3>
-                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: medium;line-height: 1.5;margin-top: 16px;margin-bottom: 24px;color: #4c4c4c;">
-                                {{ post.content }}
-                            </p>
-                          </td>
-                        </tr>
+                      {% for post in rubrique.posts | sortbyfield('position') %}
+                          {% if post.date %}
+                              {% include "MHNewsletterBundle:Template:agenda.html.twig" ignore missing %}
+                          {% else %}
+                              {% include "MHNewsletterBundle:Template:post.html.twig" ignore missing %}
+                          {% endif %}
                       {% endfor %}
 
                       {% if loop.last %}
@@ -606,17 +600,17 @@
                   {% endfor %}
 
                 <!-- FOOTER -->
-                <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0"
-                       style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #f5f5f5;">
+                <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #f5f5f5;">
                   <tbody>
                   <tr>
-                    <td align="center" class="footer_cell font_default"
-                        style="padding: 16px 32px 8px;font-family: Helvetica, Arial, sans-serif;">
-                      <p style="font-family: Helvetica, Arial, sans-serif;font-size: small;line-height: 1.5;margin-top: 16px;margin-bottom: 24px;color: #999999;">
-                      </p></td>
+                    <td align="center" class="footer_cell font_default" style="padding: 16px 32px 8px;font-family: Helvetica, Arial, sans-serif;">
+                      <p style="font-family: Helvetica, Arial, sans-serif;font-size: small;line-height: 1.5;margin-top: 16px;margin-bottom: 24px;color: #999999;"><b>Service Communication & Admissions du Groupe ESIEA</b><br>
+                        <a href="tel:+33143902116" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;"><span style="color: #999999;text-decoration: none;">01 43 90 21 16</span></a> &nbsp;&nbsp; <a href="mailto:communication@esiea.fr" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;">communication@esiea.fr</a><br>
+                        <a href="https://www.facebook.com/esiea" target="_blank" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;">Facebook</a> &nbsp;&nbsp; <a href="https://twitter.com/groupeesiea?lang=fr" target="_blank" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;">Twitter</a> &nbsp;&nbsp; <a target="_blank" href="http://www.scoop.it/t/esiea" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;"><span style="color: #999999;text-decoration: none;">Soop.It</span></a> &nbsp;&nbsp; <a href="http://www.esiea.fr" target="_blank" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;"><span style="color: #999999;text-decoration: none;">www.esiea.fr</span></a> &nbsp;&nbsp; <a href="http://www.intechinfo.fr" target="_blank" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #999999;font-size: small;"><span style="color: #999999;text-decoration: none;">www.intechinfo.fr</span></a></p></td>
                   </tr>
                   </tbody>
                 </table><!-- end .footer -->
+
 
               </td>
             </tr>

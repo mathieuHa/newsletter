@@ -24,7 +24,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
 
@@ -34,6 +34,27 @@ class Post
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lien", type="string", length=255)
+     */
+    private $lien;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="textelien", type="string", length=255)
+     */
+    private $textelien;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="date", type="boolean")
+     */
+    private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity="MH\NewsletterBundle\Entity\Rubrique",inversedBy="posts", cascade={"persist"})
@@ -152,4 +173,102 @@ class Post
     {
         return $this->position;
     }
+
+    /**
+     * Set date
+     *
+     * @param boolean $date
+     *
+     * @return Post
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return boolean
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     *
+     * @return Post
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set lien
+     *
+     * @param string $lien
+     *
+     * @return Post
+     */
+    public function setLien($lien)
+    {
+        $this->lien = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Get lien
+     *
+     * @return string
+     */
+    public function getLien()
+    {
+        return $this->lien;
+    }
+
+    /**
+     * Set textelien
+     *
+     * @param string $textelien
+     *
+     * @return Post
+     */
+    public function setTextelien($textelien)
+    {
+        $this->textelien = $textelien;
+
+        return $this;
+    }
+
+    /**
+     * Get textelien
+     *
+     * @return string
+     */
+    public function getTextelien()
+    {
+        return $this->textelien;
+    }
+
+
 }

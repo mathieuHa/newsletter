@@ -2,6 +2,7 @@
 
 namespace MH\NewsletterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +61,13 @@ class Rubrique
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="soustitre", type="text", nullable=true)
+     */
+    private $soustitre;
+
+    /**
      * Get id
      *
      * @return int
@@ -74,6 +82,18 @@ class Rubrique
     public function __construct()
     {
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __clone() {
+        if ($this->id) {
+            $posts = $this->getPosts();
+            $this->posts = new ArrayCollection();
+            foreach ($posts as $post)
+            {
+                $clonepost = clone $post;
+                $this->addPost($clonepost);
+            }
+        }
     }
 
     /**
@@ -230,5 +250,29 @@ class Rubrique
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set soustitre
+     *
+     * @param string $soustitre
+     *
+     * @return Rubrique
+     */
+    public function setSoustitre($soustitre)
+    {
+        $this->soustitre = $soustitre;
+
+        return $this;
+    }
+
+    /**
+     * Get soustitre
+     *
+     * @return string
+     */
+    public function getSoustitre()
+    {
+        return $this->soustitre;
     }
 }

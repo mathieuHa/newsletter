@@ -117,7 +117,42 @@ class NewsletterController extends Controller
         ));
     }
 
-    public function editAction (Request $request, $id)
+    public function editAction ($id)
+    {
+        $newsletter = $this
+            ->getDoctrine()
+            ->getRepository('MHNewsletterBundle:Newsletter')
+            ->find($id);
+
+        return $this->render('MHNewsletterBundle:Newsletter:edit.html.twig', array(
+            'newsletter'=>$newsletter,
+        ));
+    }
+
+    public function copyAction ($id)
+    {
+        $newsletter = $this
+            ->getDoctrine()
+            ->getRepository('MHNewsletterBundle:Newsletter')
+            ->find($id);
+        $new = clone $newsletter;
+        $new->setName($newsletter->getName().' copie');
+        $new->setDate(new \DateTime());
+        $new->setUpdateAt($new->getDate());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($new);
+        $em->flush();
+
+        $this
+            ->addFlash(
+                'notice','Newsletter copiée'
+            );
+
+        return $this->redirectToRoute('mh_newsletter_home');
+    }
+
+    public function editHeaderAction (Request $request, $id)
     {
         $newsletter = $this
             ->getDoctrine()
@@ -133,7 +168,6 @@ class NewsletterController extends Controller
                 ->getDoctrine()
                 ->getManager();
 
-
             $em->persist($newsletter);
             $em->flush();
 
@@ -147,7 +181,7 @@ class NewsletterController extends Controller
             ));
         }
 
-        return $this->render('MHNewsletterBundle:Newsletter:edit.html.twig', array(
+        return $this->render('MHNewsletterBundle:Newsletter:edit-header.html.twig', array(
             'form'=>$form->createView(),
             'newsletter'=>$newsletter,
         ));

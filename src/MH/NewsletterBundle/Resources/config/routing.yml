@@ -20,6 +20,13 @@ mh_newsletter_edit:
     requirements:
             id:   \d+
 
+mh_newsletter_edit_header:
+    path:     /edit/header/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:editheader
+    requirements:
+            id:   \d+
+
 mh_newsletter_get:
     path:     /editget/
     defaults:
@@ -29,6 +36,13 @@ mh_newsletter_delete:
     path:     /delete/{id}
     defaults:
         _controller: MHNewsletterBundle:Newsletter:delete
+    requirements:
+            id:   \d+
+
+mh_newsletter_copy:
+    path:     /copy/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:copy
     requirements:
             id:   \d+
 

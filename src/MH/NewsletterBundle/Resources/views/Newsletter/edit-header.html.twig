@@ -1,0 +1,21 @@
+{% extends "MHNewsletterBundle::layout.html.twig" %}
+
+{% block title %}
+    Edition Header - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+
+    <h2>Edition Header</h2>
+    <hr>
+
+    {{ form(form) }}
+    <a class="btn btn-default" href="{{ path('mh_newsletter_edit', {'id':newsletter.id} ) }}">Retour</a>
+  
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

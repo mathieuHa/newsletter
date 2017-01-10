@@ -134,6 +134,18 @@ class Newsletter
         $this->auteur = "communication";
     }
 
+    public function __clone() {
+        if ($this->id) {
+            $rubriques = $this->getRubriques();
+            $this->rubriques = new ArrayCollection();
+            foreach ($rubriques as $rubrique)
+            {
+              $clonerubrique = clone $rubrique;
+              $this->addRubrique($clonerubrique);
+            }
+        }
+    }
+
     /**
      * @ORM\PreUpdate
      */
