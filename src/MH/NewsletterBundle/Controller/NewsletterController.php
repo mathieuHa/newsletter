@@ -169,6 +169,7 @@ class NewsletterController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
+            $newsletter->udpateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();

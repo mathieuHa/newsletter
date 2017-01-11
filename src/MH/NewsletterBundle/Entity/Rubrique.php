@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="rubrique")
  * @ORM\Entity(repositoryClass="MH\NewsletterBundle\Repository\RubriqueRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Rubrique
 {

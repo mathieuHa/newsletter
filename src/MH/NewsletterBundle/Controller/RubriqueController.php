@@ -33,6 +33,7 @@ class RubriqueController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
+            $rubrique->getNewsletter()->updateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -79,6 +80,7 @@ class RubriqueController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHNewsletterBundle:Newsletter')
                 ->find($id);
+            $newsletter->updateDate();
             $rubrique->setPosition(0); // TEMPORAIRE A ENLEVER
             $newsletter->addRubrique($rubrique);
 
@@ -119,7 +121,7 @@ class RubriqueController extends Controller
             ->get('form.factory')
             ->create();
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-
+            $rubrique->getNewsletter()->updateDate();
             $em->remove($rubrique);
             $em->flush();
 

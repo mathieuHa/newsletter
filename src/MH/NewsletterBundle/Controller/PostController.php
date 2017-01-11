@@ -33,6 +33,7 @@ class PostController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
+            $post->getRubrique()->getNewsletter()->updateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -78,6 +79,7 @@ class PostController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHNewsletterBundle:Rubrique')
                 ->find($id);
+            $rubrique->getNewsletter()->updateDate();
             $post->setPosition(0);
             $rubrique->addPost($post);
 
@@ -119,6 +121,7 @@ class PostController extends Controller
             ->create();
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
+            $post->getRubrique()->getNewsletter()->updateDate();
             $em->remove($post);
             $em->flush();
 
