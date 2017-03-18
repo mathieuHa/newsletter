@@ -45,9 +45,9 @@ class Agenda
     /**
      * @var string
      *
-     * @ORM\Column(name="textelien1", type="string", length=255)
+     * @ORM\Column(name="textlien1", type="string", length=255)
      */
-    private $textelien1;
+    private $textlien1;
 
     /**
      * @var string
@@ -650,5 +650,29 @@ class Agenda
     public function getLien4()
     {
         return $this->lien4;
+    }
+
+    /**
+     * Set textlien1
+     *
+     * @param string $textlien1
+     *
+     * @return Agenda
+     */
+    public function setTextlien1($textlien1)
+    {
+        $this->textlien1 = $textlien1;
+
+        return $this;
+    }
+
+    /**
+     * Get textlien1
+     *
+     * @return string
+     */
+    public function getTextlien1()
+    {
+        return $this->textlien1;
     }
 }

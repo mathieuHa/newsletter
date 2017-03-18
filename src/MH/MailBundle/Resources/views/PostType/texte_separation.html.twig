@@ -1,0 +1,36 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Edition - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Texte Séparation</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            <h4>Rendu Actuel</h4>
+            {% if post.texte is not null %}
+                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="600">
+                    <tbody>
+                    {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
+                    </tbody>
+                </table>
+            {% else %}
+                <img src="{{ asset('bundles/mhmail/images/texte_separation.jpg') }}" alt="Exemple de texte séparation" width="700"  />"
+            {% endif %}
+
+            <hr>
+            {{ form(form) }}
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

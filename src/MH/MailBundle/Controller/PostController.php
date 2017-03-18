@@ -4,6 +4,7 @@ namespace MH\MailBundle\Controller;
 
 
 use MH\MailBundle\Form\PostType;
+use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +78,6 @@ class PostController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $mail->updateDate();
             $post->setPosition(0); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
 
@@ -101,6 +101,8 @@ class PostController extends Controller
         ));
     }
 
+
+
     public function deleteAction (Request $request, $id, $mail_id)
     {
         $em = $this
@@ -118,7 +120,6 @@ class PostController extends Controller
             ->get('form.factory')
             ->create();
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-            $post->getMail()->updateDate();
             $em->remove($post);
             $em->flush();
 

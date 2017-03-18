@@ -26,10 +26,12 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">Janvier</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">
+                                                                {{ post.agenda.mois1 }}
+                                                            </td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">20</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour1 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -38,9 +40,9 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><span style="color: rgb(0,134,199)"><a href="http://www.esiea.fr/admission-ecole-ingenieurs/admission-post-bac-ingenieur">Concours Alpha</a></span></b><span style="font-size: small"><b><br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><span style="color: rgb(0,134,199)"><a href="{{ post.agenda.lien1 }}">{{ post.agenda.textlien1 }}</a></span></b><span style="font-size: small"><b><br />
                                                         </b></span></font><br />
-                                        <font size="2" face="Arial">                                     <span style="font-size: x-small">D&eacute;but des inscriptions sur APB<br />
+                                        <font size="2" face="Arial">                                     <span style="font-size: x-small">{{ post.agenda.texte1 }}<br />
                                                         </span>                                     </font></td>
                                     <td width="10%" valign="top" align="left">
                                         <table width="80" cellspacing="0" cellpadding="0" border="0" style="border-top: #cccccc 1px solid; border-right: #cccccc 1px solid; border-bottom: #cccccc 1px solid; border-left: #cccccc 1px solid; background-color: #ffffff">
@@ -50,10 +52,10 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">Mars</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">{{ post.agenda.mois2 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">12</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour2 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -62,9 +64,9 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="http://www.esiea.fr/ecole-ingenieurs/journees-portes-ouvertes-esiea#1&amp;#utm_source=oscar&amp;utm_medium=newsletter&amp;utm_campaign=NLnov15">Journ&eacute;e Portes Ouvertes<br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.lien2 }}">{{ post.agenda.textlien2 }}<br />
                                                 </a></b></font><br />
-                                        <span style="font-family: Arial"><span style="font-size: x-small">Campus de Paris</span></span></td>
+                                        <span style="font-family: Arial"><span style="font-size: x-small">{{ post.agenda.texte2 }}</span></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -83,10 +85,10 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">F&eacute;vrier</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">{{ post.agenda.mois3 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">27</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour3 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -95,9 +97,9 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="http://www.esiea.fr/ecole-ingenieurs/journees-portes-ouvertes-esiea#2&amp;utm_source=oscar&amp;utm_medium=newsletter&amp;utm_campaign=NLnov15">Journ&eacute;e Portes Ouvertes<br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.lien3 }}">{{ post.agenda.textlien3 }}<br />
                                                 </a></b></font><br />
-                                        <span style="font-family: Arial"><span style="font-size: x-small">Campus de Laval</span></span></td>
+                                        <span style="font-family: Arial"><span style="font-size: x-small">{{ post.agenda.texte4 }}</span></span></td>
                                     <td width="10%" valign="top" align="left">
                                         <table width="80" cellspacing="0" cellpadding="0" border="0" style="border-top: #cccccc 1px solid; border-right: #cccccc 1px solid; border-bottom: #cccccc 1px solid; border-left: #cccccc 1px solid; background-color: #ffffff">
                                             <tbody>
@@ -106,10 +108,10 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">Mars</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">{{ post.agenda.mois4 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">02</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour4 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -118,9 +120,9 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="http://www.esiea.fr/25-fevrier-2015-journee-dimmersion-vis-vie-dingenieur-campus-paris/#utm_source=oscar&amp;utm_medium=newsletter&amp;utm_campaign=NLnov15">Vis ma vie d'ing&eacute;nieur<br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.lien4 }}">{{ post.agenda.textlien4 }}<br />
                                                 </a></b></font><br />
-                                        <span style="font-family: Arial"><span style="font-size: x-small">1&egrave;re journ&eacute;e d'immersion sur le campus de Paris</span></span></td>
+                                        <span style="font-family: Arial"><span style="font-size: x-small">{{ post.agenda.texte4 }}</span></span></td>
                                 </tr>
                                 </tbody>
                             </table>

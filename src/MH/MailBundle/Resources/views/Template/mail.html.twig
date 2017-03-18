@@ -37,11 +37,9 @@
 
         <!-- ICI ON AJOUTE DES BLOCS TR AVEC UN TD DEDANS MAX -->
 
-        {% include "MHMailBundle:Template:header.html.twig" ignore missing %}
-
-        {% include "MHMailBundle:Template:agenda.html.twig" ignore missing %}
-
-        {% include "MHMailBundle:Template:footer-reseausociaux.html.twig" ignore missing %}
+        {% for post in mail.posts | sortbyfield('position') %}
+            {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
+        {% endfor %}
 
         <!-- Fin du tableau -->
         </tbody>

@@ -2,7 +2,9 @@
 
 namespace MH\MailBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use MH\MailBundle\Entity\Post\Texte;
 
 /**
  * Post
@@ -24,30 +26,9 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="text", nullable=true)
+     * @ORM\Column(name="slug", type="text")
      */
-    private $texte;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="bgcolor", type="string", length=6)
-     */
-    private $bgcolor;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="textcolor", type="string", length=6)
-     */
-    private $textcolor;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="hauteur", type="integer")
-     */
-    private $hauteur;
+    private $slug;
 
     /**
      * @var integer
@@ -61,12 +42,67 @@ class Post
      */
     private $mail;
 
+    /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Agenda", cascade={"persist", "remove"})
+     */
+    private $agenda;
 
+    /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Header", cascade={"persist", "remove"})
+     */
+    private $header;
+
+    /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Texte", cascade={"persist", "remove"})
+     */
+    private $texte;
+    
+
+    /**
+     * Set mail
+     *
+     * @param \MH\MailBundle\Entity\Mail $mail
+     *
+     * @return Post
+     */
+    public function setMail(\MH\MailBundle\Entity\Mail $mail = null)
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+
+    /**
+     * Set agenda
+     *
+     * @param \MH\MailBundle\Entity\Post\Agenda $agenda
+     *
+     * @return Post
+     */
+    public function setAgenda(\MH\MailBundle\Entity\Post\Agenda $agenda = null)
+    {
+        $this->agenda = $agenda;
+
+        return $this;
+    }
+
+    /**
+     * Get agenda
+     *
+     * @return \MH\MailBundle\Entity\Post\Agenda
+     */
+    public function getAgenda()
+    {
+        return $this->agenda;
+    }
+
+   
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -74,99 +110,27 @@ class Post
     }
 
     /**
-     * Set texte
+     * Set slug
      *
-     * @param string $texte
+     * @param string $slug
      *
      * @return Post
      */
-    public function setTexte($texte)
+    public function setSlug($slug)
     {
-        $this->texte = $texte;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * Get texte
+     * Get slug
      *
      * @return string
      */
-    public function getTexte()
+    public function getSlug()
     {
-        return $this->texte;
-    }
-
-    /**
-     * Set bgcolor
-     *
-     * @param string $bgcolor
-     *
-     * @return Post
-     */
-    public function setBgcolor($bgcolor)
-    {
-        $this->bgcolor = $bgcolor;
-
-        return $this;
-    }
-
-    /**
-     * Get bgcolor
-     *
-     * @return string
-     */
-    public function getBgcolor()
-    {
-        return $this->bgcolor;
-    }
-
-    /**
-     * Set textcolor
-     *
-     * @param string $textcolor
-     *
-     * @return Post
-     */
-    public function setTextcolor($textcolor)
-    {
-        $this->textcolor = $textcolor;
-
-        return $this;
-    }
-
-    /**
-     * Get textcolor
-     *
-     * @return string
-     */
-    public function getTextcolor()
-    {
-        return $this->textcolor;
-    }
-
-    /**
-     * Set hauteur
-     *
-     * @param integer $hauteur
-     *
-     * @return Post
-     */
-    public function setHauteur($hauteur)
-    {
-        $this->hauteur = $hauteur;
-
-        return $this;
-    }
-
-    /**
-     * Get hauteur
-     *
-     * @return integer
-     */
-    public function getHauteur()
-    {
-        return $this->hauteur;
+        return $this->slug;
     }
 
     /**
@@ -194,20 +158,6 @@ class Post
     }
 
     /**
-     * Set mail
-     *
-     * @param \MH\MailBundle\Entity\Mail $mail
-     *
-     * @return Post
-     */
-    public function setMail(\MH\MailBundle\Entity\Mail $mail = null)
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
      * Get mail
      *
      * @return \MH\MailBundle\Entity\Mail
@@ -215,5 +165,53 @@ class Post
     public function getMail()
     {
         return $this->mail;
+    }
+
+    /**
+     * Set header
+     *
+     * @param \MH\MailBundle\Entity\Post\Header $header
+     *
+     * @return Post
+     */
+    public function setHeader(\MH\MailBundle\Entity\Post\Header $header = null)
+    {
+        $this->header = $header;
+
+        return $this;
+    }
+
+    /**
+     * Get header
+     *
+     * @return \MH\MailBundle\Entity\Post\Header
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param \MH\MailBundle\Entity\Post\Texte $texte
+     *
+     * @return Post
+     */
+    public function setTexte(\MH\MailBundle\Entity\Post\Texte $texte = null)
+    {
+        $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return \MH\MailBundle\Entity\Post\Texte
+     */
+    public function getTexte()
+    {
+        return $this->texte;
     }
 }

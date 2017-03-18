@@ -1,0 +1,28 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Edition - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Ajout Footer Admission</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            <h4>Rendu Actuel</h4>
+            <img src="{{ asset('bundles/mhmail/images/footer_admission.JPG') }}" alt="Exemple de rendu de header" width="700"  />
+
+            <hr>
+            {{ form(form) }}
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

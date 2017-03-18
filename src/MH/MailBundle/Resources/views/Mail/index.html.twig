@@ -71,7 +71,7 @@
             $(".mail-sortable").sortable({
                 cursor: "move",
                 update: function () {
-                    var order_serialize = $(this).sortable("serialize", {key: "mail[]"});
+                    var order_serialize = $(this).sortable("serialize", {key: "mails[]"});
                     $.ajax({
                         type: "POST",
                         url: "{{ path('mh_mail_order') }}",

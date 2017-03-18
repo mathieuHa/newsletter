@@ -1,0 +1,37 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Selection - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Selection type de Post</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            {% for postType in listPostType %}
+                <div class="col-md-2">
+                    <h3><a class="btn btn-link" href="{{ path('mh_mail_'~postType.name|lower~'_add', {'id':id}) }}">{{ postType.name }}</a> </h3>
+                </div>
+                <div class="col-md-10">
+                    <img src="{{ asset('bundles/mhmail/images/' ~ postType.imgsrc) }}" alt="{{ postType.imgalt }}"  width="500"  />
+                    <br>
+                    <br>
+                    <br>
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+
