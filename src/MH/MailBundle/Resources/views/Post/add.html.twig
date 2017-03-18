@@ -1,0 +1,24 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Edition - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Ajout Post</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            {{ form(form) }}
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

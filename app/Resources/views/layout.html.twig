@@ -32,7 +32,7 @@
         <div id="header" class="jumbotron">
             <h1><a href="{{ path('mh_newsletter_home') }}">NewsletterProcessor</a></h1>
             <p>
-                Un outil de création de newsletters pour le service de Communication du Groupe ESIEA
+                Un outil de création de newsletters et de mail HTML pour le service de Communication du Groupe ESIEA
             </p>
         </div>
 
@@ -40,9 +40,9 @@
             <div id="menu" class="col-md-2">
                 <h3>Menu</h3>
                 <ul class="nav nav-pills nav-stacked">
-                     <li><a href="{{ path('mh_newsletter_home') }}">Accueil</a> </li>
+                    <li><a href="{{ path('mh_newsletter_home') }}">Newsletter</a> </li>
+                    <li><a href="{{ path('mh_mail_home') }}">Mail</a> </li>
                 </ul>
-
             </div>
             <div id="content" class="col-md-10">
                 {% block body %}

@@ -1,0 +1,80 @@
+mh_mail_home:
+    path:     /
+    defaults: { _controller: MHMailBundle:Mail:index }
+
+mh_mail_create:
+    path:     /creation
+    defaults: { _controller: MHMailBundle:Mail:create }
+
+mh_mail_view:
+    path:     /view/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:view
+    requirements:
+            id:   \d+
+
+mh_mail_edit:
+    path:     /edit/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:edit
+    requirements:
+            id:   \d+
+mh_mail_edit_header:
+    path:     /edit/header/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:editheader
+    requirements:
+            id:   \d+
+
+mh_mail_copy:
+    path:     /copy/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:copy
+    requirements:
+            id:   \d+
+
+mh_mail_delete:
+    path:     /delete/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:delete
+    requirements:
+            id:   \d+
+
+mh_mail_mail:
+    path:     /mail/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:mail
+    requirements:
+            id:   \d+
+
+mh_mail_order:
+    path:     /order
+    defaults:
+        _controller: MHMailBundle:Mail:order
+
+mh_mail_post_add:
+    path:     /post/add/{id}
+    defaults:
+        _controller: MHMailBundle:Post:add
+    requirements:
+            id:   \d+
+mh_mail_post_edit:
+    path:     /post/edit/{id}/{mail_id}
+    defaults:
+        _controller: MHMailBundle:Post:edit
+    requirements:
+            id:   \d+
+            mail_id:   \d+
+
+mh_mail_post_delete:
+    path:     /post/delete/{id}/{mail_id}
+    defaults:
+        _controller: MHMailBundle:Post:delete
+    requirements:
+            id:   \d+
+            mail_id:   \d+
+
+mh_mail_post_order:
+    path:     /post/order
+    defaults:
+        _controller: MHMailBundle:Post:order

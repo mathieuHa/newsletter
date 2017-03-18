@@ -1,54 +1,53 @@
-{% extends "MHNewsletterBundle::layout.html.twig" %}
+{% extends "MHMailBundle::layout.html.twig" %}
 
 {% block title %}
      {{ parent() }}
 {% endblock %}
 
 {% block bundle_body %}
-        <a href="{{ path('mh_newsletter_create') }}" class="btn btn-primary">Créer une newsletter</a>
-    <h2>Liste des newsletters</h2>
+        <a href="{{ path('mh_mail_create') }}" class="btn btn-primary">Créer un Mail HTML</a>
+    <h2>Liste des Mails</h2>
     <hr>
-    <ul class="list-unstyled newsletter-sortable">
-        {% for newsletter in listNewsletter | sortbyfield('position') %}
-            <li  id="newsletter_{{ newsletter.id }}">
+    <ul class="list-unstyled mail-sortable">
+        {% for mail in listMail | sortbyfield('position') %}
+            <li  id="mail_{{ mail.id }}">
                 <div class="panel panel-default">
 
-                    <div class="panel-body" data-toggle="collapse" data-target="#info{{ newsletter.id }}">
-                        <h3>{{ newsletter.name }} {{ newsletter.week }}</h3>
-                        <i>   crée le {{ newsletter.date|date("d/m/Y à H:i:s", "Europe/Paris")|raw }} par {{ newsletter.auteur }}</i>
+                    <div class="panel-body" data-toggle="collapse" data-target="#info{{ mail.id }}">
+                        <h3>{{ mail.name }} </h3>
+                        <i>   crée le {{ mail.date|date("d/m/Y à H:i:s", "Europe/Paris")|raw }} par {{ mail.auteur }}</i>
                         <br>
                         <br>
 
-                        <div id="info{{ newsletter.id }}" class="collapse">
-                            <i>Dernière Modification {{ newsletter.updateat|date("d/m/Y à H:i:s", "Europe/Paris")|raw }}</i>
+                        <div id="info{{ mail.id }}" class="collapse">
                             <div class="row">
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_edit',{'id':newsletter.id}) }}" class="btn btn-default">
+                                    <a href="{{ path('mh_mail_edit',{'id':mail.id}) }}" class="btn btn-default">
                                         <span class="glyphicon glyphicon-edit"></span>
                                         Modifier
                                     </a>
                                     <br>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
+                                    <a href="{{ path('mh_mail_view',{'id':mail.id}) }}" class="btn btn-info" target="_blank">
                                         <span class="glyphicon glyphicon-expand"></span>
                                         Afficher
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-success">
+                                    <a href="{{ path('mh_mail_view',{'id':mail.id}) }}" class="btn btn-success">
                                         <span class="glyphicon glyphicon-download"></span>
                                         Telecharger
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_copy',{'id':newsletter.id}) }}" class="btn btn-warning">
+                                    <a href="{{ path('mh_mail_copy',{'id':mail.id}) }}" class="btn btn-warning">
                                         <span class="glyphicon glyphicon-copy"></span>
                                         Copier
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
+                                    <a href="{{ path('mh_mail_delete',{'id':mail.id}) }}" class="btn btn-danger">
                                         <span class="glyphicon glyphicon-trash"></span>
                                         Supprimer
                                     </a>
@@ -69,13 +68,13 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".newsletter-sortable").sortable({
+            $(".mail-sortable").sortable({
                 cursor: "move",
                 update: function () {
-                    var order_serialize = $(this).sortable("serialize", {key: "newsletters[]"});
+                    var order_serialize = $(this).sortable("serialize", {key: "mail[]"});
                     $.ajax({
                         type: "POST",
-                        url: "{{ path('mh_newsletter_order') }}",
+                        url: "{{ path('mh_mail_order') }}",
                         data: order_serialize,
                         error: function () {
                             console.log('error');

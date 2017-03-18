@@ -1,0 +1,21 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Envoi - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Envoyer un Mail</h2>
+    <hr>
+
+    <i>Mail : {{ mail.name }} crée le {{ mail.date|date("m/d/Y à H:i:s", "Europe/Paris") }} par {{ mail.auteur }}</i>
+
+    <div class="well">
+            <a href="{{ path('mh_mail_home') }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour à la liste
+            </a>
+            {{ form(form) }}
+    </div>
+    <hr>
+{% endblock %}

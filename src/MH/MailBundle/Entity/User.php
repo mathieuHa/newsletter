@@ -1,14 +1,14 @@
 <?php
 
-namespace MH\NewsletterBundle\Entity;
+namespace MH\MailBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
- * @ORM\Table(name="mailuser")
- * @ORM\Entity(repositoryClass="MH\NewsletterBundle\Repository\UserRepository")
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="MH\MailBundle\Repository\UserRepository")
  */
 class User
 {
@@ -24,16 +24,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
-    private $mail;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
      */
-    private $nom;
+    private $mail;
 
 
     /**
@@ -44,6 +44,30 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -68,29 +92,5 @@ class User
     public function getMail()
     {
         return $this->mail;
-    }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return User
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
     }
 }

@@ -1,0 +1,105 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block bundle_css %}
+
+{% endblock %}
+
+{% block title %}
+    Edition - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Edition Mail</h2>
+    <hr>
+        <div class="panel-group" id="accordion">
+            <ul class="list-unstyled post-sortable">
+            {% for post in mail.posts | sortbyfield('position') %}
+            <li  id="post_{{ post.id }}">
+                <div class="panel panel-success">
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#post{{ post.id }}">
+                                {{ post.name }}</a>
+                        </h4>
+                    </div>
+                    <div id="post{{ post.id }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-xs-6">
+                                    <a class="btn btn-warning" href="{{ path('mh_mail_post_edit',  {'id': post.id, 'mail_id': mail.id}    ) }}">Modifier</a>
+                                    <a class="btn btn-danger" href="{{ path('mh_mail_post_delete', {'id': post.id, 'mail_id': mail.id}    ) }}">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </li>
+
+            {% endfor %}
+            </ul>
+            <br>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <a class="btn btn-primary" href="{{ path('mh_mail_post_add', {'id': mail.id}    ) }}" >Ajouter un post</a>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <a href="{{ path('mh_mail_view',{'id':mail.id}) }}" class="btn btn-info" target="_blank">
+                        <span class="glyphicon glyphicon-expand"></span>
+                        Afficher
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <a class="btn btn-warning" href="{{ path('mh_mail_edit_header',  {'id': mail.id}    ) }}">Modifier L'entête</a>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <a href="{{ path('mh_mail_mail',{'id':mail.id}) }}" class="btn btn-default" target="_blank">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        Mail
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".post-sortable").sortable({
+            cursor: "move",
+            update: function () {
+                var order_serialize = $(this).sortable("serialize", {key: "posts[]"});
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('mh_newsletter_post_order') }}",
+                    data: order_serialize,
+                    error: function () {
+                        console.log('error');
+                    }
+                });
+            }
+        });
+        $(".rubrique-sortable").sortable({
+            cursor: "move",
+            update: function () {
+                var order_serialize = $(this).sortable("serialize", {key: "rubriques[]"});
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('mh_newsletter_rubrique_order') }}",
+                    data: order_serialize,
+                    error: function () {
+                        console.log('error');
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}
+

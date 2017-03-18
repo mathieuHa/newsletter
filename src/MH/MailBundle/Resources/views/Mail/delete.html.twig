@@ -1,0 +1,26 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Suppression - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Supprimer un Mail</h2>
+    <hr>
+    <p>La suppresion du mail est irreversible<br>
+    Souhaitez-vous poursuivre ?</p>
+
+    <i>Mail : {{ mail.name }} crée le {{ mail.date|date("m/d/Y à H:i:s", "Europe/Paris") }} par {{ mail.auteur }}</i>
+
+    <div class="well">
+        <form action="{{ path('mh_mail_delete', {'id':mail.id}) }}" method="post">
+            <a href="{{ path('mh_mail_home') }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour à la liste
+            </a>
+            <input type="submit" value="Supprimer" class="btn btn-danger"/>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+    <hr>
+{% endblock %}
