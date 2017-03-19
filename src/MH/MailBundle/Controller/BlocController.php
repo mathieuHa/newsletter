@@ -3,6 +3,8 @@
 namespace MH\MailBundle\Controller;
 
 
+use Doctrine\ORM\Mapping\Entity;
+use MH\MailBundle\Entity\Tool\Couleur;
 use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Form\Post\BlocType;
 use MH\MailBundle\Form\Post\FooterType;
@@ -11,6 +13,7 @@ use MH\MailBundle\Form\Post\ImageType;
 use MH\MailBundle\Form\Post\TexteType;
 use MH\MailBundle\Form\PostType;
 use MH\MailBundle\Entity\Post;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,14 +33,15 @@ class BlocController extends Controller
         $post->setSlug("bloc");
         $bloc = new Post\Bloc();
         $post->setBloc($bloc);
-
         $bloc
-            ->setCouleur("0071BC")
             ->setHauteur("15");
+
+
 
         $form = $this
             ->get('form.factory')
             ->create(BlocType::class,$bloc);
+
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {

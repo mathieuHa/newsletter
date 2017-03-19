@@ -31,8 +31,6 @@ class TexteController extends Controller
 
         $texte
             ->setTexte("Journée Portes Ouvertes ESIEA - Samedi 21 janvier 2017")
-            ->setBgcouleur("0086c7")
-            ->setCouleur("ffffff")
             ->setHauteur("15");
         $post->setTexte($texte);
 

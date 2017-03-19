@@ -1,0 +1,31 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Selection - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Ajout de couleur</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            <div class="row">
+            <div class="col-md-6">
+                {{ form(form) }}
+            </div>
+            <div class="col-md-6">
+                {% include "MHMailBundle:Template:pickCouleur.html.twig" %}
+            </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a class="btn btn-default" href="{{ path('mh_mail_couleur_view') }}">Retour à la liste des couleurs</a>
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

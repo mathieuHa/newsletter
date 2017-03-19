@@ -1,13 +1,13 @@
 mh_mail_agenda_add:
     path:     /post/add/{id}/agenda
     defaults:
-        _controller: MHMailBundle:Agenda:addAgenda
+        _controller: MHMailBundle:Post\Agenda:addAgenda
     requirements:
             id:   \d+
 
 mh_mail_agenda_edit:
     path:     /post/edit/{id}/agenda
     defaults:
-        _controller: MHMailBundle:Agenda:editAgenda
+        _controller: MHMailBundle:Post\Agenda:editAgenda
     requirements:
             id:   \d+

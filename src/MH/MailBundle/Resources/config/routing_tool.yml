@@ -1,0 +1,28 @@
+mh_mail_tool_home:
+    path:     /
+    defaults:
+        _controller: MHMailBundle:Tool:index
+
+mh_mail_couleur_add:
+    path:     /couleur/add
+    defaults:
+        _controller: MHMailBundle:Tool:addCouleur
+
+mh_mail_couleur_view:
+    path:     /couleur/liste
+    defaults:
+        _controller: MHMailBundle:Tool:ViewCouleur
+
+mh_mail_couleur_edit:
+    path:     /couleur/edit/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:editCouleur
+    requirements:
+                id:   \d+
+
+mh_mail_couleur_delete:
+    path:     /couleur/delete/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:deleteCouleur
+    requirements:
+                id:   \d+

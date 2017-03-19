@@ -1,0 +1,46 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Selection - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Liste de couleurs</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            <table cellspacing="10" cellpadding="10" border="1" bgcolor="#ffffff" width="750">
+                <tbody>
+                    {% for couleur in listCouleur %}
+                        <tr>
+                            <td width="20%" align="center">
+                                {{ couleur.nom | upper }}
+                            </td>
+                            <td width="20%" align="center">
+                                {{ couleur.valeur | upper }}
+                            </td>
+                            <td width="40%" bgcolor="#{{ couleur.valeur }}"></td>
+                            <td width="10%" align="center">
+                                <a class="btn btn-warning" href="{{ path('mh_mail_couleur_edit', {'id': couleur.id} ) }}"> Modifier</a>
+                            </td>
+                            <td width="10%" align="center">
+                                <a class="btn btn-danger" href="{{ path('mh_mail_couleur_delete', {'id': couleur.id}) }}"> Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <a class="btn btn-primary" href="{{ path('mh_mail_couleur_add') }}">Ajouter</a>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('mh_mail_home') }}">Retour à  l'accueil</a>
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

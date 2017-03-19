@@ -18,7 +18,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
                 crossorigin="anonymous"></script>
-        <script src="jquery.ui.touch-punch.min.js"></script>
+        <script src="{{ asset('bundles/mhmail/js/jscolor.min.js') }}"></script>
+
         <style>
             body {
                 overflow-y: scroll;
@@ -42,6 +43,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="{{ path('mh_newsletter_home') }}">Newsletter</a> </li>
                     <li><a href="{{ path('mh_mail_home') }}">Mail</a> </li>
+                    <li><a href="{{ path('mh_mail_tool_home') }}">Outils</a> </li>
                 </ul>
             </div>
             <div id="content" class="col-md-10">
