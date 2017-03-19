@@ -10,7 +10,7 @@
     <div id="contain" >
         <div class="well">
             <h4>Rendu Actuel</h4>
-            {% if post.texte is not null %}
+            {% if post.bloc is not null %}
                 <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="600">
                     <tbody>
                     {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}

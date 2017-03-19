@@ -88,58 +88,18 @@ mh_mail_post_select:
     requirements:
             id:   \d+
 
-mh_mail_agenda_add:
-    path:     /post/add/{id}/agenda
-    defaults:
-        _controller: MHMailBundle:Agenda:addAgenda
-    requirements:
-            id:   \d+
+mh_mail_routing_agenda:
+    resource: routing_agenda.yml
 
-mh_mail_agenda_edit:
-    path:     /post/edit/{id}/agenda
-    defaults:
-        _controller: MHMailBundle:Agenda:editAgenda
-    requirements:
-            id:   \d+
+mh_mail_routing_header:
+    resource: routing_header.yml
 
-mh_mail_header_add:
-    path:     /post/add/{id}/header
-    defaults:
-        _controller: MHMailBundle:Header/Header:addHeader
-    requirements:
-            id:   \d+
+mh_mail_routing_footer_admission:
+    resource: routing_footer_admission.yml
 
-mh_mail_header_edit:
-    path:     /post/edit/{id}/header
-    defaults:
-        _controller: MHMailBundle:Header/Header:editHeader
-    requirements:
-            id:   \d+
+mh_mail_routing_texte_separation:
+    resource: routing_texte_separation.yml
 
-mh_mail_footer_admission_add:
-    path:     /post/add/{id}/footer_admission
-    defaults:
-        _controller: MHMailBundle:Footer/Footer:addFooterAdmission
-    requirements:
-            id:   \d+
+mh_mail_routing_bloc:
+    resource: routing_bloc.yml
 
-mh_mail_footer_admission_edit:
-    path:     /post/edit/{id}/footer_admission
-    defaults:
-        _controller: MHMailBundle:Footer/Footer:editFooterAdmission
-    requirements:
-            id:   \d+
-
-mh_mail_texte_separation_add:
-    path:     /post/add/{id}/texte_separation
-    defaults:
-        _controller: MHMailBundle:Texte/Texte:addTexte
-    requirements:
-            id:   \d+
-
-mh_mail_texte_separation_edit:
-    path:     /post/edit/{id}/texte_separation
-    defaults:
-        _controller: MHMailBundle:Texte/Texte:editTexte
-    requirements:
-            id:   \d+

@@ -45,6 +45,11 @@ class PostTypeController extends Controller
                 'texte_separation.JPG',
                 'Texte separation Esiea'
             ),
+            new \MH\MailBundle\Entity\PostType(
+                'bloc',
+                'bloc.JPG',
+                'Bloc Couleur'
+            ),
         ];
 
         return $this->render('MHMailBundle:PostType:select.html.twig', array(

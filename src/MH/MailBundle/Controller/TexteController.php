@@ -1,12 +1,13 @@
 <?php
 
-namespace MH\MailBundle\Controller\Footer;
+namespace MH\MailBundle\Controller;
 
 
 use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Form\Post\FooterType;
 use MH\MailBundle\Form\Post\HeaderType;
 use MH\MailBundle\Form\Post\ImageType;
+use MH\MailBundle\Form\Post\TexteType;
 use MH\MailBundle\Form\PostType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,19 +21,24 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-class FooterController extends Controller
+class TexteController extends Controller
 {
-
-
-    public function addFooterAdmissionAction(Request $request, $id)
+    public function addTexteAction(Request $request, $id)
     {
         $post = new Post();
-        $post->setSlug("footer_admission");
-        $footer = new Post\Footer();
+        $post->setSlug("texte_separation");
+        $texte = new Post\Texte();
+
+        $texte
+            ->setTexte("Journée Portes Ouvertes ESIEA - Samedi 21 janvier 2017")
+            ->setBgcouleur("0086c7")
+            ->setCouleur("ffffff")
+            ->setHauteur("15");
+        $post->setTexte($texte);
 
         $form = $this
             ->get('form.factory')
-            ->create(FooterType::class,$footer);
+            ->create(TexteType::class,$texte);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
@@ -43,15 +49,15 @@ class FooterController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $post->setPosition(0); // TEMPORAIRE A ENLEVER
+            $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
-
-            $em->persist($mail);
+            $post->setTexte($texte);
+            $em->persist($texte);
             $em->flush();
 
             $this
                 ->addFlash(
-                    'notice','Post Footer Admission crée'
+                    'notice','Post Texte séparation crée'
                 );
 
             return $this->redirectToRoute('mh_mail_edit',array(
@@ -66,7 +72,7 @@ class FooterController extends Controller
         ));
     }
 
-    public function editFooterAdmissionAction(Request $request, $id)
+    public function editTexteAction(Request $request, $id)
     {
         $post = $this
             ->getDoctrine()
@@ -74,16 +80,36 @@ class FooterController extends Controller
             ->find($id);
 
         $mail_id = $post->getMail()->getId();
+        $texte = $post->getTexte();
 
-        $this
-            ->addFlash(
-                'notice','On ne peux pas modifier ce bloc, Suppression autorisée'
-            );
+        $form = $this
+            ->get('form.factory')
+            ->create(TexteType::class,$texte);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+            $em->persist($texte);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Post Texte séparation modifiée'
+                );
 
             return $this->redirectToRoute('mh_mail_edit',array(
                 'id'=>$mail_id
             ));
+        }
 
+        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
+            'form'=>$form->createView(),
+            'id'=>$id,
+            'post'=>$post,
+        ));
     }
 
 

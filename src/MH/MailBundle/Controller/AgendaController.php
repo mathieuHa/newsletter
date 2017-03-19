@@ -1,6 +1,6 @@
 <?php
 
-namespace MH\MailBundle\Controller\Header;
+namespace MH\MailBundle\Controller;
 
 
 use MH\MailBundle\Form\Post\AgendaType;
@@ -19,23 +19,33 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-class HeaderController extends Controller
+class AgendaController extends Controller
 {
-    public function addHeaderAction(Request $request, $id)
+
+    public function addAgendaAction(Request $request, $id)
     {
         $post = new Post();
-        $post->setSlug("header");
-        $header = new Post\Header();
-        $header->setImage(new Post\Image());
-        $header->getImage()
-            ->setSrc("https://www.esiea.fr/wp-content/uploads/2016/11/Header-emailling_02.jpg")
-            ->setAlt("ESIEA, l'&Eacute;cole d'ing&eacute;nieurs du monde num&eacute;rique")
-            ->setDescription("ESIEA, l'&Eacute;cole d'ing&eacute;nieurs du monde num&eacute;rique")
-        ;
+        $post->setSlug("agenda");
+        $agenda = new Post\Agenda();
+        $agenda
+            ->setJour1("20")->setMois1("Janvier")
+            ->setLien1("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
+            ->setTextlien1("Concours Alpha")->setTexte1("Début des inscriptions sur APB")
+            ->setJour2("12")->setMois2("Mars")
+            ->setLien2("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
+            ->setTextlien2("Journée Portes Ouverte")->setTexte2("Campus de Paris")
+            ->setJour3("27")->setMois3("Février")
+            ->setLien3("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
+            ->setTextlien3("Journée Portes Ouverte")->setTexte3("Campus de Laval")
+            ->setJour4("02")->setMois4("Mars")
+            ->setLien4("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
+            ->setTextlien4("Vis ma vie d'ingénieur")->setTexte4("1ère journée d'immersion sur le campus de Paris");
+        $post->setAgenda($agenda);
+
 
         $form = $this
             ->get('form.factory')
-            ->create(HeaderType::class,$header);
+            ->create(AgendaType::class,$agenda);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
@@ -47,7 +57,7 @@ class HeaderController extends Controller
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
             $post->setPosition(0); // TEMPORAIRE A ENLEVER
-            $post->setHeader($header);
+            $post->setAgenda($agenda);
             $mail->addPost($post);
 
             $em->persist($mail);
@@ -55,7 +65,7 @@ class HeaderController extends Controller
 
             $this
                 ->addFlash(
-                    'notice','Post Header crée'
+                    'notice','Post Agenda crée'
                 );
 
             return $this->redirectToRoute('mh_mail_edit',array(
@@ -63,14 +73,16 @@ class HeaderController extends Controller
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:header.html.twig', array(
+        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
             'form'=>$form->createView(),
             'id'=>$id,
             'post'=>$post,
         ));
     }
 
-    public function editHeaderAction(Request $request, $id)
+
+
+    public function editAgendaAction(Request $request, $id)
     {
         $post = $this
             ->getDoctrine()
@@ -78,11 +90,11 @@ class HeaderController extends Controller
             ->find($id);
 
         $mail_id = $post->getMail()->getId();
-        $header = $post->getHeader();
+        $agenda = $post->getAgenda();
 
         $form = $this
             ->get('form.factory')
-            ->create(HeaderType::class,$header);
+            ->create(AgendaType::class,$agenda);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
@@ -90,12 +102,12 @@ class HeaderController extends Controller
                 ->getDoctrine()
                 ->getManager();
 
-            $em->persist($header);
+            $em->persist($agenda);
             $em->flush();
 
             $this
                 ->addFlash(
-                    'notice','Post Header modifié'
+                    'notice','Post Agenda modifié'
                 );
 
             return $this->redirectToRoute('mh_mail_edit',array(
@@ -103,7 +115,7 @@ class HeaderController extends Controller
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:header.html.twig', array(
+        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
             'form'=>$form->createView(),
             'id'=>$id,
             'post'=>$post

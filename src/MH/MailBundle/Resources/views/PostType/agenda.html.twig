@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block bundle_body %}
-    <h2>Agenda</h2>
+    <h2>{{ post.slug }}</h2>
     <hr>
     <div id="contain" >
         <div class="well">
@@ -13,7 +13,7 @@
             {% if post.agenda is not null %}
                 {% include "MHMailBundle:Template:agenda.html.twig" ignore missing %}
             {% else %}
-                <img src="{{ asset('bundles/mhmail/images/agenda.jpg') }}" alt="Exemple de rendu de agenda" width="700"  />"
+                <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.jpg') }}" alt="Exemple de rendu de agenda" width="700"  />"
             {% endif %}
             <hr>
             {{ form(form) }}

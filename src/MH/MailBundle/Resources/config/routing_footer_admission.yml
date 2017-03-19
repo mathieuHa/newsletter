@@ -1,0 +1,13 @@
+mh_mail_footer_admission_add:
+    path:     /post/add/{id}/footer_admission
+    defaults:
+        _controller: MHMailBundle:Footer:addFooterAdmission
+    requirements:
+            id:   \d+
+
+mh_mail_footer_admission_edit:
+    path:     /post/edit/{id}/footer_admission
+    defaults:
+        _controller: MHMailBundle:Footer:editFooterAdmission
+    requirements:
+            id:   \d+

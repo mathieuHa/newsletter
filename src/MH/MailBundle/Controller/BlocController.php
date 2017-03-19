@@ -1,11 +1,14 @@
 <?php
 
-namespace MH\MailBundle\Agenda\Controller;
+namespace MH\MailBundle\Controller;
 
 
 use MH\MailBundle\Form\Post\AgendaType;
+use MH\MailBundle\Form\Post\BlocType;
+use MH\MailBundle\Form\Post\FooterType;
 use MH\MailBundle\Form\Post\HeaderType;
 use MH\MailBundle\Form\Post\ImageType;
+use MH\MailBundle\Form\Post\TexteType;
 use MH\MailBundle\Form\PostType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,32 +22,22 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-class AgendaController extends Controller
+class BlocController extends Controller
 {
-
-    public function addAgendaAction(Request $request, $id)
+    public function addBlocAction(Request $request, $id)
     {
         $post = new Post();
-        $post->setSlug("agenda");
-        $agenda = new Post\Agenda();
-        $agenda
-            ->setJour1("20")->setMois1("Janvier")
-            ->setLien1("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
-            ->setTextlien1("Concours Alpha")->setTexte1("Début des inscriptions sur APB")
-            ->setJour2("12")->setMois2("Mars")
-            ->setLien2("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
-            ->setTextlien2("Journée Portes Ouverte")->setTexte2("Campus de Paris")
-            ->setJour3("27")->setMois3("Février")
-            ->setLien3("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
-            ->setTextlien3("Journée Portes Ouverte")->setTexte3("Campus de Laval")
-            ->setJour4("02")->setMois4("Mars")
-            ->setLien4("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
-            ->setTextlien4("Vis ma vie d'ingénieur")->setTexte4("1ère journée d'immersion sur le campus de Paris");
+        $post->setSlug("bloc");
+        $bloc = new Post\Bloc();
+        $post->setBloc($bloc);
 
+        $bloc
+            ->setCouleur("0071BC")
+            ->setHauteur("15");
 
         $form = $this
             ->get('form.factory')
-            ->create(AgendaType::class,$agenda);
+            ->create(BlocType::class,$bloc);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
@@ -55,16 +48,15 @@ class AgendaController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $post->setPosition(0); // TEMPORAIRE A ENLEVER
-            $post->setAgenda($agenda);
+            $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
-
-            $em->persist($mail);
+            $post->setBloc($bloc);
+            $em->persist($bloc);
             $em->flush();
 
             $this
                 ->addFlash(
-                    'notice','Post Agenda crée'
+                    'notice','Post Bloc créé'
                 );
 
             return $this->redirectToRoute('mh_mail_edit',array(
@@ -72,16 +64,14 @@ class AgendaController extends Controller
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:agenda.html.twig', array(
+        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
             'form'=>$form->createView(),
             'id'=>$id,
             'post'=>$post,
         ));
     }
 
-
-
-    public function editAgendaAction(Request $request, $id)
+    public function editBlocAction(Request $request, $id)
     {
         $post = $this
             ->getDoctrine()
@@ -89,11 +79,11 @@ class AgendaController extends Controller
             ->find($id);
 
         $mail_id = $post->getMail()->getId();
-        $agenda = $post->getAgenda();
+        $bloc = $post->getBloc();
 
         $form = $this
             ->get('form.factory')
-            ->create(AgendaType::class,$agenda);
+            ->create(BlocType::class,$bloc);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
@@ -101,12 +91,12 @@ class AgendaController extends Controller
                 ->getDoctrine()
                 ->getManager();
 
-            $em->persist($agenda);
+            $em->persist($bloc);
             $em->flush();
 
             $this
                 ->addFlash(
-                    'notice','Post Agenda modifié'
+                    'notice','Post Bloc modifiée'
                 );
 
             return $this->redirectToRoute('mh_mail_edit',array(
@@ -114,11 +104,13 @@ class AgendaController extends Controller
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:agenda.html.twig', array(
+        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
             'form'=>$form->createView(),
             'id'=>$id,
-            'post'=>$post
+            'post'=>$post,
         ));
     }
+
+
 
 }

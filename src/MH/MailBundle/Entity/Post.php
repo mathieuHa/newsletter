@@ -56,7 +56,11 @@ class Post
      * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Texte", cascade={"persist", "remove"})
      */
     private $texte;
-    
+
+    /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Bloc", cascade={"persist", "remove"})
+     */
+    private $bloc;
 
     /**
      * Set mail
@@ -213,5 +217,29 @@ class Post
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * Set bloc
+     *
+     * @param \MH\MailBundle\Entity\Post\Bloc $bloc
+     *
+     * @return Post
+     */
+    public function setBloc(\MH\MailBundle\Entity\Post\Bloc $bloc = null)
+    {
+        $this->bloc = $bloc;
+
+        return $this;
+    }
+
+    /**
+     * Get bloc
+     *
+     * @return \MH\MailBundle\Entity\Post\Bloc
+     */
+    public function getBloc()
+    {
+        return $this->bloc;
     }
 }
