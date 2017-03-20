@@ -13,7 +13,7 @@
             {% if post.header is not null %}
                 {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
             {% else %}
-                <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.jpg') }}" alt="Exemple de rendu de header" height="200"  />"
+                <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.JPG') }}" alt="Exemple de rendu de header" height="200"  />"
             {% endif %}
             <hr>
             {{ form(form) }}

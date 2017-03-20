@@ -1,13 +1,13 @@
 mh_mail_texte_separation_add:
     path:     /post/add/{id}/texte_separation
     defaults:
-        _controller: MHMailBundle:Texte:addTexte
+        _controller: MHMailBundle:Post\Texte:addTexte
     requirements:
             id:   \d+
 
 mh_mail_texte_separation_edit:
     path:     /post/edit/{id}/texte_separation
     defaults:
-        _controller: MHMailBundle:Texte:editTexte
+        _controller: MHMailBundle:Post\Texte:editTexte
     requirements:
             id:   \d+

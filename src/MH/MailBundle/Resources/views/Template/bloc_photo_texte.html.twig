@@ -1,0 +1,31 @@
+                    <!-- Debut bloc texte image -->
+
+                    <tr>
+                        <td valign="top" align="center">
+                            <table width="100%" bgcolor="#{{ post.blocphototexte.couleurFond }}" cellspacing="0" cellpadding="10" border="0">
+                                <tbody>
+                                <tr>
+                                    <td valign="top" style="text-align: right"><a target="_blank" href="{{ post.blocphototexte.lien }}"><img width="180" height="180" alt="{{ post.blocphototexte.image.alt }}" class="fullWidthImage" title="{{ post.blocphototexte.image.description }}" src="{{ post.blocphototexte.image.src }}" /></a></td>
+                                    <td valign="top" align="left">
+                                        <h2><span style="font-size: small">
+                                                <span style="font-family: Arial">
+                                                    <span style=" color:#{{ post.blocphototexte.couleurTitre }}">
+                                                        {{ post.blocphototexte.titre }}
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </h2>
+                                        <span style="font-family: Arial;">
+                                            <span style="font-size: x-small; color:#{{ post.blocphototexte.couleurTexte }}">
+                                                {{ post.blocphototexte.texte }}
+                                            </span>
+                                        </span>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Fin bloc texte image -->

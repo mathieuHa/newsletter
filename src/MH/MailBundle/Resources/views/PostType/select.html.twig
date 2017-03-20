@@ -8,22 +8,21 @@
     <h2>Selection type de Post</h2>
     <hr>
     <div id="contain" >
-        <div class="well">
             {% for postType in listPostType %}
-                <div class="col-md-2">
+                <div class="row">
+                <div class="col-md-3">
                     <h3><a class="btn btn-link" href="{{ path('mh_mail_'~postType.name|lower~'_add', {'id':id}) }}">{{ postType.name }}</a> </h3>
                 </div>
-                <div class="col-md-10">
-                    <img src="{{ asset('bundles/mhmail/images/' ~ postType.imgsrc) }}" alt="{{ postType.imgalt }}"  width="500"  />
+                <div class="col-md-9">
+                    <img src="{{ asset('bundles/mhmail/images/' ~ postType.imgsrc) }}" alt="{{ postType.imgalt }}"  width="700" align="top" />
                     <br>
                     <br>
                     <br>
                 </div>
-
+                </div>
 
             {% endfor %}
 
-        </div>
     </div>
     <br>
     <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>

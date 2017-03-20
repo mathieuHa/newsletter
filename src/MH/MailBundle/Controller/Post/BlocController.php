@@ -1,6 +1,6 @@
 <?php
 
-namespace MH\MailBundle\Controller;
+namespace MH\MailBundle\Controller\Post;
 
 
 use Doctrine\ORM\Mapping\Entity;
@@ -35,8 +35,6 @@ class BlocController extends Controller
         $post->setBloc($bloc);
         $bloc
             ->setHauteur("15");
-
-
 
         $form = $this
             ->get('form.factory')

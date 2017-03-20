@@ -32,12 +32,12 @@ class PostTypeController extends Controller
             ),
             new \MH\MailBundle\Entity\PostType(
                 'Header',
-                'Header-emailling_02.JPG',
+                'header.jpg',
                 'Header emailling Esiea'
             ),
             new \MH\MailBundle\Entity\PostType(
                 'Footer_admission',
-                'Footer_admission.JPG',
+                'footer_admission.JPG',
                 'Footer emailling Esiea'
             ),
             new \MH\MailBundle\Entity\PostType(
@@ -49,6 +49,11 @@ class PostTypeController extends Controller
                 'bloc',
                 'bloc.JPG',
                 'Bloc Couleur'
+            ),
+            new \MH\MailBundle\Entity\PostType(
+                'bloc_photo_texte',
+                'bloc_photo_texte.JPG',
+                'Bloc Photo Texte'
             ),
         ];
 

@@ -63,6 +63,11 @@ class Post
     private $bloc;
 
     /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\BlocTexteImage", cascade={"persist", "remove"})
+     */
+    private $blocphototexte;
+
+    /**
      * Set mail
      *
      * @param \MH\MailBundle\Entity\Mail $mail
@@ -232,6 +237,7 @@ class Post
 
         return $this;
     }
+    
 
     /**
      * Get bloc
@@ -241,5 +247,30 @@ class Post
     public function getBloc()
     {
         return $this->bloc;
+    }
+    
+
+    /**
+     * Set blocphototexte
+     *
+     * @param \MH\MailBundle\Entity\Post\BlocTexteImage $blocphototexte
+     *
+     * @return Post
+     */
+    public function setBlocphototexte(\MH\MailBundle\Entity\Post\BlocTexteImage $blocphototexte = null)
+    {
+        $this->blocphototexte = $blocphototexte;
+
+        return $this;
+    }
+
+    /**
+     * Get blocphototexte
+     *
+     * @return \MH\MailBundle\Entity\Post\BlocTexteImage
+     */
+    public function getBlocphototexte()
+    {
+        return $this->blocphototexte;
     }
 }

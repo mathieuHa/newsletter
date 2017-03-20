@@ -1,6 +1,6 @@
 <?php
 
-namespace MH\MailBundle\Controller;
+namespace MH\MailBundle\Controller\Post;
 
 
 use MH\MailBundle\Form\Post\HeaderType;

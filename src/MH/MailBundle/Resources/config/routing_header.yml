@@ -1,13 +1,13 @@
 mh_mail_header_add:
     path:     /post/add/{id}/header
     defaults:
-        _controller: MHMailBundle:Header:addHeader
+        _controller: MHMailBundle:Post\Header:addHeader
     requirements:
             id:   \d+
 
 mh_mail_header_edit:
     path:     /post/edit/{id}/header
     defaults:
-        _controller: MHMailBundle:Header:editHeader
+        _controller: MHMailBundle:Post\Header:editHeader
     requirements:
             id:   \d+

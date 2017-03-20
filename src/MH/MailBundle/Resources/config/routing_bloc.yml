@@ -1,13 +1,13 @@
 mh_mail_bloc_add:
     path:     /post/add/{id}/bloc
     defaults:
-        _controller: MHMailBundle:Bloc:addBloc
+        _controller: MHMailBundle:Post\Bloc:addBloc
     requirements:
             id:   \d+
 
 mh_mail_bloc_edit:
     path:     /post/edit/{id}/bloc
     defaults:
-        _controller: MHMailBundle:Bloc:editBloc
+        _controller: MHMailBundle:Post\Bloc:editBloc
     requirements:
             id:   \d+
