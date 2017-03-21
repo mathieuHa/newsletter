@@ -29,9 +29,7 @@ class Bloc
     private $hauteur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="couleur", type="string", length=6)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
     private $couleur;
 
@@ -69,15 +67,16 @@ class Bloc
     {
         return $this->hauteur;
     }
+    
 
     /**
      * Set couleur
      *
-     * @param string $couleur
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleur
      *
      * @return Bloc
      */
-    public function setCouleur($couleur)
+    public function setCouleur(\MH\MailBundle\Entity\Tool\Couleur $couleur = null)
     {
         $this->couleur = $couleur;
 
@@ -87,7 +86,7 @@ class Bloc
     /**
      * Get couleur
      *
-     * @return string
+     * @return \MH\MailBundle\Entity\Tool\Couleur
      */
     public function getCouleur()
     {

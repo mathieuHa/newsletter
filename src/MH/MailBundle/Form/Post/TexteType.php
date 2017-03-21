@@ -22,7 +22,7 @@ class TexteType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('bgcouleur', EntityType::class, array(
+            ->add('couleurFond', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
                 'choice_label' => 'nom',
                 'multiple'     => false,

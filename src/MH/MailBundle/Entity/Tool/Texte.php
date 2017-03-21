@@ -22,7 +22,7 @@ class Texte
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Paragraphe", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="MH\MailBundle\Entity\Tool\Paragraphe",mappedBy="text" , cascade={"persist","remove"})
      */
     private $paragraphes;
 
@@ -43,24 +43,43 @@ class Texte
         return $this->id;
     }
 
+
     /**
-     * Set paragraphes
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->paragraphes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add paragraphe
      *
-     * @param \MH\MailBundle\Entity\Tool\Paragraphe $paragraphes
+     * @param \MH\MailBundle\Entity\Tool\Paragraphe $paragraphe
      *
      * @return Texte
      */
-    public function setParagraphes(\MH\MailBundle\Entity\Tool\Paragraphe $paragraphes = null)
+    public function addParagraphe(\MH\MailBundle\Entity\Tool\Paragraphe $paragraphe)
     {
-        $this->paragraphes = $paragraphes;
+        $this->paragraphes[] = $paragraphe;
 
         return $this;
     }
 
     /**
+     * Remove paragraphe
+     *
+     * @param \MH\MailBundle\Entity\Tool\Paragraphe $paragraphe
+     */
+    public function removeParagraphe(\MH\MailBundle\Entity\Tool\Paragraphe $paragraphe)
+    {
+        $this->paragraphes->removeElement($paragraphe);
+    }
+
+    /**
      * Get paragraphes
      *
-     * @return \MH\MailBundle\Entity\Tool\Paragraphe
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getParagraphes()
     {

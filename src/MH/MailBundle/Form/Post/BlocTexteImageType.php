@@ -2,6 +2,8 @@
 
 namespace MH\MailBundle\Form\Post;
 
+use MH\MailBundle\Form\Tool\LienType;
+use MH\MailBundle\Form\Tool\TexteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,18 +24,13 @@ class BlocTexteImageType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('texte')
-            ->add('couleurTexte', EntityType::class, array(
-                'class'        => 'MHMailBundle:Tool\Couleur',
-                'choice_label' => 'nom',
-                'multiple'     => false,
-            ))
+            ->add('texte',TexteType::class)
             ->add('couleurFond', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('lien')
+            ->add('lien',LienType::class)
             ->add('image',ImageType::class)
             ->add('save',SubmitType::class);
     }

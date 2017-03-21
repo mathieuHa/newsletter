@@ -29,37 +29,22 @@ class BlocTexteImage
     private $titre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="couleur_titre", type="string", length=6, nullable=true)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
     private $couleurTitre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texte", type="text")
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
      */
     private $texte;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="couleur_texte", type="string", length=6)
-     */
-    private $couleurTexte;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="couleur_fond", type="string", length=6)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
     private $couleurFond;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="lien", type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Lien", cascade={"persist", "remove"} )
      */
     private $lien;
 
@@ -106,11 +91,11 @@ class BlocTexteImage
     /**
      * Set couleurTitre
      *
-     * @param string $couleurTitre
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleurTitre
      *
      * @return BlocTexteImage
      */
-    public function setCouleurTitre($couleurTitre)
+    public function setCouleurTitre(\MH\MailBundle\Entity\Tool\Couleur $couleurTitre = null)
     {
         $this->couleurTitre = $couleurTitre;
 
@@ -120,7 +105,7 @@ class BlocTexteImage
     /**
      * Get couleurTitre
      *
-     * @return string
+     * @return \MH\MailBundle\Entity\Tool\Couleur
      */
     public function getCouleurTitre()
     {
@@ -130,11 +115,11 @@ class BlocTexteImage
     /**
      * Set texte
      *
-     * @param string $texte
+     * @param \MH\MailBundle\Entity\Tool\Texte $texte
      *
      * @return BlocTexteImage
      */
-    public function setTexte($texte)
+    public function setTexte(\MH\MailBundle\Entity\Tool\Texte $texte = null)
     {
         $this->texte = $texte;
 
@@ -144,7 +129,7 @@ class BlocTexteImage
     /**
      * Get texte
      *
-     * @return string
+     * @return \MH\MailBundle\Entity\Tool\Texte
      */
     public function getTexte()
     {
@@ -152,75 +137,27 @@ class BlocTexteImage
     }
 
     /**
-     * Set couleurTexte
+     * Set couleurFond
      *
-     * @param string $couleurTexte
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleurFond
      *
      * @return BlocTexteImage
      */
-    public function setCouleurTexte($couleurTexte)
+    public function setCouleurFond(\MH\MailBundle\Entity\Tool\Couleur $couleurFond = null)
     {
-        $this->couleurTexte = $couleurTexte;
+        $this->couleurFond = $couleurFond;
 
         return $this;
     }
 
     /**
-     * Get couleurTexte
+     * Get couleurFond
      *
-     * @return string
+     * @return \MH\MailBundle\Entity\Tool\Couleur
      */
-    public function getCouleurTexte()
+    public function getCouleurFond()
     {
-        return $this->couleurTexte;
-    }
-
-    /**
-     * Set lien
-     *
-     * @param string $lien
-     *
-     * @return BlocTexteImage
-     */
-    public function setLien($lien)
-    {
-        $this->lien = $lien;
-
-        return $this;
-    }
-
-    /**
-     * Get lien
-     *
-     * @return string
-     */
-    public function getLien()
-    {
-        return $this->lien;
-    }
-
-    /**
-     * Set altLien
-     *
-     * @param string $altLien
-     *
-     * @return BlocTexteImage
-     */
-    public function setAltLien($altLien)
-    {
-        $this->altLien = $altLien;
-
-        return $this;
-    }
-
-    /**
-     * Get altLien
-     *
-     * @return string
-     */
-    public function getAltLien()
-    {
-        return $this->altLien;
+        return $this->couleurFond;
     }
 
     /**
@@ -248,26 +185,26 @@ class BlocTexteImage
     }
 
     /**
-     * Set couleurFond
+     * Set lien
      *
-     * @param string $couleurFond
+     * @param \MH\MailBundle\Entity\Tool\Lien $lien
      *
      * @return BlocTexteImage
      */
-    public function setCouleurFond($couleurFond)
+    public function setLien(\MH\MailBundle\Entity\Tool\Lien $lien = null)
     {
-        $this->couleurFond = $couleurFond;
+        $this->lien = $lien;
 
         return $this;
     }
 
     /**
-     * Get couleurFond
+     * Get lien
      *
-     * @return string
+     * @return \MH\MailBundle\Entity\Tool\Lien
      */
-    public function getCouleurFond()
+    public function getLien()
     {
-        return $this->couleurFond;
+        return $this->lien;
     }
 }

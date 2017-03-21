@@ -6,6 +6,9 @@ namespace MH\MailBundle\Controller\Post;
 use Doctrine\ORM\Mapping\Entity;
 use MH\MailBundle\Entity\Post\BlocTexteImage;
 use MH\MailBundle\Entity\Tool\Couleur;
+use MH\MailBundle\Entity\Tool\Lien;
+use MH\MailBundle\Entity\Tool\Paragraphe;
+use MH\MailBundle\Entity\Tool\Texte;
 use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Form\Post\BlocTexteImageType;
 use MH\MailBundle\Form\Post\BlocType;
@@ -36,24 +39,19 @@ class PhotoTexteController extends Controller
         $blocTexteImage = new BlocTexteImage();
 
         $blocTexteImage
-            ->setImage(new Post\Image())
-            ->setCouleurTexte("000000")
-            ->setTexte("Le 8 mars dernier, la journée internationale 
+            ->setImage(new Post\Image());
+        $texte = new Texte();
+        $paragraphe1 = new Paragraphe();
+        $paragraphe1->setText($texte);
+        $paragraphe1->setTexte("Le 8 mars dernier, la journée internationale 
             des droits des Femmes a été cette année encore l’occasion 
             de se mobiliser collectivement pour lutter contre des 
             inégalités persistantes entre les hommes et les femmes, 
-            en particulier sur le plan professionnel.
-            Parce qu’il ne suffit pas d’une seule journée, l’ESIEA
-             s’engage aux côtés de la Conférence des Grandes Ecoles 
-             (CGE) et de l’association Elles Bougent pour faire
-              progresser le nombre d’ingénieures formées en France,
-               notamment dans le secteur du numérique. Fatiha Gas,
-                Directrice du campus de Paris de l’ESIEA, en explique
-                 les raisons, dans une tribune publiée dans le JDN (Journal Du Net).")
+            en particulier sur le plan professionnel.");
+        $blocTexteImage
             ->setTitre("5 raisons pour avoir plus de femmes dans le numérique")
-            ->setLien("https://www.esiea.fr/")
-            ->setAltLien("ESIEA")
-            ->setCouleurFond("ffffff");
+            ->setTexte($texte)
+            ->setLien(new Lien());
         ;
         $blocTexteImage->getImage()
             ->setSrc("http://oscar-campus.com/doc/1420/image/newsletter%20mars/femme%20numerique.jpg")

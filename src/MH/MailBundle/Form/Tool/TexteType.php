@@ -3,6 +3,7 @@
 namespace MH\MailBundle\Form\Tool;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,12 @@ class TexteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('paragraphes')        ;
+        $builder
+            ->add('paragraphes', CollectionType::class, array(
+                'entry_type'   => ParagrapheType::class,
+                'allow_add'    => true,
+                'allow_delete' => true
+            ));
     }
     
     /**

@@ -36,18 +36,14 @@ class BlocTexte
     private $texte;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="color", type="string", length=6)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
-    private $color;
+    private $couleur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="bgcolor", type="string", length=6)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
-    private $bgcolor;
+    private $couleurFond;
 
     /**
      * @var string
@@ -112,6 +108,10 @@ class BlocTexte
         return $this;
     }
 
+   
+
+
+
     /**
      * Get texte
      *
@@ -120,54 +120,6 @@ class BlocTexte
     public function getTexte()
     {
         return $this->texte;
-    }
-
-    /**
-     * Set color
-     *
-     * @param string $color
-     *
-     * @return BlocTexte
-     */
-    public function setColor($color)
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * Get color
-     *
-     * @return string
-     */
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    /**
-     * Set bgcolor
-     *
-     * @param string $bgcolor
-     *
-     * @return BlocTexte
-     */
-    public function setBgcolor($bgcolor)
-    {
-        $this->bgcolor = $bgcolor;
-
-        return $this;
-    }
-
-    /**
-     * Get bgcolor
-     *
-     * @return string
-     */
-    public function getBgcolor()
-    {
-        return $this->bgcolor;
     }
 
     /**
@@ -216,5 +168,53 @@ class BlocTexte
     public function getTaillepolice()
     {
         return $this->taillepolice;
+    }
+
+    /**
+     * Set couleur
+     *
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleur
+     *
+     * @return BlocTexte
+     */
+    public function setCouleur(\MH\MailBundle\Entity\Tool\Couleur $couleur = null)
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    /**
+     * Get couleur
+     *
+     * @return \MH\MailBundle\Entity\Tool\Couleur
+     */
+    public function getCouleur()
+    {
+        return $this->couleur;
+    }
+
+    /**
+     * Set couleurFond
+     *
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleurFond
+     *
+     * @return BlocTexte
+     */
+    public function setCouleurFond(\MH\MailBundle\Entity\Tool\Couleur $couleurFond = null)
+    {
+        $this->couleurFond = $couleurFond;
+
+        return $this;
+    }
+
+    /**
+     * Get couleurFond
+     *
+     * @return \MH\MailBundle\Entity\Tool\Couleur
+     */
+    public function getCouleurFond()
+    {
+        return $this->couleurFond;
     }
 }

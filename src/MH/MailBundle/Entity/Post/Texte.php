@@ -29,18 +29,14 @@ class Texte
     private $texte;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="couleur", type="string", length=6)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
     private $couleur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="bgcouleur", type="string", length=6)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
      */
-    private $bgcouleur;
+    private $couleurFond;
 
     /**
      * @var integer
@@ -84,58 +80,12 @@ class Texte
         return $this->texte;
     }
 
-    /**
-     * Set couleur
-     *
-     * @param string $couleur
-     *
-     * @return Texte
-     */
-    public function setCouleur($couleur)
-    {
-        $this->couleur = $couleur;
 
-        return $this;
-    }
-
-    /**
-     * Get couleur
-     *
-     * @return string
-     */
-    public function getCouleur()
-    {
-        return $this->couleur;
-    }
-
-    /**
-     * Set bgcouleur
-     *
-     * @param string $bgcouleur
-     *
-     * @return Texte
-     */
-    public function setBgcouleur($bgcouleur)
-    {
-        $this->bgcouleur = $bgcouleur;
-
-        return $this;
-    }
-
-    /**
-     * Get bgcouleur
-     *
-     * @return string
-     */
-    public function getBgcouleur()
-    {
-        return $this->bgcouleur;
-    }
 
     /**
      * Set hauteur
      *
-     * @param string $hauteur
+     * @param integer $hauteur
      *
      * @return Texte
      */
@@ -149,12 +99,58 @@ class Texte
     /**
      * Get hauteur
      *
-     * @return string
+     * @return integer
      */
     public function getHauteur()
     {
         return $this->hauteur;
     }
 
+    /**
+     * Set couleur
+     *
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleur
+     *
+     * @return Texte
+     */
+    public function setCouleur(\MH\MailBundle\Entity\Tool\Couleur $couleur = null)
+    {
+        $this->couleur = $couleur;
 
+        return $this;
+    }
+
+    /**
+     * Get couleur
+     *
+     * @return \MH\MailBundle\Entity\Tool\Couleur
+     */
+    public function getCouleur()
+    {
+        return $this->couleur;
+    }
+
+    /**
+     * Set couleurFond
+     *
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleurFond
+     *
+     * @return Texte
+     */
+    public function setCouleurFond(\MH\MailBundle\Entity\Tool\Couleur $couleurFond = null)
+    {
+        $this->couleurFond = $couleurFond;
+
+        return $this;
+    }
+
+    /**
+     * Get couleurFond
+     *
+     * @return \MH\MailBundle\Entity\Tool\Couleur
+     */
+    public function getCouleurFond()
+    {
+        return $this->couleurFond;
+    }
 }
