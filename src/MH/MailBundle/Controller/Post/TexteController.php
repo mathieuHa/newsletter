@@ -3,25 +3,11 @@
 namespace MH\MailBundle\Controller\Post;
 
 
-use MH\MailBundle\Entity\Tool\Paragraphe;
 use MH\MailBundle\Entity\Tool\Texte;
-use MH\MailBundle\Form\Post\AgendaType;
-use MH\MailBundle\Form\Post\FooterType;
-use MH\MailBundle\Form\Post\HeaderType;
-use MH\MailBundle\Form\Post\ImageType;
 use MH\MailBundle\Form\Post\TexteType;
-use MH\MailBundle\Form\PostType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class TexteController extends Controller
 {
@@ -31,11 +17,6 @@ class TexteController extends Controller
         $post->setSlug("texte_separation");
         $texte = new Post\Texte();
         $text = new Texte();
-        $paragraphe = new Paragraphe();
-        $paragraphe
-            ->setTexte("Journée Portes Ouvertes ESIEA - Samedi 21 janvier 2017")
-            ->setText($text);
-
         $texte
             ->setTexte($text)
             ->setHauteur("15");
@@ -54,10 +35,11 @@ class TexteController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
+            $em->persist($texte);
             $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
             $post->setTexte($texte);
-            $em->persist($texte);
+            $em->persist($mail);
             $em->flush();
 
             $this

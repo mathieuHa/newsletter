@@ -41,17 +41,16 @@ class PhotoTexteController extends Controller
         $blocTexteImage
             ->setImage(new Post\Image());
         $texte = new Texte();
-        $paragraphe1 = new Paragraphe();
-        $paragraphe1->setText($texte);
-        $paragraphe1->setTexte("Le 8 mars dernier, la journée internationale 
-            des droits des Femmes a été cette année encore l’occasion 
-            de se mobiliser collectivement pour lutter contre des 
-            inégalités persistantes entre les hommes et les femmes, 
-            en particulier sur le plan professionnel.");
+        $lien = new Lien();
+        $lien
+            ->setAlt("ESIEA")
+            ->setHref("esiea.fr")
+            ->setTarget(true);
+
         $blocTexteImage
             ->setTitre("5 raisons pour avoir plus de femmes dans le numérique")
             ->setTexte($texte)
-            ->setLien(new Lien());
+            ->setLien($lien);
         ;
         $blocTexteImage->getImage()
             ->setSrc("http://oscar-campus.com/doc/1420/image/newsletter%20mars/femme%20numerique.jpg")

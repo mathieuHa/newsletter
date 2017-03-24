@@ -28,13 +28,6 @@ class Paragraphe
      */
     private $texte;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte",inversedBy="paragraphes", cascade={"persist"})
-     */
-    private $text;
-
-
-    
 
     /**
      * Get id
@@ -70,27 +63,8 @@ class Paragraphe
         return $this->texte;
     }
 
-    /**
-     * Set text
-     *
-     * @param \MH\MailBundle\Entity\Tool\Texte $text
-     *
-     * @return Paragraphe
-     */
-    public function setText(\MH\MailBundle\Entity\Tool\Texte $text = null)
+    public function __toString()
     {
-        $this->text = $text;
-
-        return $this;
-    }
-
-    /**
-     * Get text
-     *
-     * @return \MH\MailBundle\Entity\Tool\Texte
-     */
-    public function getText()
-    {
-        return $this->text;
+        return $this->getTexte();
     }
 }

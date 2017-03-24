@@ -23,7 +23,6 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 class FooterController extends Controller
 {
 
-
     public function addFooterAdmissionAction(Request $request, $id)
     {
         $post = new Post();

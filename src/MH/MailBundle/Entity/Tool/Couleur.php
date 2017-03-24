@@ -24,7 +24,7 @@ class Couleur
     /**
      * @var string
      *
-     * @ORM\Column(name="valeur", type="string", length=6, unique=true)
+     * @ORM\Column(name="valeur", type="string", length=6)
      */
     private $valeur;
 

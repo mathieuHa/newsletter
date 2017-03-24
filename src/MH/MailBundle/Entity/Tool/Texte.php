@@ -22,13 +22,13 @@ class Texte
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="MH\MailBundle\Entity\Tool\Paragraphe",mappedBy="text" , cascade={"persist","remove"})
+     * @ORM\ManyToMany(targetEntity="MH\MailBundle\Entity\Tool\Paragraphe", cascade={"persist","remove"})
      */
     private $paragraphes;
 
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"} )
      */
     private $couleur;
 
@@ -42,7 +42,6 @@ class Texte
     {
         return $this->id;
     }
-
 
     /**
      * Constructor
@@ -61,7 +60,6 @@ class Texte
      */
     public function addParagraphe(\MH\MailBundle\Entity\Tool\Paragraphe $paragraphe)
     {
-        $paragraphe->setText($this);
         $this->paragraphes[] = $paragraphe;
 
         return $this;
@@ -86,8 +84,6 @@ class Texte
     {
         return $this->paragraphes;
     }
-
-
 
     /**
      * Set couleur

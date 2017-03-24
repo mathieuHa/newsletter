@@ -52,8 +52,7 @@ class BlocController extends Controller
                 ->find($id);
             $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
-            $post->setBloc($bloc);
-            $em->persist($bloc);
+            $em->persist($mail);
             $em->flush();
 
             $this

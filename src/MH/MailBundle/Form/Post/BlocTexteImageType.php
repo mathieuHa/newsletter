@@ -20,13 +20,8 @@ class BlocTexteImageType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('couleurTitre', EntityType::class, array(
-                'class'        => 'MHMailBundle:Tool\Couleur',
-                'choice_label' => 'nom',
-                'multiple'     => false,
-            ))
             ->add('texte',TexteType::class)
-            ->add('couleurFond', EntityType::class, array(
+            ->add('couleur', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
                 'choice_label' => 'nom',
                 'multiple'     => false,
