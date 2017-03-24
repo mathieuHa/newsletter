@@ -4,7 +4,11 @@
                         <td height="{{ post.texte.hauteur }}">&nbsp;</td>
                     </tr>
                     <tr bgcolor="#{{ post.texte.couleurFond }}">
-                        <td style="font-size: 16px; font-family: Arial, sans-serif; color:#{{ post.texte.texte.couleur }}" align="center" valign="middle"><strong>{{ post.texte.texte.paragraphes | first }}<br />
+                        <td style="font-size: {{ post.texte.texte.police }}px; font-family: Arial, sans-serif; color:#{{ post.texte.texte.couleur }}" align="center" valign="middle">
+                            <strong>
+                                {% for para in post.texte.texte.paragraphes %}
+                                    {{ para.texte }}<br />
+                                {% endfor %}
                             </strong></td>
                     </tr>
                     <tr bgcolor="#{{ post.texte.couleurFond }}">

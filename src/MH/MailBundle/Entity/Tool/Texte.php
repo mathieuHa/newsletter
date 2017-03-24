@@ -32,6 +32,11 @@ class Texte
      */
     private $couleur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Police", cascade={"persist"} )
+     */
+    private $police;
+
 
     /**
      * Get id
@@ -107,5 +112,29 @@ class Texte
     public function getCouleur()
     {
         return $this->couleur;
+    }
+
+    /**
+     * Set police
+     *
+     * @param \MH\MailBundle\Entity\Tool\Police $police
+     *
+     * @return Texte
+     */
+    public function setPolice(\MH\MailBundle\Entity\Tool\Police $police = null)
+    {
+        $this->police = $police;
+
+        return $this;
+    }
+
+    /**
+     * Get police
+     *
+     * @return \MH\MailBundle\Entity\Tool\Police
+     */
+    public function getPolice()
+    {
+        return $this->police;
     }
 }

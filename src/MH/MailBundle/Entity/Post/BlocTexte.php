@@ -38,20 +38,6 @@ class BlocTexte
      */
     private $couleurFond;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="alignement", type="string", length=255)
-     */
-    private $alignement;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="taillepolice", type="string", length=255)
-     */
-    private $taillepolice;
-
 
     /**
      * Get id

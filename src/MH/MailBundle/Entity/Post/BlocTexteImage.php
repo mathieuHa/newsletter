@@ -29,11 +29,6 @@ class BlocTexteImage
     private $titre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"})
-     */
-    private $couleurTitre;
-
-    /**
      * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
      */
     private $texte;

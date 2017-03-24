@@ -28,6 +28,11 @@ class Police
      */
     private $taille;
 
+    public function __toString()
+    {
+        return (string)$this->getTaille();
+    }
+
 
     /**
      * Get id

@@ -26,3 +26,27 @@ mh_mail_couleur_delete:
         _controller: MHMailBundle:Tool:deleteCouleur
     requirements:
                 id:   \d+
+
+mh_mail_police_add:
+    path:     /police/add
+    defaults:
+        _controller: MHMailBundle:Tool:addPolice
+
+mh_mail_police_view:
+    path:     /police/liste
+    defaults:
+        _controller: MHMailBundle:Tool:ViewPolice
+
+mh_mail_police_edit:
+    path:     /police/edit/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:editPolice
+    requirements:
+                id:   \d+
+
+mh_mail_police_delete:
+    path:     /police/delete/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:deletePolice
+    requirements:
+                id:   \d+

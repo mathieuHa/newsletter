@@ -21,6 +21,11 @@ class TexteType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
+            ->add('police', EntityType::class, array(
+                'class'        => 'MHMailBundle:Tool\Police',
+                'choice_label' => 'taille',
+                'multiple'     => false,
+            ))
             ->add('paragraphes', CollectionType::class, array(
                 'entry_type'   => ParagrapheType::class,
                 'allow_add'    => true,

@@ -24,7 +24,7 @@ class Paragraphe
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="text")
+     * @ORM\Column(name="texte", type="text", nullable=true)
      */
     private $texte;
 
