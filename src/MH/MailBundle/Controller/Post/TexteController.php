@@ -3,6 +3,8 @@
 namespace MH\MailBundle\Controller\Post;
 
 
+use MH\MailBundle\Entity\Tool\Paragraphe;
+use MH\MailBundle\Entity\Tool\Texte;
 use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Form\Post\FooterType;
 use MH\MailBundle\Form\Post\HeaderType;
@@ -28,9 +30,14 @@ class TexteController extends Controller
         $post = new Post();
         $post->setSlug("texte_separation");
         $texte = new Post\Texte();
+        $text = new Texte();
+        $paragraphe = new Paragraphe();
+        $paragraphe
+            ->setTexte("Journée Portes Ouvertes ESIEA - Samedi 21 janvier 2017")
+            ->setText($text);
 
         $texte
-            ->setTexte("Journée Portes Ouvertes ESIEA - Samedi 21 janvier 2017")
+            ->setTexte($text)
             ->setHauteur("15");
         $post->setTexte($texte);
 

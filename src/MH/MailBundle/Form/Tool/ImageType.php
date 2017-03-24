@@ -1,6 +1,6 @@
 <?php
 
-namespace MH\MailBundle\Form\Post;
+namespace MH\MailBundle\Form\Tool;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,7 +26,7 @@ class ImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MH\MailBundle\Entity\Post\Image'
+            'data_class' => 'MH\MailBundle\Entity\Tool\Image'
         ));
     }
 
@@ -35,7 +35,7 @@ class ImageType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'mh_mailbundle_post_image';
+        return 'mh_mailbundle_tool_image';
     }
 
 

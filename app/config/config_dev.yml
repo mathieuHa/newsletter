@@ -32,3 +32,23 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+easy_admin:
+    entities:
+        - MH\MailBundle\Entity\Mail
+        - MH\MailBundle\Entity\User
+        - MH\MailBundle\Entity\Post
+        - MH\MailBundle\Entity\PostType
+        - MH\MailBundle\Entity\Post\Agenda
+        - MH\MailBundle\Entity\Post\Bloc
+        - MH\MailBundle\Entity\Post\BlocTexte
+        - MH\MailBundle\Entity\Post\BlocTexteImage
+        - MH\MailBundle\Entity\Post\Footer
+        - MH\MailBundle\Entity\Post\Header
+        - MH\MailBundle\Entity\Post\Texte
+        - MH\MailBundle\Entity\Tool\Couleur
+        - MH\MailBundle\Entity\Tool\Image
+        - MH\MailBundle\Entity\Tool\Lien
+        - MH\MailBundle\Entity\Tool\Paragraphe
+        - MH\MailBundle\Entity\Tool\Police
+        - MH\MailBundle\Entity\Tool\Texte

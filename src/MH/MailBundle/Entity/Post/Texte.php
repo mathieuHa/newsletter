@@ -22,19 +22,12 @@ class Texte
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
      */
     private $texte;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
-     */
-    private $couleur;
-
-    /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"})
      */
     private $couleurFond;
 
@@ -46,41 +39,17 @@ class Texte
     private $hauteur;
 
 
+
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * Set texte
-     *
-     * @param string $texte
-     *
-     * @return Texte
-     */
-    public function setTexte($texte)
-    {
-        $this->texte = $texte;
-
-        return $this;
-    }
-
-    /**
-     * Get texte
-     *
-     * @return string
-     */
-    public function getTexte()
-    {
-        return $this->texte;
-    }
-
-
 
     /**
      * Set hauteur
@@ -106,28 +75,30 @@ class Texte
         return $this->hauteur;
     }
 
+    
+
     /**
-     * Set couleur
+     * Set texte
      *
-     * @param \MH\MailBundle\Entity\Tool\Couleur $couleur
+     * @param \MH\MailBundle\Entity\Tool\Texte $texte
      *
      * @return Texte
      */
-    public function setCouleur(\MH\MailBundle\Entity\Tool\Couleur $couleur = null)
+    public function setTexte(\MH\MailBundle\Entity\Tool\Texte $texte = null)
     {
-        $this->couleur = $couleur;
+        $this->texte = $texte;
 
         return $this;
     }
 
     /**
-     * Get couleur
+     * Get texte
      *
-     * @return \MH\MailBundle\Entity\Tool\Couleur
+     * @return \MH\MailBundle\Entity\Tool\Texte
      */
-    public function getCouleur()
+    public function getTexte()
     {
-        return $this->couleur;
+        return $this->texte;
     }
 
     /**

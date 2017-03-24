@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Form\Tool;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +16,11 @@ class TexteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('couleur', EntityType::class, array(
+                'class'        => 'MHMailBundle:Tool\Couleur',
+                'choice_label' => 'nom',
+                'multiple'     => false,
+            ))
             ->add('paragraphes', CollectionType::class, array(
                 'entry_type'   => ParagrapheType::class,
                 'allow_add'    => true,

@@ -29,15 +29,17 @@ class Bloc
     private $hauteur;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"})
      */
     private $couleur;
+
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -61,13 +63,12 @@ class Bloc
     /**
      * Get hauteur
      *
-     * @return int
+     * @return integer
      */
     public function getHauteur()
     {
         return $this->hauteur;
     }
-    
 
     /**
      * Set couleur

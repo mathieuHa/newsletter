@@ -41,18 +41,22 @@ class Header
     }
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Image", cascade={"persist", "remove"} )
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist", "remove"} )
      */
     private $image;
+
+    
+
+
 
     /**
      * Set image
      *
-     * @param \MH\MailBundle\Entity\Post\Image $image
+     * @param \MH\MailBundle\Entity\Tool\Image $image
      *
      * @return Header
      */
-    public function setImage(\MH\MailBundle\Entity\Post\Image $image = null)
+    public function setImage(\MH\MailBundle\Entity\Tool\Image $image = null)
     {
         $this->image = $image;
 
@@ -62,7 +66,7 @@ class Header
     /**
      * Get image
      *
-     * @return \MH\MailBundle\Entity\Post\Image
+     * @return \MH\MailBundle\Entity\Tool\Image
      */
     public function getImage()
     {

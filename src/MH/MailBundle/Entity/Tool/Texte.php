@@ -28,7 +28,7 @@ class Texte
 
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"} )
      */
     private $couleur;
 
@@ -61,6 +61,7 @@ class Texte
      */
     public function addParagraphe(\MH\MailBundle\Entity\Tool\Paragraphe $paragraphe)
     {
+        $paragraphe->setText($this);
         $this->paragraphes[] = $paragraphe;
 
         return $this;
@@ -85,6 +86,8 @@ class Texte
     {
         return $this->paragraphes;
     }
+
+
 
     /**
      * Set couleur

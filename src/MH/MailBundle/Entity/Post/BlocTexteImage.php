@@ -29,7 +29,7 @@ class BlocTexteImage
     private $titre;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"})
      */
     private $couleurTitre;
 
@@ -39,7 +39,7 @@ class BlocTexteImage
     private $texte;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"})
      */
     private $couleurFond;
 
@@ -49,15 +49,17 @@ class BlocTexteImage
     private $lien;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\Image", cascade={"persist", "remove"} )
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist", "remove"} )
      */
     private $image;
+
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -161,30 +163,6 @@ class BlocTexteImage
     }
 
     /**
-     * Set image
-     *
-     * @param \MH\MailBundle\Entity\Post\Image $image
-     *
-     * @return BlocTexteImage
-     */
-    public function setImage(\MH\MailBundle\Entity\Post\Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \MH\MailBundle\Entity\Post\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set lien
      *
      * @param \MH\MailBundle\Entity\Tool\Lien $lien
@@ -206,5 +184,29 @@ class BlocTexteImage
     public function getLien()
     {
         return $this->lien;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MH\MailBundle\Entity\Tool\Image $image
+     *
+     * @return BlocTexteImage
+     */
+    public function setImage(\MH\MailBundle\Entity\Tool\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MH\MailBundle\Entity\Tool\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

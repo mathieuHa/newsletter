@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Form\Post;
 
+use MH\MailBundle\Form\Tool\ImageType;
 use MH\MailBundle\Form\Tool\LienType;
 use MH\MailBundle\Form\Tool\TexteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

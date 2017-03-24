@@ -16,12 +16,7 @@ class TexteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('texte')
-            ->add('couleur', EntityType::class, array(
-                'class'        => 'MHMailBundle:Tool\Couleur',
-                'choice_label' => 'nom',
-                'multiple'     => false,
-            ))
+            ->add('texte',\MH\MailBundle\Form\Tool\TexteType::class)
             ->add('couleurFond', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
                 'choice_label' => 'nom',

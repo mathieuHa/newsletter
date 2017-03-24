@@ -16,3 +16,8 @@ _main:
 coresphere_console:
     resource: .
     type: extra
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin

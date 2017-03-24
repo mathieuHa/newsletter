@@ -1,29 +1,44 @@
 <?php
 
-namespace MH\MailBundle\Entity\Post;
+namespace MH\MailBundle\Entity\Tool;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Image
+ *
+ * @ORM\Table(name="post_image")
+ * @ORM\Entity(repositoryClass="MH\MailBundle\Repository\Tool\ImageRepository")
  */
 class Image
 {
     /**
-     * @var integer
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="src", type="string", length=255)
      */
     private $src;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="alt", type="string", length=255)
      */
     private $alt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
@@ -31,7 +46,7 @@ class Image
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -110,4 +125,3 @@ class Image
         return $this->description;
     }
 }
-

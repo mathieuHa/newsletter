@@ -166,6 +166,7 @@ class Mail
     public function __construct()
     {
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setDate(new \DateTime());
     }
 
     /**
