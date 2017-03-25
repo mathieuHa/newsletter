@@ -161,6 +161,21 @@ class Agenda
      */
     private $lien4;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Police", cascade={"persist"} )
+     */
+    private $police;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Couleur", cascade={"persist"} )
+     */
+    private $couleur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MH\MailBundle\Entity\Tool\Lien", cascade={"persist", "remove"} )
+     */
+    private $liens;
+
 
     /**
      * Get id
@@ -674,5 +689,94 @@ class Agenda
     public function getTextlien1()
     {
         return $this->textlien1;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->liens = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set police
+     *
+     * @param \MH\MailBundle\Entity\Tool\Police $police
+     *
+     * @return Agenda
+     */
+    public function setPolice(\MH\MailBundle\Entity\Tool\Police $police = null)
+    {
+        $this->police = $police;
+
+        return $this;
+    }
+
+    /**
+     * Get police
+     *
+     * @return \MH\MailBundle\Entity\Tool\Police
+     */
+    public function getPolice()
+    {
+        return $this->police;
+    }
+
+    /**
+     * Set couleur
+     *
+     * @param \MH\MailBundle\Entity\Tool\Couleur $couleur
+     *
+     * @return Agenda
+     */
+    public function setCouleur(\MH\MailBundle\Entity\Tool\Couleur $couleur = null)
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    /**
+     * Get couleur
+     *
+     * @return \MH\MailBundle\Entity\Tool\Couleur
+     */
+    public function getCouleur()
+    {
+        return $this->couleur;
+    }
+
+    /**
+     * Add lien
+     *
+     * @param \MH\MailBundle\Entity\Tool\Lien $lien
+     *
+     * @return Agenda
+     */
+    public function addLien(\MH\MailBundle\Entity\Tool\Lien $lien)
+    {
+        $this->liens[] = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Remove lien
+     *
+     * @param \MH\MailBundle\Entity\Tool\Lien $lien
+     */
+    public function removeLien(\MH\MailBundle\Entity\Tool\Lien $lien)
+    {
+        $this->liens->removeElement($lien);
+    }
+
+    /**
+     * Get liens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLiens()
+    {
+        return $this->liens;
     }
 }
