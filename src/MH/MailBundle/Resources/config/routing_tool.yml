@@ -50,3 +50,27 @@ mh_mail_police_delete:
         _controller: MHMailBundle:Tool:deletePolice
     requirements:
                 id:   \d+
+
+mh_mail_image_add:
+    path:     /image/add
+    defaults:
+        _controller: MHMailBundle:Tool:addImage
+
+mh_mail_image_view:
+    path:     /image/liste
+    defaults:
+        _controller: MHMailBundle:Tool:ViewImage
+
+mh_mail_image_edit:
+    path:     /image/edit/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:editImage
+    requirements:
+                id:   \d+
+
+mh_mail_image_delete:
+    path:     /image/delete/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:deleteImage
+    requirements:
+                id:   \d+

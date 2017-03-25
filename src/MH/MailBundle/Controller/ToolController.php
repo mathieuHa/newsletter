@@ -3,20 +3,14 @@
 namespace MH\MailBundle\Controller;
 
 use MH\MailBundle\Entity\Tool\Couleur;
+use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\Tool\Police;
-use MH\MailBundle\Form\MailType;
 use MH\MailBundle\Form\Tool\CouleurType;
+use MH\MailBundle\Form\Tool\ImageType;
 use MH\MailBundle\Form\Tool\PoliceType;
-use MH\MailBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class ToolController extends Controller
 {
@@ -247,6 +241,118 @@ class ToolController extends Controller
         return $this
             ->render('MHMailBundle:Tool\Police:delete.html.twig',array(
                 'id'=>$police->getId(),
+                'form'=>$form->createView()
+            ));
+    }
+
+    public function addImageAction (Request $request)
+    {
+        $image = new Image();
+        $image->setSrc("");
+
+        $form = $this
+            ->get('form.factory')
+            ->create(ImageType::class,$image);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+            $em->persist($image);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Image créé'
+                );
+
+            return $this->redirectToRoute('mh_mail_image_view');
+        }
+
+        return $this->render('MHMailBundle:Tool\Image:add.html.twig', array(
+            'form'=>$form->createView(),
+        ));
+    }
+
+    public function viewImageAction ()
+    {
+        $listImage = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:Tool\Image')
+            ->findAll();
+        return $this->render('MHMailBundle:Tool\Image:view.html.twig',array(
+            'listImage'=>$listImage
+        ));
+    }
+
+    public function editImageAction (Request $request, $id)
+    {
+        $image = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:Tool\Image')
+            ->find($id);
+
+        $form = $this
+            ->get('form.factory')
+            ->create(ImageType::class,$image);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+            $em->persist($image);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Image modifié'
+                );
+
+            return $this->redirectToRoute('mh_mail_image_view');
+        }
+
+        return $this->render('MHMailBundle:Tool\Image:edit.html.twig', array(
+            'id'=>$image->getId(),
+            'form'=>$form->createView()
+        ));
+    }
+
+    public function deleteImageAction (Request $request, $id)
+    {
+        $em = $this
+            ->getDoctrine()
+            ->getManager();
+        $image = $em
+            ->getRepository('MHMailBundle:Tool\Image')
+            ->find($id);
+
+        if (null === $image) {
+            throw new NotFoundHttpException("La Image ".$id." n'existe pas");
+        }
+
+        $form = $this
+            ->get('form.factory')
+            ->create();
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+            $em->remove($image);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Image supprimée'
+            );
+
+            return $this->redirectToRoute('mh_mail_image_view');
+        }
+
+        return $this
+            ->render('MHMailBundle:Tool\Image:delete.html.twig',array(
+                'id'=>$image->getId(),
                 'form'=>$form->createView()
             ));
     }

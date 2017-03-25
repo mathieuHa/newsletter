@@ -3,6 +3,7 @@
 namespace MH\MailBundle\Entity\Post;
 
 use Doctrine\ORM\Mapping as ORM;
+use MH\MailBundle\Entity\Tool\Image;
 
 /**
  * Header
@@ -41,11 +42,9 @@ class Header
     }
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist"} )
      */
     private $image;
-
-    
 
 
 

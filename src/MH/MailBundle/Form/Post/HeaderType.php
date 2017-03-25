@@ -3,6 +3,7 @@
 namespace MH\MailBundle\Form\Post;
 
 use MH\MailBundle\Form\Tool\ImageType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,7 +16,13 @@ class HeaderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('image',ImageType::class)->add('save',SubmitType::class)        ;
+        $builder
+            ->add('image', EntityType::class, array(
+                'class'        => 'MHMailBundle:Tool\Image',
+                'choice_label' => 'nom',
+                'multiple'     => false,
+            ))
+            ->add('save',SubmitType::class)        ;
     }
     
     /**

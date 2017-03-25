@@ -1,6 +1,6 @@
 <?php
 
-namespace MH\MailBundle\Repository\Post;
+namespace MH\MailBundle\Repository\Tool;
 
 /**
  * ImageRepository

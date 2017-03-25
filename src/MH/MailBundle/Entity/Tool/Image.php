@@ -42,6 +42,13 @@ class Image
      */
     private $description;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+
 
     /**
      * Get id
@@ -123,5 +130,31 @@ class Image
     public function getDescription()
     {
         return $this->description;
+    }
+
+    
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Image
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
     }
 }

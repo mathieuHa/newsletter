@@ -5,7 +5,6 @@ namespace MH\MailBundle\Controller\Post;
 
 use MH\MailBundle\Form\Post\HeaderType;
 use MH\MailBundle\Entity\Post;
-use MH\MailBundle\Entity\Tool;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,12 +15,7 @@ class HeaderController extends Controller
         $post = new Post();
         $post->setSlug("header");
         $header = new Post\Header();
-        $header->setImage(new Tool\Image());
-        $header->getImage()
-            ->setSrc("https://www.esiea.fr/wp-content/uploads/2016/11/Header-emailling_02.jpg")
-            ->setAlt("ESIEA, l'&Eacute;cole d'ing&eacute;nieurs du monde num&eacute;rique")
-            ->setDescription("ESIEA, l'&Eacute;cole d'ing&eacute;nieurs du monde num&eacute;rique")
-        ;
+        $post->setHeader($header);
 
         $form = $this
             ->get('form.factory')
@@ -36,10 +30,9 @@ class HeaderController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $post->setPosition(0); // TEMPORAIRE A ENLEVER
+            $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $post->setHeader($header);
             $mail->addPost($post);
-
             $em->persist($mail);
             $em->flush();
 
