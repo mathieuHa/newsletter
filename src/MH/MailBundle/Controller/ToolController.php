@@ -6,6 +6,7 @@ use MH\MailBundle\Entity\PostType;
 use MH\MailBundle\Entity\Tool\Couleur;
 use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\Tool\Police;
+use MH\MailBundle\Form\PostTypeType;
 use MH\MailBundle\Form\Tool\CouleurType;
 use MH\MailBundle\Form\Tool\ImageType;
 use MH\MailBundle\Form\Tool\PoliceType;
@@ -364,13 +365,15 @@ class ToolController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(PostType::class,$type);
+            ->create(PostTypeType::class,$type);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
+
+            $type->setPosition(0);
 
             $em->persist($type);
             $em->flush();
@@ -408,7 +411,7 @@ class ToolController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(PostType::class,$type);
+            ->create(PostTypeType::class,$type);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
