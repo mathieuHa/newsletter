@@ -10,13 +10,14 @@
     <div id="contain" >
         <div class="well">
             <h4>Rendu Actuel</h4>
-            {% if post.header is not null %}
+            {% if post.header.image is not null %}
                 {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
             {% else %}
                 <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.JPG') }}" alt="Exemple de rendu de header" height="200"  />"
             {% endif %}
             <hr>
             {{ form(form) }}
+
         </div>
     </div>
     <br>

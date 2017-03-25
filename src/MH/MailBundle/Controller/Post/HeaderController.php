@@ -17,6 +17,8 @@ class HeaderController extends Controller
         $header = new Post\Header();
         $post->setHeader($header);
 
+
+
         $form = $this
             ->get('form.factory')
             ->create(HeaderType::class,$header);
@@ -89,7 +91,7 @@ class HeaderController extends Controller
         return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
             'form'=>$form->createView(),
             'id'=>$id,
-            'post'=>$post
+            'post'=>$post,
         ));
     }
 

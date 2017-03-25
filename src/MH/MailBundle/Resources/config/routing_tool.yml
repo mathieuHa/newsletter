@@ -74,3 +74,28 @@ mh_mail_image_delete:
         _controller: MHMailBundle:Tool:deleteImage
     requirements:
                 id:   \d+
+
+
+mh_mail_type_add:
+    path:     /type/add
+    defaults:
+        _controller: MHMailBundle:Tool:addType
+
+mh_mail_type_view:
+    path:     /type/liste
+    defaults:
+        _controller: MHMailBundle:Tool:ViewType
+
+mh_mail_type_edit:
+    path:     /type/edit/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:editType
+    requirements:
+                id:   \d+
+
+mh_mail_type_delete:
+    path:     /type/delete/{id}
+    defaults:
+        _controller: MHMailBundle:Tool:deleteType
+    requirements:
+                id:   \d+

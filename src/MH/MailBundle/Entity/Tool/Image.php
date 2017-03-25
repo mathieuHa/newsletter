@@ -49,6 +49,10 @@ class Image
      */
     private $nom;
 
+    public function __toString()
+    {
+        return (string)$this->getNom();
+    }
 
     /**
      * Get id

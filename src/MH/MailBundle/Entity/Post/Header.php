@@ -3,7 +3,6 @@
 namespace MH\MailBundle\Entity\Post;
 
 use Doctrine\ORM\Mapping as ORM;
-use MH\MailBundle\Entity\Tool\Image;
 
 /**
  * Header
@@ -23,15 +22,6 @@ class Header
     private $id;
 
     /**
-     * Header constructor.
-     */
-    public function __construct()
-    {
-        $this->image = new Image();
-    }
-
-
-    /**
      * Get id
      *
      * @return int
@@ -45,6 +35,8 @@ class Header
      * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist"} )
      */
     private $image;
+
+
 
 
 

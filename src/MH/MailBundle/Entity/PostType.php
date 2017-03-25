@@ -49,20 +49,12 @@ class PostType
      */
     private $imgalt;
 
-
     /**
-     * PostType constructor.
-     * @param string $name
-     * @param string $imgsrc
-     * @param string $imgalt
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer")
      */
-    public function __construct($name, $imgsrc, $imgalt)
-    {
-        $this->name = $name;
-        $this->imgsrc = $imgsrc;
-        $this->imgalt = $imgalt;
-    }
-
+    private $position;
 
     /**
      * Get id
@@ -216,5 +208,29 @@ class PostType
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return PostType
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

@@ -7,23 +7,23 @@
 {% block bundle_body %}
     <h2>Selection type de Post</h2>
     <hr>
-    <div id="contain" >
-            {% for postType in listPostType %}
+        <ul class="list-unstyled type-sortable">
+            {% for type in listPostType | sortbyfield('position') %}
+                <li  id="type_{{ type.id }}">
                 <div class="row">
-                <div class="col-md-3">
-                    <h3><a class="btn btn-link" href="{{ path('mh_mail_'~postType.name|lower~'_add', {'id':id}) }}">{{ postType.name }}</a> </h3>
-                </div>
-                <div class="col-md-9">
-                    <img src="{{ asset('bundles/mhmail/images/' ~ postType.imgsrc) }}" alt="{{ postType.imgalt }}"  width="700" align="top" />
-                    <br>
-                    <br>
-                    <br>
-                </div>
-                </div>
-
+                        <div class="col-md-3">
+                            <h3><a class="btn btn-link" href="{{ path('mh_mail_'~type.slug|lower~'_add', {'id':id}) }}">{{ type.name }}</a> </h3>
+                        </div>
+                        <div class="col-md-9">
+                            <img src="{{ asset('bundles/mhmail/images/' ~ type.imgsrc) }}" alt="{{ type.imgalt }}"  width="700" align="top" />
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        </div>
+                </li>
             {% endfor %}
-
-    </div>
+        </ul>
     <br>
     <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
 
@@ -31,6 +31,23 @@
 {% endblock %}
 
 {% block bundle_javascript %}
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".type-sortable").sortable({
+                cursor: "move",
+                update: function () {
+                    var order_serialize = $(this).sortable("serialize", {key: "types[]"});
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('mh_mail_posttype_order') }}",
+                        data: order_serialize,
+                        error: function () {
+                            console.log('error');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 {% endblock %}
 

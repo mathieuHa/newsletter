@@ -88,6 +88,11 @@ mh_mail_post_select:
     requirements:
             id:   \d+
 
+mh_mail_posttype_order:
+    path:     /posttype/order
+    defaults:
+        _controller: MHMailBundle:PostType:order
+
 mh_mail_routing_agenda:
     resource: routing_agenda.yml
 

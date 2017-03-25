@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Controller;
 
+use MH\MailBundle\Entity\PostType;
 use MH\MailBundle\Entity\Tool\Couleur;
 use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\Tool\Police;
@@ -356,6 +357,118 @@ class ToolController extends Controller
                 'form'=>$form->createView()
             ));
     }
+
+    public function addTypeAction (Request $request)
+    {
+        $type = new PostType();
+
+        $form = $this
+            ->get('form.factory')
+            ->create(PostType::class,$type);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+            $em->persist($type);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Type créé'
+                );
+
+            return $this->redirectToRoute('mh_mail_type_view');
+        }
+
+        return $this->render('MHMailBundle:Tool\Type:add.html.twig', array(
+            'form'=>$form->createView(),
+        ));
+    }
+
+    public function viewTypeAction ()
+    {
+        $listType = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:PostType')
+            ->findAll();
+        return $this->render('MHMailBundle:Tool\Type:view.html.twig',array(
+            'listType'=>$listType
+        ));
+    }
+
+    public function editTypeAction (Request $request, $id)
+    {
+        $type = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:PostType')
+            ->find($id);
+
+        $form = $this
+            ->get('form.factory')
+            ->create(PostType::class,$type);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+            $em->persist($type);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Type modifié'
+                );
+
+            return $this->redirectToRoute('mh_mail_type_view');
+        }
+
+        return $this->render('MHMailBundle:PostType:edit.html.twig', array(
+            'id'=>$type->getId(),
+            'form'=>$form->createView()
+        ));
+    }
+
+    public function deleteTypeAction (Request $request, $id)
+    {
+        $em = $this
+            ->getDoctrine()
+            ->getManager();
+        $type = $em
+            ->getRepository('MHMailBundle:PostType')
+            ->find($id);
+
+        if (null === $type) {
+            throw new NotFoundHttpException("La Type ".$id." n'existe pas");
+        }
+
+        $form = $this
+            ->get('form.factory')
+            ->create();
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+            $em->remove($type);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Type supprimée'
+            );
+
+            return $this->redirectToRoute('mh_mail_type_view');
+        }
+
+        return $this
+            ->render('MHMailBundle:Tool\Type:delete.html.twig',array(
+                'id'=>$type->getId(),
+                'form'=>$form->createView()
+            ));
+    }
+
 
 
 }

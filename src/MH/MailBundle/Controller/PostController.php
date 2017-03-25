@@ -162,24 +162,4 @@ class PostController extends Controller
             throw new BadRequestHttpException('No posts in request');
         }
     }
-
-    /* public function getAction(Request $request)
-    {
-        $id = $request->query->get('id');
-        $mail = $this
-            ->getDoctrine()
-            ->getRepository('MHMailBundle:Mail')
-            ->find($id);
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-
-        $normalizer->setCircularReferenceHandler(function ($mail) {
-            return $mail->getName();
-        });
-
-        $serializer = new Serializer(array($normalizer), array($encoder));
-        $json = $serializer->serialize($mail, 'json');
-        return new Response($json);
-
-    }*/
 }

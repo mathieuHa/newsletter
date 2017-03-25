@@ -17,7 +17,9 @@ class PostType extends AbstractType
     {
         $builder
             ->add('slug')
-            ->add('position')
+            ->add('name')
+            ->add('imgsrc')
+            ->add('imgalt')
             ->add('save',SubmitType::class);
     }
 
