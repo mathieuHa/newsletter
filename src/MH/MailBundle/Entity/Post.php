@@ -31,6 +31,13 @@ class Post
     private $slug;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="text", nullable=true)
+     */
+    private $nom;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
@@ -272,5 +279,29 @@ class Post
     public function getBlocphototexte()
     {
         return $this->blocphototexte;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Post
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
     }
 }

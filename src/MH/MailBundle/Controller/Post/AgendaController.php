@@ -4,6 +4,7 @@ namespace MH\MailBundle\Controller\Post;
 
 
 use MH\MailBundle\Entity\Tool\Lien;
+use MH\MailBundle\Entity\Tool\MiniTexte;
 use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,8 +16,8 @@ class AgendaController extends Controller
     public function addAgendaAction(Request $request, $id)
     {
         $post = new Post();
-        $post->setSlug("agenda");
         $agenda = new Post\Agenda();
+        $post->setSlug("agenda");
         $agenda
             ->setJour1("20")->setMois1("Janvier")
             ->setTexte1("Début des inscriptions sur APB")
@@ -27,28 +28,36 @@ class AgendaController extends Controller
             ->setJour4("02")->setMois4("Mars")
             ->setTexte4("1ère journée d'immersion sur le campus de Paris");
         $lien1 = new Lien();
+        $miniText1 = new MiniTexte();
+        $miniText1->setTexte("Concours Alpha");
         $lien1
             ->setHref("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
             ->setAlt("admission préparation au concours alpha")
-            ->setTexte("Concours Alpha")
+            ->setTexte($miniText1)
             ->setTarget(true);
         $lien2 = new Lien();
+        $miniText2 = new MiniTexte();
+        $miniText2->setTexte("Journée Portes-Ouverte");
         $lien2
             ->setHref("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
             ->setAlt("Journées Portes-Ouvertes ESIEA")
-            ->setTexte("Journée Portes Ouverte")
+            ->setTexte($miniText2)
             ->setTarget(true);
         $lien3 = new Lien();
+        $miniText3 = new MiniTexte();
+        $miniText3->setTexte("Journée Portes Ouverte");
         $lien3
             ->setHref("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
             ->setAlt("Journées Portes-Ouvertes ESIEA")
-            ->setTexte("Journée Portes Ouverte")
+            ->setTexte($miniText3)
             ->setTarget(true);
         $lien4 = new Lien();
+        $miniText4 = new MiniTexte();
+        $miniText4->setTexte("Vis ma vie d'ingénieur");
         $lien4
             ->setHref("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
             ->setAlt("Vie Ma Vie d'ingénieur")
-            ->setTexte("Vis ma vie d'ingénieur")
+            ->setTexte($miniText4)
             ->setTarget(true);
         $agenda->getLiens()
             ->add($lien1);
