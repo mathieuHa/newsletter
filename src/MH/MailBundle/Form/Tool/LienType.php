@@ -3,6 +3,8 @@
 namespace MH\MailBundle\Form\Tool;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,10 +16,10 @@ class LienType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('href')
-            ->add('alt')
-            ->add('texte')
-            ->add('target')
+            ->add('href',TextType::class)
+            ->add('alt',TextType::class)
+            ->add('texte',MiniTexteType::class)
+            ->add('target',CheckboxType::class)
         ;
     }
     

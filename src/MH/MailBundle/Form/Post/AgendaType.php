@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,18 +19,18 @@ class AgendaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mois1')
-            ->add('jour1')
-            ->add('texte1')
-            ->add('mois2')
-            ->add('jour2')
-            ->add('texte2')
-            ->add('mois3')
-            ->add('jour3')
-            ->add('texte3')
-            ->add('mois4')
-            ->add('jour4')
-            ->add('texte4')
+            ->add('mois1',TextType::class)
+            ->add('jour1',TextType::class)
+            ->add('texte1',TextType::class)
+            ->add('mois2',TextType::class)
+            ->add('jour2',TextType::class)
+            ->add('texte2',TextType::class)
+            ->add('mois3',TextType::class)
+            ->add('jour3',TextType::class)
+            ->add('texte3',TextType::class)
+            ->add('mois4',TextType::class)
+            ->add('jour4',TextType::class)
+            ->add('texte4',TextType::class)
             ->add('liens', CollectionType::class, array(
                 'entry_type' => LienType::class
             ))

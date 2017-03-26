@@ -36,9 +36,7 @@ class Lien
     private $alt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\MiniTexte", cascade={"persist", "remove"})
      */
     private $texte;
 
@@ -49,6 +47,10 @@ class Lien
      */
     private $target;
 
+    public function __toString()
+    {
+        return $this->getTexte();
+    }
 
     /**
      * Get id

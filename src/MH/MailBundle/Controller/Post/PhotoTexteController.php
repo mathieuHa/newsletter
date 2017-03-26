@@ -3,32 +3,14 @@
 namespace MH\MailBundle\Controller\Post;
 
 
-use Doctrine\ORM\Mapping\Entity;
 use MH\MailBundle\Entity\Post\BlocTexteImage;
-use MH\MailBundle\Entity\Tool\Couleur;
+use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\Tool\Lien;
-use MH\MailBundle\Entity\Tool\Paragraphe;
 use MH\MailBundle\Entity\Tool\Texte;
-use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Form\Post\BlocTexteImageType;
-use MH\MailBundle\Form\Post\BlocType;
-use MH\MailBundle\Form\Post\FooterType;
-use MH\MailBundle\Form\Post\HeaderType;
-use MH\MailBundle\Form\Post\ImageType;
-use MH\MailBundle\Form\Post\TexteType;
-use MH\MailBundle\Form\PostType;
 use MH\MailBundle\Entity\Post;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class PhotoTexteController extends Controller
 {
@@ -37,25 +19,18 @@ class PhotoTexteController extends Controller
         $post = new Post();
         $post->setSlug("bloc_photo_texte");
         $blocTexteImage = new BlocTexteImage();
-
-        $blocTexteImage
-            ->setImage(new Post\Image());
         $texte = new Texte();
         $lien = new Lien();
         $lien
             ->setAlt("ESIEA")
             ->setHref("esiea.fr")
+            ->setTexte("5 raisons pour avoir plus de femmes dans le numérique")
             ->setTarget(true);
 
         $blocTexteImage
-            ->setTitre("5 raisons pour avoir plus de femmes dans le numérique")
             ->setTexte($texte)
-            ->setLien($lien);
+            ->setTitre($lien);
         ;
-        $blocTexteImage->getImage()
-            ->setSrc("http://oscar-campus.com/doc/1420/image/newsletter%20mars/femme%20numerique.jpg")
-            ->setAlt("ESIEA, l'&Eacute;cole d'ing&eacute;nieurs du monde num&eacute;rique")
-            ->setDescription("ESIEA, l'&Eacute;cole d'ing&eacute;nieurs du monde num&eacute;rique");
 
         $post->setBlocphototexte($blocTexteImage);
 

@@ -14,7 +14,8 @@ class FooterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('save',SubmitType::class)        ;
+        $builder
+            ->add('save',SubmitType::class)        ;
     }
     /**
      * {@inheritdoc}

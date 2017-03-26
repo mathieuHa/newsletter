@@ -22,14 +22,7 @@ class BlocTexteImage
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=255, nullable=true)
-     */
-    private $titre;
-
-    /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
      */
     private $texte;
 
@@ -39,12 +32,12 @@ class BlocTexteImage
     private $couleurFond;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Lien", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Lien", cascade={"persist", "remove"} )
      */
-    private $lien;
+    private $titre;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist", "remove"} )
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist"} )
      */
     private $image;
 
@@ -61,53 +54,8 @@ class BlocTexteImage
         return $this->id;
     }
 
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return BlocTexteImage
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
 
-        return $this;
-    }
 
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * Set couleurTitre
-     *
-     * @param \MH\MailBundle\Entity\Tool\Couleur $couleurTitre
-     *
-     * @return BlocTexteImage
-     */
-    public function setCouleurTitre(\MH\MailBundle\Entity\Tool\Couleur $couleurTitre = null)
-    {
-        $this->couleurTitre = $couleurTitre;
-
-        return $this;
-    }
-
-    /**
-     * Get couleurTitre
-     *
-     * @return \MH\MailBundle\Entity\Tool\Couleur
-     */
-    public function getCouleurTitre()
-    {
-        return $this->couleurTitre;
-    }
 
     /**
      * Set texte
@@ -158,27 +106,27 @@ class BlocTexteImage
     }
 
     /**
-     * Set lien
+     * Set titre
      *
-     * @param \MH\MailBundle\Entity\Tool\Lien $lien
+     * @param \MH\MailBundle\Entity\Tool\Lien $titre
      *
      * @return BlocTexteImage
      */
-    public function setLien(\MH\MailBundle\Entity\Tool\Lien $lien = null)
+    public function setTitre(\MH\MailBundle\Entity\Tool\Lien $titre = null)
     {
-        $this->lien = $lien;
+        $this->titre = $titre;
 
         return $this;
     }
 
     /**
-     * Get lien
+     * Get titre
      *
      * @return \MH\MailBundle\Entity\Tool\Lien
      */
-    public function getLien()
+    public function getTitre()
     {
-        return $this->lien;
+        return $this->titre;
     }
 
     /**

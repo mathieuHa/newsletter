@@ -41,7 +41,6 @@ easy_admin:
         - MH\MailBundle\Entity\PostType
         - MH\MailBundle\Entity\Post\Agenda
         - MH\MailBundle\Entity\Post\Bloc
-        - MH\MailBundle\Entity\Post\BlocTexte
         - MH\MailBundle\Entity\Post\BlocTexteImage
         - MH\MailBundle\Entity\Post\Footer
         - MH\MailBundle\Entity\Post\Header

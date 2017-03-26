@@ -17,9 +17,9 @@ class ImageType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class,array('required' => false))
-            ->add('src')
-            ->add('alt')
-            ->add('description')
+            ->add('src',TextType::class)
+            ->add('alt',TextType::class)
+            ->add('description',TextType::class)
             ->add('save',SubmitType::class);
     }
     

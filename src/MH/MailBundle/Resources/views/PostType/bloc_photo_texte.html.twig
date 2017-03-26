@@ -10,16 +10,16 @@
     <div id="contain" >
         <div class="well">
             <h4>Rendu Actuel</h4>
-            {#{% if post.bloc_photo_texte is not null %}
+            {% if post.blocphototexte.image is not null %}
                 <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="600">
                     <tbody>
                     {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
                     </tbody>
                 </table>
-            {% else %}#}
+            {% else %}
 
                 <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.jpg') }}" alt="Exemple de texte & photo" width="700"  />
-            {#{% endif %}#}
+            {% endif %}
 
             <hr>
             {{ form_start(form) }}
@@ -29,43 +29,29 @@
                 {{ form_label(form.titre, "Titre", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.titre) }}
                 <div class="col-sm-9">
-                    {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.titre.texte) }}
+                    {{ form_row(form.titre.href) }}
+                    {{ form_row(form.titre.alt) }}
+                    {{ form_row(form.titre.target) }}
                 </div>
             </div>
             <br>
             <br>
             <div class="form-group">
-                {{ form_label(form.couleurTitre, "Couleur du Titre", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                {{ form_errors(form.couleurTitre) }}
-                <div class="col-sm-9">
-                    {{ form_widget(form.couleurTitre, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <br>
-            <br>
-            {{ form_label(form.lien, "Lien", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-            <div class="form-group">
-                <div class="col-sm-9">
-                    {{ form_row(form.lien.href) }}
-                    {{ form_row(form.lien.alt) }}
-                    {{ form_row(form.lien.target) }}
-                </div>
-            </div>
             {{ form_label(form.couleurFond, "Couleur Fond", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-            <div class="form-group">
                 <div class="col-sm-9">
                     {{ form_row(form.couleurFond) }}
                 </div>
             </div>
-            <br><br>
+            <br>
+            <br>
             <div class="form-group">
-                {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 <div class="col-sm-9">
-                    {{ form_row(form.image.src) }}
-                    {{ form_row(form.image.alt) }}
-                    {{ form_row(form.image.description) }}
+                    {{ form_row(form.image) }}
                 </div>
             </div>
+            <br><br>
             <div class="row">
                 <div class="form-group">
                     <div class="col-sm-3">
