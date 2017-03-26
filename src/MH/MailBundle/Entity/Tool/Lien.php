@@ -36,6 +36,13 @@ class Lien
     private $alt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="texte", type="string", length=255)
+     */
+    private $texte;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="target", type="boolean")
@@ -123,5 +130,29 @@ class Lien
     public function getTarget()
     {
         return $this->target;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param string $texte
+     *
+     * @return Lien
+     */
+    public function setTexte($texte)
+    {
+        $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return string
+     */
+    public function getTexte()
+    {
+        return $this->texte;
     }
 }

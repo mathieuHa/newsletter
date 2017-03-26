@@ -6,7 +6,7 @@
                                 <tbody>
                                 <tr>
                                     <td valign="bottom" align="center" style="padding-top: 20px">
-                                        <h2><span style="font-size: medium"><font color="#018ace" face="Arial, Sans Serif">Agenda</font></span></h2>
+                                        <h2><span style="font-size: medium"><font color="#{{ post.agenda.couleur }}" face="Arial, Sans Serif">Agenda</font></span></h2>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -26,12 +26,12 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color:#{{ post.agenda.couleur }}">
                                                                 {{ post.agenda.mois1 }}
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour1 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color:#{{ post.agenda.couleur }}; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour1 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -40,7 +40,7 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><span style="color: rgb(0,134,199)"><a href="{{ post.agenda.lien1 }}">{{ post.agenda.textlien1 }}</a></span></b><span style="font-size: small"><b><br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><span style="color:#{{ post.agenda.couleur }}"><a href="{{ post.agenda.liens[0].href }}">{{ post.agenda.liens[0].texte }}</a></span></b><span style="font-size: small"><b><br />
                                                         </b></span></font><br />
                                         <font size="2" face="Arial">                                     <span style="font-size: x-small">{{ post.agenda.texte1 }}<br />
                                                         </span>                                     </font></td>
@@ -52,10 +52,10 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">{{ post.agenda.mois2 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color:#{{ post.agenda.couleur }}">{{ post.agenda.mois2 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour2 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color:#{{ post.agenda.couleur }}; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour2 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -64,7 +64,7 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.lien2 }}">{{ post.agenda.textlien2 }}<br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.liens[1].href }}">{{ post.agenda.liens[1].texte }}<br />
                                                 </a></b></font><br />
                                         <span style="font-family: Arial"><span style="font-size: x-small">{{ post.agenda.texte2 }}</span></span></td>
                                 </tr>
@@ -85,10 +85,10 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">{{ post.agenda.mois3 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color:#{{ post.agenda.couleur }}">{{ post.agenda.mois3 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour3 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color:#{{ post.agenda.couleur }}; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour3 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -97,7 +97,7 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.lien3 }}">{{ post.agenda.textlien3 }}<br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.liens[2].href }}">{{ post.agenda.liens[2].texte }}<br />
                                                 </a></b></font><br />
                                         <span style="font-family: Arial"><span style="font-size: x-small">{{ post.agenda.texte4 }}</span></span></td>
                                     <td width="10%" valign="top" align="left">
@@ -108,10 +108,10 @@
                                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color: #0086c7">{{ post.agenda.mois4 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #ffffff; padding-bottom: 5px; text-align: center; padding-top: 5px; background-color:#{{ post.agenda.couleur }}">{{ post.agenda.mois4 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0086c7; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour4 }}</td>
+                                                            <td valign="top" align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color:#{{ post.agenda.couleur }}; padding-bottom: 8px; text-align: center; padding-top: 8px; letter-spacing: -1px; line-height: 100%">{{ post.agenda.jour4 }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -120,7 +120,7 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.lien4 }}">{{ post.agenda.textlien4 }}<br />
+                                    <td width="40%" valign="top" align="left" style="padding-left: 5px"><font size="2" face="Arial"><b><a target="_blank" href="{{ post.agenda.liens[3].href }}">{{ post.agenda.liens[3].texte }}<br />
                                                 </a></b></font><br />
                                         <span style="font-family: Arial"><span style="font-size: x-small">{{ post.agenda.texte4 }}</span></span></td>
                                 </tr>

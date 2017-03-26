@@ -2,7 +2,10 @@
 
 namespace MH\MailBundle\Form\Post;
 
+use MH\MailBundle\Form\Tool\LienType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,12 +18,34 @@ class AgendaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('jour1')->add('mois1')->add('lien1')->add('textlien1')->add('texte1')
-            ->add('jour2')->add('mois2')->add('lien2')->add('textlien2')->add('texte2')
-            ->add('jour3')->add('mois3')->add('lien3')->add('textlien3')->add('texte3')
-            ->add('jour4')->add('mois4')->add('texte4')->add('textlien4')->add('lien4')
+            ->add('mois1')
+            ->add('jour1')
+            ->add('texte1')
+            ->add('mois2')
+            ->add('jour2')
+            ->add('texte2')
+            ->add('mois3')
+            ->add('jour3')
+            ->add('texte3')
+            ->add('mois4')
+            ->add('jour4')
+            ->add('texte4')
+            ->add('liens', CollectionType::class, array(
+                'entry_type' => LienType::class
+            ))
+            ->add('police', EntityType::class, array(
+                'class'        => 'MHMailBundle:Tool\Police',
+                'choice_label' => 'taille',
+                'multiple'     => false,
+            ))
+            ->add('couleur', EntityType::class, array(
+                'class'        => 'MHMailBundle:Tool\Couleur',
+                'choice_label' => 'nom',
+                'multiple'     => false,
+            ))
             ->add('save',SubmitType::class)
-        ;
+            ;
+
     }
     
     /**

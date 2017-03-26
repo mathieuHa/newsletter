@@ -71,6 +71,7 @@
     $(document).ready(function () {
         $(".post-sortable").sortable({
             cursor: "move",
+            helper: 'clone',
             update: function () {
                 var order_serialize = $(this).sortable("serialize", {key: "posts[]"});
 

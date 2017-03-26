@@ -3,6 +3,7 @@
 namespace MH\MailBundle\Controller\Post;
 
 
+use MH\MailBundle\Entity\Tool\Lien;
 use MH\MailBundle\Form\Post\AgendaType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,17 +19,45 @@ class AgendaController extends Controller
         $agenda = new Post\Agenda();
         $agenda
             ->setJour1("20")->setMois1("Janvier")
-            ->setLien1("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
-            ->setTextlien1("Concours Alpha")->setTexte1("Début des inscriptions sur APB")
+            ->setTexte1("Début des inscriptions sur APB")
             ->setJour2("12")->setMois2("Mars")
-            ->setLien2("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
-            ->setTextlien2("Journée Portes Ouverte")->setTexte2("Campus de Paris")
+            ->setTexte2("Campus de Paris")
             ->setJour3("27")->setMois3("Février")
-            ->setLien3("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
-            ->setTextlien3("Journée Portes Ouverte")->setTexte3("Campus de Laval")
+            ->setTexte3("Campus de Laval")
             ->setJour4("02")->setMois4("Mars")
-            ->setLien4("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
-            ->setTextlien4("Vis ma vie d'ingénieur")->setTexte4("1ère journée d'immersion sur le campus de Paris");
+            ->setTexte4("1ère journée d'immersion sur le campus de Paris");
+        $lien1 = new Lien();
+        $lien1
+            ->setHref("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
+            ->setAlt("admission préparation au concours alpha")
+            ->setTexte("Concours Alpha")
+            ->setTarget(true);
+        $lien2 = new Lien();
+        $lien2
+            ->setHref("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
+            ->setAlt("Journées Portes-Ouvertes ESIEA")
+            ->setTexte("Journée Portes Ouverte")
+            ->setTarget(true);
+        $lien3 = new Lien();
+        $lien3
+            ->setHref("https://www.esiea.fr/les-dates-journees-portes-ouvertes/")
+            ->setAlt("Journées Portes-Ouvertes ESIEA")
+            ->setTexte("Journée Portes Ouverte")
+            ->setTarget(true);
+        $lien4 = new Lien();
+        $lien4
+            ->setHref("https://www.esiea.fr/admission-ecole-ingenieurs-concours-alpha-preparation/")
+            ->setAlt("Vie Ma Vie d'ingénieur")
+            ->setTexte("Vis ma vie d'ingénieur")
+            ->setTarget(true);
+        $agenda->getLiens()
+            ->add($lien1);
+        $agenda->getLiens()
+            ->add($lien2);
+        $agenda->getLiens()
+            ->add($lien3);
+        $agenda->getLiens()
+            ->add($lien4);
         $post->setAgenda($agenda);
 
 

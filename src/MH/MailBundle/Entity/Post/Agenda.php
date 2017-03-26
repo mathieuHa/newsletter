@@ -38,20 +38,6 @@ class Agenda
     /**
      * @var string
      *
-     * @ORM\Column(name="lien1", type="string", length=255)
-     */
-    private $lien1;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="textlien1", type="string", length=255)
-     */
-    private $textlien1;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="texte1", type="string", length=255)
      */
     private $texte1;
@@ -120,48 +106,6 @@ class Agenda
     private $texte4;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="textlien2", type="string", length=255)
-     */
-    private $textlien2;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="textlien3", type="string", length=255)
-     */
-    private $textlien3;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="textlien4", type="string", length=255)
-     */
-    private $textlien4;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lien2", type="string", length=255)
-     */
-    private $lien2;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lien3", type="string", length=255)
-     */
-    private $lien3;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lien4", type="string", length=255)
-     */
-    private $lien4;
-
-    /**
      * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Police", cascade={"persist"} )
      */
     private $police;
@@ -177,10 +121,19 @@ class Agenda
     private $liens;
 
 
+   
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->liens = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -260,27 +213,27 @@ class Agenda
     }
 
     /**
-     * Set textelien1
+     * Set textlien1
      *
-     * @param string $textelien1
+     * @param string $textlien1
      *
      * @return Agenda
      */
-    public function setTextelien1($textelien1)
+    public function setTextlien1($textlien1)
     {
-        $this->textelien1 = $textelien1;
+        $this->textlien1 = $textlien1;
 
         return $this;
     }
 
     /**
-     * Get textelien1
+     * Get textlien1
      *
      * @return string
      */
-    public function getTextelien1()
+    public function getTextlien1()
     {
-        return $this->textelien1;
+        return $this->textlien1;
     }
 
     /**
@@ -665,37 +618,6 @@ class Agenda
     public function getLien4()
     {
         return $this->lien4;
-    }
-
-    /**
-     * Set textlien1
-     *
-     * @param string $textlien1
-     *
-     * @return Agenda
-     */
-    public function setTextlien1($textlien1)
-    {
-        $this->textlien1 = $textlien1;
-
-        return $this;
-    }
-
-    /**
-     * Get textlien1
-     *
-     * @return string
-     */
-    public function getTextlien1()
-    {
-        return $this->textlien1;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->liens = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

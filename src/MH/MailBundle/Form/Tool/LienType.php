@@ -13,7 +13,12 @@ class LienType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('href')->add('alt')->add('target')        ;
+        $builder
+            ->add('href')
+            ->add('alt')
+            ->add('texte')
+            ->add('target')
+        ;
     }
     
     /**
