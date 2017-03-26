@@ -49,13 +49,14 @@ class Lien
 
     public function __toString()
     {
-        return $this->getTexte();
+        return $this->getTexte()->getTexte();
     }
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -127,7 +128,7 @@ class Lien
     /**
      * Get target
      *
-     * @return bool
+     * @return boolean
      */
     public function getTarget()
     {
@@ -137,11 +138,11 @@ class Lien
     /**
      * Set texte
      *
-     * @param string $texte
+     * @param \MH\MailBundle\Entity\Tool\MiniTexte $texte
      *
      * @return Lien
      */
-    public function setTexte($texte)
+    public function setTexte(\MH\MailBundle\Entity\Tool\MiniTexte $texte = null)
     {
         $this->texte = $texte;
 
@@ -151,7 +152,7 @@ class Lien
     /**
      * Get texte
      *
-     * @return string
+     * @return \MH\MailBundle\Entity\Tool\MiniTexte
      */
     public function getTexte()
     {

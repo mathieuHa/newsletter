@@ -38,6 +38,11 @@ class MiniTexte
      */
     private $police;
 
+    public function __toString()
+    {
+        return "";
+    }
+
 
     /**
      * Get id

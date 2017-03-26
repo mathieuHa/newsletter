@@ -6,6 +6,7 @@ namespace MH\MailBundle\Controller\Post;
 use MH\MailBundle\Entity\Post\BlocTexteImage;
 use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\Tool\Lien;
+use MH\MailBundle\Entity\Tool\MiniTexte;
 use MH\MailBundle\Entity\Tool\Texte;
 use MH\MailBundle\Form\Post\BlocTexteImageType;
 use MH\MailBundle\Entity\Post;
@@ -20,11 +21,13 @@ class PhotoTexteController extends Controller
         $post->setSlug("bloc_photo_texte");
         $blocTexteImage = new BlocTexteImage();
         $texte = new Texte();
+        $miniTexte = new MiniTexte();
+        $miniTexte->setTexte("5 raisons pour avoir plus de femmes dans le numérique");
         $lien = new Lien();
         $lien
             ->setAlt("ESIEA")
             ->setHref("esiea.fr")
-            ->setTexte("5 raisons pour avoir plus de femmes dans le numérique")
+            ->setTexte($miniTexte)
             ->setTarget(true);
 
         $blocTexteImage

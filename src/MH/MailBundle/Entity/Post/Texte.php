@@ -22,7 +22,7 @@ class Texte
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Texte", cascade={"persist", "remove"} )
      */
     private $texte;
 

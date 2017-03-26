@@ -37,7 +37,7 @@ class BlocTexteImage
     private $titre;
 
     /**
-     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist"} )
+     * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist"} )
      */
     private $image;
 
@@ -56,6 +56,8 @@ class BlocTexteImage
 
 
 
+    
+    
 
     /**
      * Set texte

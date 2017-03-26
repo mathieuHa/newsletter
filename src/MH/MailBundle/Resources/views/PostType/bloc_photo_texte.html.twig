@@ -28,38 +28,44 @@
             <div class="form-group">
                 {{ form_label(form.titre, "Titre", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.titre) }}
-                <div class="col-sm-9">
-                    {{ form_row(form.titre.texte) }}
+                <div class="col-sm-7">
+                    {{ form_row(form.titre.texte.texte) }}
                     {{ form_row(form.titre.href) }}
                     {{ form_row(form.titre.alt) }}
+                </div>
+                <div class="col-sm-2">
+                    {{ form_row(form.titre.texte.couleur) }}
+                    {{ form_row(form.titre.texte.police) }}
+                    <br>
                     {{ form_row(form.titre.target) }}
                 </div>
             </div>
             <br>
             <br>
+            <br>
             <div class="form-group">
-            {{ form_label(form.couleurFond, "Couleur Fond", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                <div class="col-sm-9">
+                {{ form_label(form.couleurFond, "Fond et Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-4">
                     {{ form_row(form.couleurFond) }}
                 </div>
-            </div>
-            <br>
-            <br>
-            <div class="form-group">
-            {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                <div class="col-sm-9">
+                <div class="col-sm-4 col-sm-offset-1">
                     {{ form_row(form.image) }}
                 </div>
             </div>
             <br><br>
+            <div class="form-group">
             <div class="row">
-                <div class="form-group">
+
                     <div class="col-sm-3">
                         <a id="hide" class="btn btn-link">Hide/Show Paragraphe</a>
                     </div>
                     <div id="paragraphe">
-                        <div class="col-sm-9">
-                            {{ form_row(form.texte) }}
+                        <div class="col-sm-2">
+                            {{ form_row(form.texte.couleur) }}
+                            {{ form_row(form.texte.police) }}
+                        </div>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.texte) }}
                             <a href="#" id="add_paragraphe" class="btn btn-primary">Ajouter</a>
                         </div>
                     </div>
