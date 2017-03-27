@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Form\Post;
 
+use MH\MailBundle\Form\Tool\LienQType;
 use MH\MailBundle\Form\Tool\LienType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,7 +33,7 @@ class AgendaType extends AbstractType
             ->add('jour4',TextType::class)
             ->add('texte4',TextType::class)
             ->add('liens', CollectionType::class, array(
-                'entry_type' => LienType::class
+                'entry_type' => LienQType::class
             ))
             ->add('police', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Police',

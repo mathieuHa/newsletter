@@ -129,6 +129,7 @@ class Agenda
     {
         $this->liens = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
 
     /**
      * Get id
@@ -186,54 +187,6 @@ class Agenda
     public function getJour1()
     {
         return $this->jour1;
-    }
-
-    /**
-     * Set lien1
-     *
-     * @param string $lien1
-     *
-     * @return Agenda
-     */
-    public function setLien1($lien1)
-    {
-        $this->lien1 = $lien1;
-
-        return $this;
-    }
-
-    /**
-     * Get lien1
-     *
-     * @return string
-     */
-    public function getLien1()
-    {
-        return $this->lien1;
-    }
-
-    /**
-     * Set textlien1
-     *
-     * @param string $textlien1
-     *
-     * @return Agenda
-     */
-    public function setTextlien1($textlien1)
-    {
-        $this->textlien1 = $textlien1;
-
-        return $this;
-    }
-
-    /**
-     * Get textlien1
-     *
-     * @return string
-     */
-    public function getTextlien1()
-    {
-        return $this->textlien1;
     }
 
     /**
@@ -474,150 +427,6 @@ class Agenda
     public function getTexte4()
     {
         return $this->texte4;
-    }
-
-    /**
-     * Set textlien2
-     *
-     * @param string $textlien2
-     *
-     * @return Agenda
-     */
-    public function setTextlien2($textlien2)
-    {
-        $this->textlien2 = $textlien2;
-
-        return $this;
-    }
-
-    /**
-     * Get textlien2
-     *
-     * @return string
-     */
-    public function getTextlien2()
-    {
-        return $this->textlien2;
-    }
-
-    /**
-     * Set textlien3
-     *
-     * @param string $textlien3
-     *
-     * @return Agenda
-     */
-    public function setTextlien3($textlien3)
-    {
-        $this->textlien3 = $textlien3;
-
-        return $this;
-    }
-
-    /**
-     * Get textlien3
-     *
-     * @return string
-     */
-    public function getTextlien3()
-    {
-        return $this->textlien3;
-    }
-
-    /**
-     * Set textlien4
-     *
-     * @param string $textlien4
-     *
-     * @return Agenda
-     */
-    public function setTextlien4($textlien4)
-    {
-        $this->textlien4 = $textlien4;
-
-        return $this;
-    }
-
-    /**
-     * Get textlien4
-     *
-     * @return string
-     */
-    public function getTextlien4()
-    {
-        return $this->textlien4;
-    }
-
-    /**
-     * Set lien2
-     *
-     * @param string $lien2
-     *
-     * @return Agenda
-     */
-    public function setLien2($lien2)
-    {
-        $this->lien2 = $lien2;
-
-        return $this;
-    }
-
-    /**
-     * Get lien2
-     *
-     * @return string
-     */
-    public function getLien2()
-    {
-        return $this->lien2;
-    }
-
-    /**
-     * Set lien3
-     *
-     * @param string $lien3
-     *
-     * @return Agenda
-     */
-    public function setLien3($lien3)
-    {
-        $this->lien3 = $lien3;
-
-        return $this;
-    }
-
-    /**
-     * Get lien3
-     *
-     * @return string
-     */
-    public function getLien3()
-    {
-        return $this->lien3;
-    }
-
-    /**
-     * Set lien4
-     *
-     * @param string $lien4
-     *
-     * @return Agenda
-     */
-    public function setLien4($lien4)
-    {
-        $this->lien4 = $lien4;
-
-        return $this;
-    }
-
-    /**
-     * Get lien4
-     *
-     * @return string
-     */
-    public function getLien4()
-    {
-        return $this->lien4;
     }
 
     /**

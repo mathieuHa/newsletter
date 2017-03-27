@@ -22,11 +22,11 @@ class PostType
     private $id;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="position", type="integer")
      */
-    private $slug;
+    private $position;
 
     /**
      * @var string
@@ -34,6 +34,14 @@ class PostType
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
 
     /**
      * @var string
@@ -49,12 +57,28 @@ class PostType
      */
     private $imgalt;
 
+
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="position", type="integer")
+     * PostType constructor.
+     * @param int $id
+     * @param string $slug
+     * @param string $name
+     * @param string $imgsrc
+     * @param string $imgalt
+     * @param int $position
      */
-    private $position;
+    public function __construct($id,  $position, $name, $slug, $imgsrc, $imgalt)
+    {
+        $this->id = $id;
+        $this->position = $position;
+        $this->slug = $slug;
+        $this->name = $name;
+        $this->imgsrc = $imgsrc;
+        $this->imgalt = $imgalt;
+
+    }
+
 
     /**
      * Get id

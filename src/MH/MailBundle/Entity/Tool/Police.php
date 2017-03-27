@@ -28,6 +28,17 @@ class Police
      */
     private $taille;
 
+    /**
+     * Police constructor.
+     * @param int $id
+     * @param int $taille
+     */
+    public function __construct($id, $taille)
+    {
+        $this->id = $id;
+        $this->taille = $taille;
+    }
+
     public function __toString()
     {
         return (string)$this->getTaille();

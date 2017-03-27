@@ -23,7 +23,7 @@ class ToolController extends Controller
 
     public function addCouleurAction (Request $request)
     {
-        $couleur = new Couleur();
+        $couleur = new Couleur(0,"","");
         $couleur
             ->setNom("Nouvelle Couleur")
             ->setvaleur("000000");
@@ -137,7 +137,7 @@ class ToolController extends Controller
 
     public function addPoliceAction (Request $request)
     {
-        $police = new Police();
+        $police = new Police(1,0);
         $police->setTaille(14);
 
         $form = $this

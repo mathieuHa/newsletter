@@ -35,6 +35,19 @@ class Couleur
      */
     private $nom;
 
+    /**
+     * Couleur constructor.
+     * @param int $id
+     * @param string $valeur
+     * @param string $nom
+     */
+    public function __construct($id, $valeur, $nom)
+    {
+        $this->id = $id;
+        $this->valeur = $valeur;
+        $this->nom = $nom;
+    }
+
     public function __toString()
     {
         return (string)$this->getValeur();
