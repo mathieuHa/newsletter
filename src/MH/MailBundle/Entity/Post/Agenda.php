@@ -120,8 +120,6 @@ class Agenda
      */
     private $liens;
 
-
-   
     /**
      * Constructor
      */
@@ -129,7 +127,21 @@ class Agenda
     {
         $this->liens = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->setId(null);
+        }
+    }
+
+    /**
+     * Set id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id

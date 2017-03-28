@@ -11,6 +11,7 @@ namespace MH\MailBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MH\MailBundle\Entity\Tool\Couleur;
+use MH\MailBundle\Form\Tool\CouleurType;
 
 
 class LoadCouleurData implements FixtureInterface
@@ -30,8 +31,18 @@ class LoadCouleurData implements FixtureInterface
             ),
             new Couleur(
                 3,
-                "0x2424",
+                "0086C7",
                 "Bleu"
+            ),
+            new Couleur(
+                4,
+                "E7E8EA",
+                "Gris"
+            ),
+            new Couleur(
+                5,
+                "FF0000",
+                "Rouge"
             )
          ];
 

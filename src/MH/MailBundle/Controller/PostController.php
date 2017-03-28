@@ -101,6 +101,25 @@ class PostController extends Controller
         ));
     }
 
+    public function copyAction ($id)
+    {
+        $post = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:Post')
+            ->find($id);
+        $new = clone $post;
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($new);
+        $em->flush();
+
+        $this
+            ->addFlash(
+                'notice','Mail copiée'
+            );
+
+        return $this->redirectToRoute('mh_mail_home');
+    }
 
 
     public function deleteAction (Request $request, $id, $mail_id)

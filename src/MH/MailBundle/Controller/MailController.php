@@ -3,11 +3,8 @@
 namespace MH\MailBundle\Controller;
 
 use MH\MailBundle\Entity\Mail;
-use MH\MailBundle\Entity\Post;
-use MH\MailBundle\Entity\Rubrique;
 use MH\MailBundle\Entity\User;
 use MH\MailBundle\Form\MailType;
-use MH\MailBundle\Form\RubriqueType;
 use MH\MailBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +14,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class MailController extends Controller
@@ -102,7 +98,6 @@ class MailController extends Controller
         $new = clone $mail;
         $new->setName($mail->getName().' copie');
         $new->setDate(new \DateTime());
-        $new->setUpdateAt($new->getDate());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($new);

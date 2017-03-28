@@ -33,7 +33,20 @@ class Bloc
      */
     private $couleur;
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->setId(null);
+        }
+    }
 
+    /**
+     * Set id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
 
     /**

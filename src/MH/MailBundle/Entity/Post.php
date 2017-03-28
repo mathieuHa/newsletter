@@ -74,6 +74,23 @@ class Post
      */
     private $blocphototexte;
 
+    public function __clone() {
+        if ($this->id) {
+            $this->setId(null);
+            if ($this->bloc!=null)
+                $this->bloc = clone $this->bloc;
+            if ($this->blocphototexte!=null)
+                $this->blocphototexte = clone $this->blocphototexte;
+            if ($this->texte!=null)
+                $this->texte = clone $this->texte;
+            if ($this->agenda!=null)
+                $this->agenda = clone $this->agenda;
+            if ($this->header!=null)
+                $this->header = clone $this->header;
+
+        }
+    }
+
     /**
      * Set mail
      *
@@ -113,6 +130,14 @@ class Post
         return $this->agenda;
     }
 
+    /**
+     * Set id
+     *
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
    
 
     /**

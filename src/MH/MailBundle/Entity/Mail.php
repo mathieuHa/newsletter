@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +54,18 @@ class Mail
      * @ORM\OneToMany(targetEntity="MH\MailBundle\Entity\Post",mappedBy="mail" , cascade={"persist","remove"})
      */
     private $posts;
+
+    public function __clone() {
+        if ($this->id) {
+            $posts = $this->getPosts();
+            $this->posts = new ArrayCollection();
+            foreach ($posts as $post)
+            {
+                $clonepost = clone $post;
+                $this->addPost($clonepost);
+            }
+        }
+    }
 
 
     /**

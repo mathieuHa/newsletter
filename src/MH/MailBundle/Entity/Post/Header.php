@@ -31,13 +31,28 @@ class Header
         return $this->id;
     }
 
+
+
     /**
      * @ORM\ManyToOne(targetEntity="MH\MailBundle\Entity\Tool\Image", cascade={"persist"} )
      */
     private $image;
 
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->setId(null);
+        }
+    }
 
+    /**
+     * Set id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
 
     /**

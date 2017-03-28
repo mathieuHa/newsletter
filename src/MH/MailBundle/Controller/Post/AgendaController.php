@@ -69,7 +69,6 @@ class AgendaController extends Controller
             ->add($lien4);
         $post->setAgenda($agenda);
 
-
         $form = $this
             ->get('form.factory')
             ->create(AgendaType::class,$agenda);

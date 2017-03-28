@@ -4,7 +4,6 @@ namespace MH\MailBundle\Controller\Post;
 
 
 use MH\MailBundle\Entity\Post\BlocTexteImage;
-use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\Tool\Lien;
 use MH\MailBundle\Entity\Tool\MiniTexte;
 use MH\MailBundle\Entity\Tool\Texte;
