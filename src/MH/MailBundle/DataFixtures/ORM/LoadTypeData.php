@@ -42,6 +42,14 @@ class LoadTypeData implements FixtureInterface
                  'footer_admission.JPG',
                 'Footer emailling Esiea'
             ),
+            new \MH\MailBundle\Entity\PostType(
+                7,
+                2,
+                'Contact Admission Esiea',
+                'Contact_admission',
+                'contact_admission.JPG',
+                'Contact emailling Esiea'
+            ),
              new \MH\MailBundle\Entity\PostType(
                  4,
                  2,

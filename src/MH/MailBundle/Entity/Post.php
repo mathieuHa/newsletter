@@ -87,7 +87,6 @@ class Post
                 $this->agenda = clone $this->agenda;
             if ($this->header!=null)
                 $this->header = clone $this->header;
-
         }
     }
 

@@ -29,7 +29,24 @@ class LoadPoliceData implements FixtureInterface
             new Police(
                 3,
                 14
+            ),
+            new Police(
+                4,
+                16
+            ),
+            new Police(
+                5,
+                18
+            ),
+            new Police(
+                6,
+                20
+            ),
+            new Police(
+                7,
+                24
             )
+
          ];
 
         foreach ($listPolice as $Police){

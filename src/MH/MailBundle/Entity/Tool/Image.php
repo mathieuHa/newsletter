@@ -49,6 +49,23 @@ class Image
      */
     private $nom;
 
+    /**
+     * Image constructor.
+     * @param int $id
+     * @param string $src
+     * @param string $alt
+     * @param string $description
+     * @param string $nom
+     */
+    public function __construct($id, $src, $alt, $description, $nom)
+    {
+        $this->id = $id;
+        $this->src = $src;
+        $this->alt = $alt;
+        $this->description = $description;
+        $this->nom = $nom;
+    }
+
     public function __toString()
     {
         return (string)$this->getNom();

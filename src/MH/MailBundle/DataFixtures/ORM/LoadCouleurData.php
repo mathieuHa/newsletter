@@ -43,7 +43,19 @@ class LoadCouleurData implements FixtureInterface
                 5,
                 "FF0000",
                 "Rouge"
+            ),
+            new Couleur(
+                5,
+                "FF6600",
+                "Orange"
+            ),
+            new Couleur(
+                5,
+                "2EC4B6",
+                "Turquoise"
             )
+
+
          ];
 
         foreach ($listCouleur as $couleur){
