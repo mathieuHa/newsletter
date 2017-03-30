@@ -74,6 +74,11 @@ class Post
      */
     private $blocphototexte;
 
+    /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\BlocTexte", cascade={"persist", "remove"})
+     */
+    private $bloctexte;
+
     public function __clone() {
         if ($this->id) {
             $this->setId(null);
@@ -83,6 +88,8 @@ class Post
                 $this->blocphototexte = clone $this->blocphototexte;
             if ($this->texte!=null)
                 $this->texte = clone $this->texte;
+            if ($this->bloctexte!=null)
+                $this->bloctexte = clone $this->bloctexte;
             if ($this->agenda!=null)
                 $this->agenda = clone $this->agenda;
             if ($this->header!=null)
@@ -327,5 +334,29 @@ class Post
     public function getNom()
     {
         return $this->nom;
+    }
+
+    /**
+     * Set bloctexte
+     *
+     * @param \MH\MailBundle\Entity\Post\BlocTexte $bloctexte
+     *
+     * @return Post
+     */
+    public function setBloctexte(\MH\MailBundle\Entity\Post\BlocTexte $bloctexte = null)
+    {
+        $this->bloctexte = $bloctexte;
+
+        return $this;
+    }
+
+    /**
+     * Get bloctexte
+     *
+     * @return \MH\MailBundle\Entity\Post\BlocTexte
+     */
+    public function getBloctexte()
+    {
+        return $this->bloctexte;
     }
 }

@@ -47,4 +47,3 @@ class Contact
         return $this->id;
     }
 }
-

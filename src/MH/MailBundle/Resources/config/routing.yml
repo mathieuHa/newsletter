@@ -114,6 +114,9 @@ mh_mail_routing_bloc:
 mh_mail_routing_bloc_photo_texte:
     resource: routing_bloc_photo_texte.yml
 
+mh_mail_routing_bloc_texte:
+    resource: routing_bloc_texte.yml
+
 mh_mail_routing_tool:
     resource: routing_tool.yml
     prefix:   /tool

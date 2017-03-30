@@ -1,0 +1,13 @@
+mh_mail_bloc_texte_add:
+    path:     /post/add/{id}/bloc-texte
+    defaults:
+        _controller: MHMailBundle:Post\BlocTexte:addBlocTexte
+    requirements:
+            id:   \d+
+
+mh_mail_bloc_texte_edit:
+    path:     /post/edit/{id}/bloc-texte
+    defaults:
+        _controller: MHMailBundle:Post\BlocTexte:editBlocTexte
+    requirements:
+            id:   \d+

@@ -74,6 +74,14 @@ class LoadTypeData implements FixtureInterface
                 'bloc_photo_texte.JPG',
                 'Bloc Photo Texte'
              ),
+            new \MH\MailBundle\Entity\PostType(
+                7,
+                2,
+                'Bloc de Texte',
+                'bloc_texte',
+                'bloc_texte.JPG',
+                'Bloc Texte'
+            ),
          ];
 
         foreach ($listPostType as $type){
