@@ -52,6 +52,23 @@ class Lien
         return $this->getTexte()->getTexte();
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->setId(null);
+            if ($this->texte!=null)
+                $this->texte = clone $this->texte;
+        }
+    }
+
+    /**
+     * Set id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * Get id
@@ -158,4 +175,5 @@ class Lien
     {
         return $this->texte;
     }
+
 }

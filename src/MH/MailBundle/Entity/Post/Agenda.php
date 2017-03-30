@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Entity\Post;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -132,7 +133,19 @@ class Agenda
     {
         if ($this->id) {
             $this->setId(null);
+            $liens = $this->getLiens();
+            $this->liens = new ArrayCollection();
+            foreach ($liens as $lien)
+            {
+                $clonelien = clone $lien;
+                $this->addLien($clonelien);
+            }
         }
+    }
+
+    public function __toString()
+    {
+        return "Agenda";
     }
 
     /**

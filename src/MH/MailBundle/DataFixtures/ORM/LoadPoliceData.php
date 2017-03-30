@@ -45,6 +45,10 @@ class LoadPoliceData implements FixtureInterface
             new Police(
                 7,
                 24
+            ),
+            new Police(
+                8,
+                15
             )
 
          ];

@@ -20,6 +20,4 @@ class MiniTexteQType extends AbstractType
         return MiniTexteType::class;
     }
 
-
-
 }

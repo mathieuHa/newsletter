@@ -5,12 +5,12 @@ namespace MH\MailBundle\Entity\Post;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Footer
+ * Contact
  *
- * @ORM\Table(name="post_footer")
- * @ORM\Entity(repositoryClass="MH\MailBundle\Repository\Post\FooterRepository")
+ * @ORM\Table(name="post_contact")
+ * @ORM\Entity(repositoryClass="MH\MailBundle\Repository\Post\ContactRepository")
  */
-class Footer
+class Contact
 {
     /**
      * @var int
@@ -36,6 +36,7 @@ class Footer
         $this->id = $id;
     }
 
+
     /**
      * Get id
      *
@@ -46,3 +47,4 @@ class Footer
         return $this->id;
     }
 }
+

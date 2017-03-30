@@ -44,6 +44,10 @@ class BlocTexteImage
 
 
 
+
+
+
+
     /**
      * Get id
      *
@@ -58,6 +62,10 @@ class BlocTexteImage
     {
         if ($this->id) {
             $this->setId(null);
+            if ($this->texte!=null)
+                $this->texte = clone $this->texte;
+            if ($this->titre!=null)
+                $this->titre = clone $this->titre;
         }
     }
 

@@ -1,0 +1,28 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Edition - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>{{ post.slug }}</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            <h4>Rendu Actuel</h4>
+            <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.jpg') }}" alt="Exemple de rendu de contact" width="700"  />
+
+            <hr>
+            {{ form(form) }}
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+{% endblock %}
+

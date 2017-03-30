@@ -2,6 +2,7 @@
 
 namespace MH\MailBundle\Entity\Tool;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +47,28 @@ class Texte
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->setId(null);
+            $paragraphes = $this->getParagraphes();
+            $this->paragraphes = new ArrayCollection();
+            foreach ($paragraphes as $paragraphe)
+            {
+                $cloneparagraphe = clone $paragraphe;
+                $this->addParagraphe($cloneparagraphe);
+            }
+        }
+    }
+
+    /**
+     * Set id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**

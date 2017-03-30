@@ -102,6 +102,9 @@ mh_mail_routing_header:
 mh_mail_routing_footer_admission:
     resource: routing_footer_admission.yml
 
+mh_mail_routing_contact_admission:
+    resource: routing_contact_admission.yml
+
 mh_mail_routing_texte_separation:
     resource: routing_texte_separation.yml
 

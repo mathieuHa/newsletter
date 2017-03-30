@@ -1,0 +1,13 @@
+mh_mail_contact_admission_add:
+    path:     /post/add/{id}/contact_admission
+    defaults:
+        _controller: MHMailBundle:Post\Contact:addContactAdmission
+    requirements:
+            id:   \d+
+
+mh_mail_contact_admission_edit:
+    path:     /post/edit/{id}/footer_admission
+    defaults:
+        _controller: MHMailBundle:Post\Contact:editContactAdmission
+    requirements:
+            id:   \d+

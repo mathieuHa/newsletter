@@ -39,6 +39,21 @@ class Paragraphe
         return $this->id;
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->setId(null);
+        }
+    }
+
+    /**
+     * Set id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     /**
      * Set texte
      *
