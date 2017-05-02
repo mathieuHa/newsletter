@@ -94,7 +94,7 @@ class MailController extends Controller
 
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            "'mail_'.$mail->getName().'_'.$mail->getAuteur().'.html'"
+            'mail_'.$mail->getName().'_'.$mail->getAuteur().'.html'
         );
         $response->headers->set('Content-Disposition', $disposition);
         return $response;

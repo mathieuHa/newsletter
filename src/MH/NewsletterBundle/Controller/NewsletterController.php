@@ -139,7 +139,7 @@ class NewsletterController extends Controller
 
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            "'newsletter_'.$newsletter->getName().'_'.$newsletter->getWeek().'_'.$newsletter->getAuteur().'.html'"
+            'newsletter_'.$newsletter->getName().'_'.$newsletter->getWeek().'_'.$newsletter->getAuteur().'.html'
         );
         $response->headers->set('Content-Disposition', $disposition);
         return $response;
