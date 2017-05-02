@@ -13,6 +13,13 @@ mh_mail_view:
     requirements:
             id:   \d+
 
+mh_mail_download:
+    path:     /download/{id}
+    defaults:
+        _controller: MHMailBundle:Mail:download
+    requirements:
+            id:   \d+
+
 mh_mail_edit:
     path:     /edit/{id}
     defaults:

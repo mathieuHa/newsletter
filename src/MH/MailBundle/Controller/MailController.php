@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -76,6 +77,30 @@ class MailController extends Controller
             'mail'=>$mail
         ));
     }
+
+    public function downloadAction ($id)
+    {
+        $mail = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:Mail')
+            ->find($id);
+        $file = $this->renderView('MHMailBundle:Template:mail.html.twig',array(
+            'mail'=>$mail
+        ));
+
+        $response = new Response($file);
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'text/plain');
+
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'mail_'.$mail->getName().'_'.$mail->getAuteur().'.html'
+        );
+        $response->headers->set('Content-Disposition', $disposition);
+        return $response;
+    }
+
+
 
     public function editAction ($id)
     {

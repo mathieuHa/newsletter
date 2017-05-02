@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -120,6 +122,27 @@ class NewsletterController extends Controller
         return $this->render('MHNewsletterBundle:Template:newsletter.html.twig',array(
             'newsletter'=>$newsletter
         ));
+    }
+
+    public function downloadAction ($id)
+    {
+        $newsletter = $this
+            ->getDoctrine()
+            ->getRepository('MHNewsletterBundle:Newsletter')
+            ->find($id);
+        $file = $this->renderView('MHNewsletterBundle:Template:newsletter.html.twig',array(
+            'newsletter'=>$newsletter
+        ));
+        $response = new Response($file);
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'text/plain');
+
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'newsletter_'.$newsletter->getName().'_'.$newsletter->getWeek().'_'.$newsletter->getAuteur().'.html'
+        );
+        $response->headers->set('Content-Disposition', $disposition);
+        return $response;
     }
 
     public function editAction ($id)

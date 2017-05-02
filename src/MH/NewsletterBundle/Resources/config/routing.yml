@@ -13,6 +13,13 @@ mh_newsletter_view:
     requirements:
             id:   \d+
 
+mh_newsletter_download:
+    path:     /download/{id}
+    defaults:
+        _controller: MHNewsletterBundle:Newsletter:download
+    requirements:
+            id:   \d+
+
 mh_newsletter_edit:
     path:     /edit/{id}
     defaults:
