@@ -148,7 +148,6 @@ class MailController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
-            $mail->udpateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
