@@ -7,16 +7,16 @@
                                 <tr>
                                     <td valign="top" style="text-align: right"><a target="_blank" href="{{ post.blocphototexte.titre.texte }}"><img width="180" height="180" alt="{{ post.blocphototexte.image.alt }}" class="fullWidthImage" title="{{ post.blocphototexte.image.description }}" src="{{ post.blocphototexte.image.src }}" /></a></td>
                                     <td valign="top" align="left">
-                                        <h2><span style="font-size: small">
+                                        <h2><span style="font-size: {{ post.blocphototexte.titre.texte.police }}">
                                                 <span style="font-family: Arial">
-                                                    <span style=" color:#0086C7">
+                                                    <span style=" color:#{{ post.blocphototexte.titre.texte.couleur }}">
                                                         {{ post.blocphototexte.titre }}
                                                     </span>
                                                 </span>
                                             </span>
                                         </h2>
                                         <span style="font-family: Arial;">
-                                            <span style="font-size: x-small; color:#{{ post.blocphototexte.texte.couleur }}">
+                                            <span style="font-size: {{ post.blocphototexte.texte.police }}; color:#{{ post.blocphototexte.texte.couleur }}">
                                                 {% for para in post.blocphototexte.texte.paragraphes %}
                                                     {{ para.texte }}<br />
                                                 {% endfor %}
