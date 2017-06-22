@@ -361,7 +361,7 @@ class ToolController extends Controller
 
     public function addTypeAction (Request $request)
     {
-        $type = new PostType();
+        $type = new PostType(null,null,null,null,null,null);
 
         $form = $this
             ->get('form.factory')
@@ -430,7 +430,7 @@ class ToolController extends Controller
             return $this->redirectToRoute('mh_mail_type_view');
         }
 
-        return $this->render('MHMailBundle:PostType:edit.html.twig', array(
+        return $this->render('MHMailBundle:Tool/Type:edit.html.twig', array(
             'id'=>$type->getId(),
             'form'=>$form->createView()
         ));

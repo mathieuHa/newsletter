@@ -15,6 +15,7 @@ class BlocTexteController extends Controller
     {
         $post = new Post();
         $post->setSlug("bloc_texte");
+        $post->setName("Bloc de texte");
         $blocTexte = new Post\BlocTexte();
         $text = new Texte();
         $blocTexte

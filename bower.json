@@ -1,0 +1,20 @@
+{
+  "name": "newsletter",
+  "homepage": "https://github.com/mathieuHa/newsletter",
+  "authors": [
+    "mathieuHa <mathieu.hanotaux@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "simplemde": "^1.11.2"
+  }
+}

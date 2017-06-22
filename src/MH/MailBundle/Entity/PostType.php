@@ -79,7 +79,6 @@ class PostType
 
     }
 
-
     /**
      * Get id
      *

@@ -1,0 +1,54 @@
+{% extends "MHMailBundle::layout.html.twig" %}
+
+{% block title %}
+    Edition - {{ parent() }}
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>{{ post.name }}</h2>
+    <hr>
+    <div id="contain" >
+        <div class="well">
+            <h4>Rendu Actuel</h4>
+            {% if post.buttonred.lien is not null %}
+                {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
+            {% else %}
+                <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.JPG') }}" alt="Exemple de rendu de bouton rouge" height="200"  />"
+            {% endif %}
+
+            <hr>
+
+            {{ form(form) }}
+            <button id="show" class="btn btn-success">Previsualiser</button>
+            {{ include("MHMailBundle:Template:modal_show.html.twig") }}
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-link"
+        href="{{ path('mh_mail_edit', {'id': id}) }}"><span class="glyphicon glyphicon-backward"></span> Retour</a>
+
+
+{% endblock %}
+
+{% block bundle_javascript %}
+
+    {{ parent() }}
+<script>
+    $(document).ready(function() {
+        $("#modalP").modal();
+        $("#show").click(function(){
+            $("#modalP").modal();
+        });
+        var tab = [];
+        var i;
+        $("form textarea").each(function(){
+            tab.push(new SimpleMDE({
+                spellChecker: false,
+                forceSync: true,
+                element: this
+            }));
+        });
+    });
+</script>
+{% endblock %}
+

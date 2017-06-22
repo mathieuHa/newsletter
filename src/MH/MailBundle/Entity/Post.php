@@ -33,9 +33,11 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="text", nullable=true)
+     * @ORM\Column(name="name", type="text", nullable=true)
      */
-    private $nom;
+    private $name;
+
+
 
     /**
      * @var integer
@@ -70,6 +72,11 @@ class Post
     private $bloc;
 
     /**
+     * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\ButtonRed", cascade={"persist", "remove"})
+     */
+    private $buttonred;
+
+    /**
      * @ORM\OneToOne(targetEntity="MH\MailBundle\Entity\Post\BlocTexteImage", cascade={"persist", "remove"})
      */
     private $blocphototexte;
@@ -94,6 +101,8 @@ class Post
                 $this->agenda = clone $this->agenda;
             if ($this->header!=null)
                 $this->header = clone $this->header;
+            if ($this->buttonred!=null)
+                $this->buttonred = clone $this->buttonred;
         }
     }
 
@@ -263,6 +272,30 @@ class Post
     }
 
     /**
+     * Set buttonred
+     *
+     * @param \MH\MailBundle\Entity\Post\ButtonRed $buttonred
+     *
+     * @return Post
+     */
+    public function setButtonRed(\MH\MailBundle\Entity\Post\ButtonRed $buttonred = null)
+    {
+        $this->buttonred = $buttonred;
+
+        return $this;
+    }
+
+    /**
+     * Get buttonred
+     *
+     * @return \MH\MailBundle\Entity\Post\ButtonRed
+     */
+    public function getButtonRed()
+    {
+        return $this->buttonred;
+    }
+
+    /**
      * Set bloc
      *
      * @param \MH\MailBundle\Entity\Post\Bloc $bloc
@@ -313,28 +346,30 @@ class Post
     }
 
     /**
-     * Set nom
+     * Set name
      *
-     * @param string $nom
+     * @param string $name
      *
      * @return Post
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get name
      *
      * @return string
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
+
+
 
     /**
      * Set bloctexte

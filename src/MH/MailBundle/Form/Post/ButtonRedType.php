@@ -1,15 +1,17 @@
 <?php
 
-namespace MH\MailBundle\Form\Tool;
+namespace MH\MailBundle\Form\Post;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MiniTexteType extends AbstractType
+class ButtonRedType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,18 +19,15 @@ class MiniTexteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('texte',TextareaType::class)
-            ->add('couleur', EntityType::class, array(
+            ->add('lien',\MH\MailBundle\Form\Tool\LienType::class)
+            ->add('description', TextareaType::class)
+            ->add('couleurFond', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('police', EntityType::class, array(
-                'class'        => 'MHMailBundle:Tool\Police',
-                'choice_label' => 'taille',
-                'multiple'     => false,
-            ))
-            ;
+            ->add('hauteur',IntegerType::class)
+            ->add('save',SubmitType::class)        ;
     }
     
     /**
@@ -37,7 +36,7 @@ class MiniTexteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MH\MailBundle\Entity\Tool\MiniTexte'
+            'data_class' => 'MH\MailBundle\Entity\Post\ButtonRed'
         ));
     }
 
@@ -46,7 +45,7 @@ class MiniTexteType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'mh_mailbundle_tool_minitexte';
+        return 'mh_mailbundle_post_buttonred';
     }
 
 

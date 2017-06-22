@@ -1,0 +1,13 @@
+mh_mail_button_red_add:
+    path:     /post/add/{id}/button-red
+    defaults:
+        _controller: MHMailBundle:Post\ButtonRed:addButtonRed
+    requirements:
+            id:   \d+
+
+mh_mail_button_red_edit:
+    path:     /post/edit/{id}/button-red
+    defaults:
+        _controller: MHMailBundle:Post\ButtonRed:editButtonRed
+    requirements:
+            id:   \d+
