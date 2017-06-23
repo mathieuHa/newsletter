@@ -44,6 +44,8 @@
 {% endblock %}
 
 {% block bundle_javascript %}
+    <script src="{{ asset('bundles/mhmail/js/main.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".type-sortable").sortable({

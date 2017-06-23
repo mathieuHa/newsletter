@@ -13,6 +13,7 @@ use MH\MailBundle\Entity\Post;
 use MH\MailBundle\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ButtonRedController extends Controller
 {
@@ -69,6 +70,35 @@ class ButtonRedController extends Controller
             'form' => $form->createView(),
             'id' => $id,
             'post' => $post,
+        ));
+    }
+
+    public function editXButtonRedAction(Request $request,$id)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = $this
+            ->getDoctrine()
+            ->getRepository('MHMailBundle:Post')
+            ->find($id);
+        //$mail_id = $post->getMail()->getId();
+        $button = $post->getButtonRed();
+        $form = $this
+            ->get('form.factory')
+            ->create(ButtonRedType::class,$button, array(
+                'action' => $this->generateUrl('mh_mail_button_red_edit_x', array('id' => $post->getId()))));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return new JsonResponse(array(
+                'status' => 'ok'
+            ));
+        }
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form'=>$form->createView(),
+            //'id'=>$id,
+            'post'=>$post
         ));
     }
 

@@ -11,3 +11,10 @@ mh_mail_button_red_edit:
         _controller: MHMailBundle:Post\ButtonRed:editButtonRed
     requirements:
             id:   \d+
+
+mh_mail_button_red_edit_x:
+    path:     /post/edit-x/{id}/button-red
+    defaults:
+        _controller: MHMailBundle:Post\ButtonRed:editXButtonRed
+    requirements:
+            id:   \d+

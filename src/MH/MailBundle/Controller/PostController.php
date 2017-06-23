@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class PostController extends Controller
 {
+
     public function editAction (Request $request, $id, $mail_id)
     {
         $post = $this
