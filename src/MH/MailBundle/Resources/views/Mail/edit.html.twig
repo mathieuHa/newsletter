@@ -27,7 +27,8 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-xs-6">
-                                    <a class="btn btn-warning" href="{{ path('mh_mail_'~ post.slug ~ '_edit',  {'id': post.id, 'mail_id': mail.id}    ) }}">Modifier</a>
+                                    <a class="btn btn-warning" data-toggle="modal"
+                                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_mail_'~ post.slug ~ '_edit',  {'id': post.id, 'mail_id': mail.id}    ) }}">Modifier</a>
                                     <a class="btn btn-danger" href="{{ path('mh_mail_post_delete', {'id': post.id, 'mail_id': mail.id}    ) }}">Supprimer</a>
                                 </div>
                             </div>
@@ -143,6 +144,16 @@
                 var $modalContent = $postFormModal.find('#post-content');
 
                 $modalContent.load($btn.attr("href"), function () {
+                    var tab = [];
+                    console.log("New Thing 1");
+                    $("form textarea").each(function(){
+                        tab.push(new SimpleMDE({
+                            spellChecker: false,
+                            forceSync: true,
+                            element: this
+                        }));
+                        console.log("New Thing");
+                    });
 
                     $postFormModal.find('form').submit(function (e) {
 
@@ -190,14 +201,8 @@
                     })
                 });
             }).on('shown.bs.modal', function () {
-                if ($(this).find('textarea').size() > 0) {
-                    var simplemde = new SimpleMDE({
-                        spellChecker: false,
-                        forceSync: true
-                    });
-                }
-            });
 
+            });
 
     });
 </script>
