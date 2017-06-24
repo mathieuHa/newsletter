@@ -1,13 +1,11 @@
-{% extends "MHMailBundle::layout.html.twig" %}
 
-{% block title %}
-    Selection - {{ parent() }}
-{% endblock %}
-
-{% block bundle_body %}
-    <h2>Selection type de Post</h2>
-    <hr>
-     <div class="panel-group" id="accordion">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Selection type de Post</h4>
+</div>
+<div class="modal-body">
+    <div class="panel-group" id="accordion">
         <ul class="list-unstyled type-sortable">
             {% for type in listPostType | sortbyfield('position') %}
                 <li  id="type_{{ type.id }}">
@@ -23,7 +21,8 @@
                             <div class="panel-body" data-toggle="collapse" data-target="#type{{ type.id }}">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <h3><a class="btn btn-primary" href="{{ path('mh_mail_'~type.slug|lower~'_add', {'id':id}) }}">Ajouter {{ type.name }}</a></h3>
+                                        <h3><a class="btn btn-primary" data-toggle="modal"
+                                               data-target="#post-form-modal" data-remote="false" href="{{ path('mh_mail_'~type.slug|lower~'_add', {'id':id}) }}">Ajouter {{ type.name }}</a></h3>
                                     </div>
                                     <div class="col-md-9">
                                         <img src="{{ asset('bundles/mhmail/images/' ~ type.imgsrc) }}" alt="{{ type.imgalt }}"  width="600" align="top" />
@@ -36,15 +35,14 @@
                 </li>
             {% endfor %}
         </ul>
-     </div>
-    <br>
-    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+</div>
 
-
-{% endblock %}
-
-{% block bundle_javascript %}
-    <script src="{{ asset('bundles/mhmail/js/main.js') }}"></script>
+    {#{% block bundle_javascript %}
+    <script src="{{ asset('bundles/mhmail/js/main.js') }}"></script>#}
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -64,5 +62,4 @@
             });
         });
     </script>
-{% endblock %}
 

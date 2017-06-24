@@ -24,18 +24,11 @@
         </div>
     </div>
     <br>
-    <a class="btn btn-link"
-        href="{{ path('mh_mail_edit', {'id': id}) }}"><span class="glyphicon glyphicon-backward"></span> Retour</a>
+    {#<a class="btn btn-link"
+        href="{{ path('mh_mail_edit', {'id': id}) }}"><span class="glyphicon glyphicon-backward"></span> Retour</a>#}
     <a class="btn btn-danger"
-       href="{{ path('mh_mail_button_red_edit_x', {'id': post.id}) }}" data-toggle="modal"
+       href="{{ path('mh_mail_button_red_edit', {'id': post.id}) }}" data-toggle="modal"
        data-target="#post-form-modal" data-remote="false"><span class="glyphicon glyphicon-danger"></span> Modif X</a>
-
-    <div id="post-form-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-            </div>
-        </div>
-    </div>
 
 {% endblock %}
 

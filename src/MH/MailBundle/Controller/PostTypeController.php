@@ -13,10 +13,16 @@ class PostTypeController extends Controller
 
     public function selectAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+
         $listPostType = $this
             ->getDoctrine()
             ->getRepository('MHMailBundle:PostType')
             ->findAll();
+
+        //$mail_id = $post->getMail()->getId();
 
         return $this->render('MHMailBundle:PostType:select.html.twig', array(
             'listPostType'=>$listPostType,
