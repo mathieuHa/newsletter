@@ -6,23 +6,28 @@ namespace MH\MailBundle\Controller\Post;
 use MH\MailBundle\Form\Post\FooterType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FooterController extends Controller
 {
 
     public function addFooterAdmissionAction(Request $request, $id)
     {
-        $post = new Post();
-        $post->setSlug("footer_admission");
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = new Post("footer_admission", "Footer Admission", "");
         $footer = new Post\Footer();
 
         $form = $this
             ->get('form.factory')
-            ->create(FooterType::class,$footer);
+            ->create(FooterType::class,$footer, array(
+                'action' => $this->generateUrl('mh_mail_footer_add', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -30,7 +35,9 @@ class FooterController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $post->setPosition(0); // TEMPORAIRE A ENLEVER
+            $post->setPosition(100); // TEMPORAIRE A ENLEVER
+            $post->setDescription($footer->getDescription());
+
             $mail->addPost($post);
 
             $em->persist($mail);
@@ -41,20 +48,24 @@ class FooterController extends Controller
                     'notice','Post Footer Admission crée'
                 );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 
     public function editFooterAdmissionAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         $post = $this
             ->getDoctrine()
             ->getRepository('MHMailBundle:Post')
@@ -67,9 +78,10 @@ class FooterController extends Controller
                 'notice','On ne peux pas modifier ce bloc, Suppression autorisée'
             );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$mail_id
-            ));
+        return new JsonResponse(array(
+            'status' => 'ok',
+            'id'=>$post->getId()
+        ));
 
     }
 }

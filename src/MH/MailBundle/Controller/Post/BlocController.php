@@ -8,14 +8,16 @@ use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BlocController extends Controller
 {
     public function addBlocAction(Request $request, $id)
     {
-        $post = new Post();
-        $post->setSlug("bloc");
-        $post->setName("Bloc de Couleur");
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = new Post("bloc", "Bloc de Couleur", "");
         $bloc = new Post\Bloc();
         $bloc->setDescription("Bloc de Couleur");
         $post->setBloc($bloc);
@@ -37,6 +39,7 @@ class BlocController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
+            $post->setDescription($bloc->getDescription());
             $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
             $em->persist($mail);
@@ -47,7 +50,8 @@ class BlocController extends Controller
                     'notice','Post Bloc créé'
                 );
             return new JsonResponse(array(
-                'status' => 'ok'
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
@@ -60,6 +64,9 @@ class BlocController extends Controller
 
     public function editBlocAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         $post = $this
             ->getDoctrine()
             ->getRepository('MHMailBundle:Post')
@@ -78,7 +85,7 @@ class BlocController extends Controller
             $em = $this
                 ->getDoctrine()
                 ->getManager();
-
+            $post->setDescription($bloc->getDescription());
             $em->persist($bloc);
             $em->flush();
 
@@ -87,7 +94,8 @@ class BlocController extends Controller
                     'notice','Post Bloc modifiée'
                 );
             return new JsonResponse(array(
-                'status' => 'ok'
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 

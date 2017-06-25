@@ -26,7 +26,8 @@ class ButtonRedType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('hauteur',IntegerType::class);
+            ->add('hauteur',IntegerType::class)
+        ;
     }
     
     /**

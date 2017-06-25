@@ -3,6 +3,9 @@
 namespace MH\MailBundle\Controller;
 
 use MH\MailBundle\Entity\Mail;
+use MH\MailBundle\Entity\Post;
+use MH\MailBundle\Entity\Post\Header;
+use MH\MailBundle\Entity\Tool\Image;
 use MH\MailBundle\Entity\User;
 use MH\MailBundle\Form\MailType;
 use MH\MailBundle\Form\UserType;
@@ -37,6 +40,18 @@ class MailController extends Controller
         $mail
             ->setName("un mail")
             ->setPosition(0);
+        $header = new Header();
+        $header->setImage(new Image(
+            1,
+            "http://oscar-campus.com/doc/1420/image/1-header/ESIEA-header.jpg",
+            "img",
+            "Esiea L'école d'ingénieur du monde numérique",
+            "Header ESIEA 1"
+        ));
+        $post = new Post("header", "Header", "Header");
+        $post->setPosition(1);
+        $post->setHeader($header);
+        $mail->addPost($post);
 
         $form = $this
             ->get('form.factory')

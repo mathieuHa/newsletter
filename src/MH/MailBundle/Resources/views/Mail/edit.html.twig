@@ -11,21 +11,20 @@
 {% block bundle_body %}
     <h2>Edition Mail</h2>
     <hr>
-        <div class="panel-group" id="accordion">
-            <ul class="list-unstyled post-sortable">
+        <div id="panel-master">
+            <ul class="list-unstyled post-sortable ui-sortable">
             {% for post in mail.posts | sortbyfield('position') %}
-            <li  id="post_{{ post.id }}">
-                <div class="panel panel-success">
-                        <div class="panel-body">
-                            <div class="row">
-                                <span class="post-title" data-parent="#accordion" href="#post{{ post.id }}">
-                                {{ post.name }} </span><div style="float: right;" >{{ post.name }}</div>
-                                <div class="col-lg-3 col-md-6 col-xs-6">
-                                    <a class="btn btn-warning" data-toggle="modal"
-                                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_mail_'~ post.slug ~ '_edit',  {'id': post.id, 'mail_id': mail.id}    ) }}">Modifier</a>
-                                    <a class="btn btn-danger" href="{{ path('mh_mail_post_delete', {'id': post.id, 'mail_id': mail.id}    ) }}">Supprimer</a>
-                                </div>
-                            </div>
+            <li  id="post_{{ post.id }}" class="panel panel-default ui-sortable-handle">
+                <div class="panel-body">
+                    <span class="post-title">
+                        {{ post.name }} </span>
+                    <span class="post-description">
+                        {{ post.description }}
+                    </span>
+                    <div class="btn btn-group-xs pull-right">
+                        <a class="btn btn-warning" data-toggle="modal"
+                           data-target="#post-form-modal" data-remote="false" href="{{ path('mh_mail_'~ post.slug ~ '_edit',  {'id': post.id, 'mail_id': mail.id}    ) }}">Modifier</a>
+                        <a class="btn btn-danger" href="{{ path('mh_mail_post_delete', {'id': post.id, 'mail_id': mail.id}    ) }}">Supprimer</a>
                     </div>
                 </div>
                 <br>
@@ -33,6 +32,7 @@
 
             {% endfor %}
             </ul>
+        </div>
             <br>
             <div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12">
@@ -60,7 +60,6 @@
                 Retour
             </a>
 
-        </div>
 
     <div id="post-form-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -159,15 +158,21 @@
                             success: function (data) {
                                 console.log(data);
                                 var adddescription = $("input:first").val();
-                                var $panel = $($btn.parents('.panel-body')[0]);
+                                var $panel = $("#panel-master");
+                                console.log($panel);
                                 var action = $form.attr('action');
                                 console.log(action);
                                 var findadd = action.search("add");
-                                console.log(find);
+                                console.log(findadd);
                                 console.log(addname);
+                                $url = $form.attr('action');
+                                console.log($url);
                                  if (findadd != -1) {
+                                     console.log("Ajout du panel");
                                      var $newPost = $($panel.find('ul').find('li')[0]).clone();
+                                     console.log($newPost);
                                      $newPost.find('.post-title').html(adddescription);
+                                     $newPost.find('.post-description').html(adddescription);
                                      $newPost.hide().appendTo($panel.find('ul')).fadeIn();
                                  }
                                  /*case 'delete_post':

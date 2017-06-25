@@ -6,6 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +18,7 @@ class TexteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('description', TextType::class)
             ->add('texte',\MH\MailBundle\Form\Tool\TexteType::class)
             ->add('couleurFond', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
@@ -24,7 +26,7 @@ class TexteType extends AbstractType
                 'multiple'     => false,
             ))
             ->add('hauteur',IntegerType::class)
-            ->add('save',SubmitType::class)        ;
+            ;
     }
     
     /**

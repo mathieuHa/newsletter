@@ -1,31 +1,16 @@
-{% extends "MHMailBundle::layout.html.twig" %}
 
-{% block title %}
-    Edition - {{ parent() }}
-{% endblock %}
+{{ form_start(form) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
 
-{% block bundle_body %}
-    <h2>{{ post.slug }}</h2>
-    <hr>
-    <div id="contain" >
-        <div class="well">
-            <h4>Rendu Actuel</h4>
-            {% if post.bloctexte is not null %}
-                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="600">
-                    <tbody>
-                    {% include "MHMailBundle:Template:"~post.slug~".html.twig" ignore missing %}
-                    </tbody>
-                </table>
-            {% else %}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Editer un post</h4>
+</div>
+<div class="modal-body">
 
-                <img src="{{ asset('bundles/mhmail/images/'~post.slug~'.jpg') }}" alt="Exemple de texte & photo" width="700"  />
-            {% endif %}
-
-            <hr>
-            {{ form_start(form) }}
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-            {{ form_errors(form) }}
-
+    {{ form_row(form.description) }}
             <div class="form-group">
                 {{ form_label(form.couleurFond, "Couleur Fond", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 <div class="col-sm-4 col-sm-offset-5">
@@ -56,15 +41,15 @@
             {{ form_end(form) }}
 
 
-        </div>
-    </div>
-    <br>
-    <a class="btn btn-default" href="{{ path('mh_mail_edit', {'id': id}) }}">Retour</a>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+</div>
+{{ form_end(form) }}
 
 
-{% endblock %}
 
-{% block bundle_javascript %}
     <script type="text/javascript">
         $(document).ready(function() {
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
@@ -137,5 +122,4 @@
         });
     </script>
 
-{% endblock %}
 

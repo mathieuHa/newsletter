@@ -37,6 +37,13 @@ class Post
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
 
 
     /**
@@ -104,6 +111,13 @@ class Post
             if ($this->buttonred!=null)
                 $this->buttonred = clone $this->buttonred;
         }
+    }
+
+    public function __construct($slug, $name, $description)
+    {
+        $this->setSlug($slug);
+        $this->setName($name);
+        $this->setDescription($description);
     }
 
     /**
@@ -393,5 +407,29 @@ class Post
     public function getBloctexte()
     {
         return $this->bloctexte;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Post
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

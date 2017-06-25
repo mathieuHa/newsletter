@@ -6,14 +6,19 @@ namespace MH\MailBundle\Controller\Post;
 use MH\MailBundle\Form\Post\HeaderType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class HeaderController extends Controller
 {
     public function addHeaderAction(Request $request, $id)
     {
-        $post = new Post();
-        $post->setSlug("header");
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+
+        $post = new Post("header", "Header", "");
         $header = new Post\Header();
         $post->setHeader($header);
 
@@ -21,10 +26,11 @@ class HeaderController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(HeaderType::class,$header);
+            ->create(HeaderType::class,$header, array(
+                'action' => $this->generateUrl('mh_mail_header_add', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -43,20 +49,25 @@ class HeaderController extends Controller
                     'notice','Post Header crée'
                 );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 
     public function editHeaderAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+
         $post = $this
             ->getDoctrine()
             ->getRepository('MHMailBundle:Post')
@@ -67,13 +78,16 @@ class HeaderController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(HeaderType::class,$header);
+            ->create(HeaderType::class,$header, array(
+                'action' => $this->generateUrl('mh_mail_header_edit', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
+            $post->setDescription($header->getDescription());
+
 
             $em->persist($header);
             $em->flush();
@@ -83,15 +97,16 @@ class HeaderController extends Controller
                     'notice','Post Header modifié'
                 );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$mail_id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 

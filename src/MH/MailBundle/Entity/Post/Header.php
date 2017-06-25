@@ -38,6 +38,13 @@ class Header
      */
     private $image;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
 
     public function __clone()
     {
@@ -77,5 +84,29 @@ class Header
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Header
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

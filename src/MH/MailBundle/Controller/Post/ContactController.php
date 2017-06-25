@@ -6,23 +6,28 @@ namespace MH\MailBundle\Controller\Post;
 use MH\MailBundle\Form\Post\ContactType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ContactController extends Controller
 {
 
     public function addContactAdmissionAction(Request $request, $id)
     {
-        $post = new Post();
-        $post->setSlug("contact_admission");
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = new Post("contact_admission", "Contact Admission", "");
         $contact = new Post\Contact();
 
         $form = $this
             ->get('form.factory')
-            ->create(ContactType::class,$contact);
+            ->create(ContactType::class,$contact, array(
+                'action' => $this->generateUrl('mh_mail_contact_add', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -30,7 +35,9 @@ class ContactController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $post->setPosition(0); // TEMPORAIRE A ENLEVER
+            $post->setPosition(100); // TEMPORAIRE A ENLEVER
+            $post->setDescription($contact->getDescription());
+
             $mail->addPost($post);
 
             $em->persist($mail);
@@ -41,24 +48,29 @@ class ContactController extends Controller
                     'notice','Post Contact Admission crée'
                 );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 
     public function editContactAdmissionAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         $post = $this
             ->getDoctrine()
             ->getRepository('MHMailBundle:Post')
             ->find($id);
+
 
         $mail_id = $post->getMail()->getId();
 
@@ -67,9 +79,10 @@ class ContactController extends Controller
                 'notice','On ne peux pas modifier ce bloc, Suppression autorisée'
             );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$mail_id
-            ));
+        return new JsonResponse(array(
+            'status' => 'ok',
+            'id'=>$post->getId()
+        ));
 
     }
 }

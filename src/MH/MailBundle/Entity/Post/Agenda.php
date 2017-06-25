@@ -25,6 +25,14 @@ class Agenda
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="mois1", type="string", length=255)
      */
     private $mois1;
@@ -534,5 +542,29 @@ class Agenda
     public function getLiens()
     {
         return $this->liens;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Agenda
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

@@ -23,9 +23,7 @@ class ButtonRedController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
         }
-        $post = new Post();
-        $post->setSlug("button_red");
-        $post->setName("Bouton Action");
+        $post = new Post("button_red", "Bouton Action", "");
         $button = new ButtonRed();
         $button->setDescription("Bouton Action");
         $texte = new MiniTexte();
@@ -56,13 +54,14 @@ class ButtonRedController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $post->setPosition(0); // TEMPORAIRE A ENLEVER
+            $post->setPosition(100); // TEMPORAIRE A ENLEVER
+            $post->setDescription($button->getDescription());
             $mail->addPost($post);
             $em->persist($mail);
             $em->flush();
-            $this->getDoctrine()->getManager()->flush();
             return new JsonResponse(array(
-                'status' => 'ok'
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
         return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
@@ -89,15 +88,17 @@ class ButtonRedController extends Controller
                 'action' => $this->generateUrl('mh_mail_button_red_edit', array('id' => $post->getId()))));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setDescription($button->getDescription());
             $this->getDoctrine()->getManager()->flush();
             return new JsonResponse(array(
-                'status' => 'ok'
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
         return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
-            'form'=>$form->createView(),
-            //'id'=>$id,
-            'post'=>$post
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 

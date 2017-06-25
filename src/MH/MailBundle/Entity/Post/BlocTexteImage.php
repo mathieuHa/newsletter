@@ -41,6 +41,14 @@ class BlocTexteImage
      */
     private $image;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+
 
 
 
@@ -175,5 +183,29 @@ class BlocTexteImage
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return BlocTexteImage
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

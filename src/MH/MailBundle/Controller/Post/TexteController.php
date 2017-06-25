@@ -7,14 +7,18 @@ use MH\MailBundle\Entity\Tool\Texte;
 use MH\MailBundle\Form\Post\TexteType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TexteController extends Controller
 {
     public function addTexteAction(Request $request, $id)
     {
-        $post = new Post();
-        $post->setSlug("texte_separation");
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = new Post("texte_separation", "Texte de Séparation", "");
         $texte = new Post\Texte();
         $text = new Texte();
         $texte
@@ -24,10 +28,11 @@ class TexteController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(TexteType::class,$texte);
+            ->create(TexteType::class,$texte, array(
+                'action' => $this->generateUrl('mh_mail_texte_separation_add', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -35,10 +40,11 @@ class TexteController extends Controller
                 ->getDoctrine()
                 ->getRepository('MHMailBundle:Mail')
                 ->find($id);
-            $em->persist($texte);
             $post->setPosition(100); // TEMPORAIRE A ENLEVER
             $mail->addPost($post);
             $post->setTexte($texte);
+            $post->setDescription($texte->getDescription());
+            $em->persist($texte);
             $em->persist($mail);
             $em->flush();
 
@@ -47,20 +53,24 @@ class TexteController extends Controller
                     'notice','Post Texte séparation crée'
                 );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 
     public function editTexteAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         $post = $this
             ->getDoctrine()
             ->getRepository('MHMailBundle:Post')
@@ -71,13 +81,15 @@ class TexteController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(TexteType::class,$texte);
+            ->create(TexteType::class,$texte, array(
+                'action' => $this->generateUrl('mh_mail_texte_separation_edit', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
+            $post->setDescription($texte->getDescription());
 
             $em->persist($texte);
             $em->flush();
@@ -87,15 +99,16 @@ class TexteController extends Controller
                     'notice','Post Texte séparation modifiée'
                 );
 
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$mail_id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 

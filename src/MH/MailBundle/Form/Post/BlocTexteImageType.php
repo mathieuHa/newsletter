@@ -7,6 +7,7 @@ use MH\MailBundle\Form\Tool\TexteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,6 +19,7 @@ class BlocTexteImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('description', TextType::class)
             ->add('titre',LienType::class)
             ->add('texte',TexteType::class)
             ->add('couleurFond', EntityType::class, array(
@@ -29,8 +31,7 @@ class BlocTexteImageType extends AbstractType
                 'class'        => 'MHMailBundle:Tool\Image',
                 'choice_label' => 'nom',
                 'multiple'     => false,
-            ))
-            ->add('save',SubmitType::class);
+            ));
     }
     
     /**

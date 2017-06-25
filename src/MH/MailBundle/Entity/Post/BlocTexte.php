@@ -31,6 +31,14 @@ class BlocTexte
      */
     private $texte;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+
 
     /**
      * Get id
@@ -105,5 +113,29 @@ class BlocTexte
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return BlocTexte
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

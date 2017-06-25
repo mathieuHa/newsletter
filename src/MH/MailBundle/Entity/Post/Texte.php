@@ -32,6 +32,13 @@ class Texte
     private $couleurFond;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="hauteur", type="integer")
@@ -136,5 +143,29 @@ class Texte
     public function getCouleurFond()
     {
         return $this->couleurFond;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Texte
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

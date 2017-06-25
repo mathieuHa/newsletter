@@ -20,6 +20,7 @@ class AgendaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('description', TextType::class)
             ->add('mois1',TextType::class)
             ->add('jour1',TextType::class)
             ->add('texte1',TextType::class)
@@ -45,7 +46,6 @@ class AgendaType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('save',SubmitType::class)
             ;
 
     }
