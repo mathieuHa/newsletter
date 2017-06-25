@@ -6,6 +6,7 @@ namespace MH\MailBundle\Controller\Post;
 use MH\MailBundle\Form\Post\BlocType;
 use MH\MailBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class BlocController extends Controller
@@ -14,18 +15,21 @@ class BlocController extends Controller
     {
         $post = new Post();
         $post->setSlug("bloc");
+        $post->setName("Bloc de Couleur");
         $bloc = new Post\Bloc();
+        $bloc->setDescription("Bloc de Couleur");
         $post->setBloc($bloc);
         $bloc
             ->setHauteur("15");
 
         $form = $this
             ->get('form.factory')
-            ->create(BlocType::class,$bloc);
+            ->create(BlocType::class,$bloc, array(
+                'action' => $this->generateUrl('mh_mail_bloc_add', array('id' => $id))));
 
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -42,16 +46,15 @@ class BlocController extends Controller
                 ->addFlash(
                     'notice','Post Bloc créé'
                 );
-
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$id
+            return new JsonResponse(array(
+                'status' => 'ok'
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 
@@ -67,10 +70,11 @@ class BlocController extends Controller
 
         $form = $this
             ->get('form.factory')
-            ->create(BlocType::class,$bloc);
+            ->create(BlocType::class,$bloc, array(
+                'action' => $this->generateUrl('mh_mail_bloc_edit', array('id' => $id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -82,16 +86,15 @@ class BlocController extends Controller
                 ->addFlash(
                     'notice','Post Bloc modifiée'
                 );
-
-            return $this->redirectToRoute('mh_mail_edit',array(
-                'id'=>$mail_id
+            return new JsonResponse(array(
+                'status' => 'ok'
             ));
         }
 
-        return $this->render('MHMailBundle:PostType:'.$post->getSlug().'.html.twig', array(
-            'form'=>$form->createView(),
-            'id'=>$id,
-            'post'=>$post,
+        return $this->render('MHMailBundle:Post:edit-all.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
         ));
     }
 

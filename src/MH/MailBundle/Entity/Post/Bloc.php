@@ -33,6 +33,13 @@ class Bloc
      */
     private $couleur;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
     public function __clone()
     {
         if ($this->id) {
@@ -105,5 +112,29 @@ class Bloc
     public function getCouleur()
     {
         return $this->couleur;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Bloc
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

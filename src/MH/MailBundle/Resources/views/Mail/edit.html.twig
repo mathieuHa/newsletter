@@ -16,23 +16,16 @@
             {% for post in mail.posts | sortbyfield('position') %}
             <li  id="post_{{ post.id }}">
                 <div class="panel panel-success">
-
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#post{{ post.id }}">
-                                {{ post.name }} </a><div style="float: right;" >{{ post.name }}</div>
-                        </h4>
-                    </div>
-                    <div id="post{{ post.id }}" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="row">
+                                <span class="post-title" data-parent="#accordion" href="#post{{ post.id }}">
+                                {{ post.name }} </span><div style="float: right;" >{{ post.name }}</div>
                                 <div class="col-lg-3 col-md-6 col-xs-6">
                                     <a class="btn btn-warning" data-toggle="modal"
                                        data-target="#post-form-modal" data-remote="false" href="{{ path('mh_mail_'~ post.slug ~ '_edit',  {'id': post.id, 'mail_id': mail.id}    ) }}">Modifier</a>
                                     <a class="btn btn-danger" href="{{ path('mh_mail_post_delete', {'id': post.id, 'mail_id': mail.id}    ) }}">Supprimer</a>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <br>
@@ -145,14 +138,14 @@
 
                 $modalContent.load($btn.attr("href"), function () {
                     var tab = [];
-                    console.log("New Thing 1");
+                    var addname = $("input:first").val();
+
                     $("form textarea").each(function(){
                         tab.push(new SimpleMDE({
                             spellChecker: false,
                             forceSync: true,
                             element: this
                         }));
-                        console.log("New Thing");
                     });
 
                     $postFormModal.find('form').submit(function (e) {
@@ -165,14 +158,19 @@
                             data: $form.serialize(),
                             success: function (data) {
                                 console.log(data);
-
-                                //var $panel = $($btn.parents('.panel-body')[0]);
-
-                                /*switch ($form.attr('name')) {
-                                 case 'edit_post':
-                                 $panel.find('.post-title').html($form.find('#edit_post_title').val());
-                                 break;
-                                 case 'delete_post':
+                                var adddescription = $("input:first").val();
+                                var $panel = $($btn.parents('.panel-body')[0]);
+                                var action = $form.attr('action');
+                                console.log(action);
+                                var findadd = action.search("add");
+                                console.log(find);
+                                console.log(addname);
+                                 if (findadd != -1) {
+                                     var $newPost = $($panel.find('ul').find('li')[0]).clone();
+                                     $newPost.find('.post-title').html(adddescription);
+                                     $newPost.hide().appendTo($panel.find('ul')).fadeIn();
+                                 }
+                                 /*case 'delete_post':
                                  $panel.parent().fadeOut(400, function () {
                                  $(this).remove();
                                  });
@@ -190,8 +188,8 @@
                                  $($btn.parents('tr')[0]).fadeOut(400, function () {
                                  $(this).remove();
                                  });
-                                 break;
-                                 }*/
+                                 break;*/
+
 
                                 $postFormModal.modal('hide');
                             }

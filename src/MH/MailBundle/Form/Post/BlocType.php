@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class BlocType extends AbstractType
 {
@@ -17,13 +19,13 @@ class BlocType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('description', TextType::class)
             ->add('hauteur',IntegerType::class)
             ->add('couleur', EntityType::class, array(
             'class'        => 'MHMailBundle:Tool\Couleur',
             'choice_label' => 'nom',
             'multiple'     => false,
-        ))
-            ->add('save',SubmitType::class)        ;
+        ));
     }
     
     /**

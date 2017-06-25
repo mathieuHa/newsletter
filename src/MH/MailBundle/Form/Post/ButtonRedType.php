@@ -19,15 +19,14 @@ class ButtonRedType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('description', TextType::class)
             ->add('lien',\MH\MailBundle\Form\Tool\LienType::class)
-            ->add('description', TextareaType::class)
             ->add('couleurFond', EntityType::class, array(
                 'class'        => 'MHMailBundle:Tool\Couleur',
                 'choice_label' => 'nom',
                 'multiple'     => false,
             ))
-            ->add('hauteur',IntegerType::class)
-            ->add('save',SubmitType::class)        ;
+            ->add('hauteur',IntegerType::class);
     }
     
     /**

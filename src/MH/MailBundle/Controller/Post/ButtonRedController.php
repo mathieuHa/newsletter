@@ -27,7 +27,7 @@ class ButtonRedController extends Controller
         $post->setSlug("button_red");
         $post->setName("Bouton Action");
         $button = new ButtonRed();
-        $button->setDescription("Description ...");
+        $button->setDescription("Bouton Action");
         $texte = new MiniTexte();
         //$police = new Police(null, 14);
         $texte
