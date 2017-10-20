@@ -29,7 +29,7 @@
                             <ul class="list-unstyled post-sortable">
 
                                 {% for post in rubrique.posts | sortbyfield('position') %}
-                                    <li  id="post_{{ post.id }}">
+                                    <li class="toto" id="post_{{ post.id }}">
                                         <div class="panel panel-info">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title" >
@@ -165,16 +165,21 @@
             element: this
             }));
             });*/
-
+        $('[data-toggle="tooltip"]').tooltip();
 
             var $postFormModal = $('#post-form-modal');
 
-            $postFormModal.on('show.bs.modal', function (e) {
+            var loading = '<div class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div>';
+
+
+        $postFormModal.on('show.bs.modal', function (e) {
                 console.log("Open the new One");
 
                 var $btn = $(e.relatedTarget);
 
                 var $modalContent = $postFormModal.find('#post-content');
+
+                $modalContent.html(loading);
 
                 $modalContent.load($btn.attr("href"), function () {
                     var tab = [];
@@ -212,35 +217,46 @@
                                         break;
                                     case 'mh_newsletterbundle_post_add':
                                         $panel = $($btn.parents('.panel-success')[0]);
+                                        console.log($panel);
                                         var $newPost = $($panel.find('ul').find('li')[0]).clone();
-                                        $newPost.find('.link-title').html($form.find('#mh_newsletterbundle_post_add_titre').val());
-                                        $newPost.find('.content-update').html($form.find('#mh_newsletterbundle_post_add_content').val());
-                                        $newPost.hide().appendTo($panel.find('ul')).fadeIn(1500);
+                                        console.log($newPost.hasClass('toto'));
+                                        if ($newPost.hasClass('toto')===false){
+
+                                            $newPost ="                                   <div class=\"panel panel-info\">\n" +
+                                                "                                            <div class=\"panel-heading\">\n" +
+                                                "                                                <h4 class=\"panel-title\">\n" +
+                                                "                                                    <a class=\"link-title\" data-toggle=\"collapse\" data-parent=\"#accordion7\" href=\"#post26rubrique7\">\n" +
+                                                "                                                        aaaa</a>\n" +
+                                                "                                                    <div class=\"btn btn-group-xs pull-right\">\n" +
+                                                "                                                    <a class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"/newsletter/web/app_dev.php/newsletter/2/post/edit/26/\"><i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
+                                                "                                                    <a class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"/newsletter/web/app_dev.php/newsletter/rubrique/delete/26/2/7\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
+                                                "                                                    </div>\n" +
+                                                "                                                </h4>\n" +
+                                                "                                                <br>\n" +
+                                                "                                            </div>\n" +
+                                                "                                            <div id=\"post26rubrique7\" class=\"panel-collapse collapse\">\n" +
+                                                "                                                <div class=\"panel-body\">\n" +
+                                                "                                                    <div class=\"col-md-10 col-xs-9\">\n" +
+                                                "                                                        <div class=\"content-update\">\n" +
+                                                "                                                        \n" +
+                                                "                                                        </div><br>\n" +
+                                                "                                                                                                            </div>\n" +
+                                                "                                                </div>\n" +
+                                                "                                            </div>\n" +
+                                                "                                        </div>\n" +
+                                                "                                        <br>\n"
+                                        }
+                                        var $test = $("<li class='toto' id='post_'+data.id ></li>").append($newPost);
+
+                                        $test.find('.link-title').html($form.find('#mh_newsletterbundle_post_add_titre').val());
+                                        $test.find('.content-update').html($form.find('#mh_newsletterbundle_post_add_content').val());
+                                        $test.hide().appendTo($panel.find('ul')).fadeIn(1500);
                                         break;
                                 }
                                 console.log(data);
-                                /*var adddescription = $("input:first").val();
-                                //var $panel = $("#panel-master");
-                                console.log($panel);
-                                var action = $form.attr('action');
-                                console.log(action);
-                                var findadd = action.search("add");
-                                console.log(findadd);
-                                console.log(addname);
-                                $url = $form.attr('action');
-                                console.log($url);
-                                if (findadd != -1) {
-                                    console.log("Ajout du panel");
-                                    var $newPost = $($panel.find('ul').find('li')[0]).clone();
-                                    console.log($newPost);
-                                    $newPost.find('.post-title').html(adddescription);
-                                    $newPost.find('.post-description').html(adddescription);
-                                    $newPost.hide().appendTo($panel.find('ul')).fadeIn();
-                                }*/
                                 $postFormModal.modal('hide');
                             }
                         });
-
                         e.preventDefault();
                     })
                 });
