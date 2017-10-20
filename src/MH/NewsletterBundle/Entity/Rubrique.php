@@ -85,6 +85,11 @@ class Rubrique
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __clone() {
         if ($this->id) {
             $posts = $this->getPosts();

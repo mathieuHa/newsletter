@@ -19,8 +19,7 @@ class PostType extends AbstractType
             ->add('content')
             ->add('lien')
             ->add('textelien')
-            ->add('date')
-            ->add('save',SubmitType::class);
+            ->add('date');
     }
     
     /**

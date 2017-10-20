@@ -175,27 +175,6 @@
                                      $newPost.find('.post-description').html(adddescription);
                                      $newPost.hide().appendTo($panel.find('ul')).fadeIn();
                                  }
-                                 /*case 'delete_post':
-                                 $panel.parent().fadeOut(400, function () {
-                                 $(this).remove();
-                                 });
-                                 break;
-                                 case 'new_post':
-                                 var $newPost = $($panel.find('ul').find('li')[0]).clone();
-                                 $newPost.find('.post-title').html($form.find('#new_post_title').val());
-                                 $newPost.hide().appendTo($panel.find('ul')).fadeIn();
-                                 break;
-                                 case 'edit_newsletter-header':
-                                 $panel.find('#newsletter-title').html($form.find('#edit_newsletter-header_title').val());
-                                 $panel.find('#newsletter-week').html($form.find('#edit_newsletter-header_week').val());
-                                 break;
-                                 case 'delete_newsletter':
-                                 $($btn.parents('tr')[0]).fadeOut(400, function () {
-                                 $(this).remove();
-                                 });
-                                 break;*/
-
-
                                 $postFormModal.modal('hide');
                             }
                         });

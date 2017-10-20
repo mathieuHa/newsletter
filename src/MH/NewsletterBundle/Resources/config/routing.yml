@@ -106,7 +106,7 @@ mh_newsletter_post_order:
         _controller: MHNewsletterBundle:Post:order
 
 mh_newsletter_post_edit:
-    path:     /post/edit/{id}/{newsletter_id}
+    path:     /{newsletter_id}/post/edit/{id}/
     defaults:
         _controller: MHNewsletterBundle:Post:edit
     requirements:

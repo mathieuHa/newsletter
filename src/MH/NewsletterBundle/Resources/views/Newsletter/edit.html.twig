@@ -32,10 +32,17 @@
                                     <li  id="post_{{ post.id }}">
                                         <div class="panel panel-info">
                                             <div class="panel-heading">
-                                                <h4 class="panel-title">
+                                                <h4 class="panel-title" >
                                                     <a data-toggle="collapse" data-parent="#accordion{{ rubrique.id }}" href="#post{{ post.id }}rubrique{{ rubrique.id }}">
                                                         {{ post.titre }}</a>
+                                                    <div class="btn btn-group-xs pull-right">
+                                                    <a class="btn btn-warning" title="Modifier" data-toggle="modal"
+                                                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_post_edit',  {'id': post.id, 'newsletter_id': newsletter.id}    ) }}"><i class="glyphicon glyphicon-edit" aria-hidden="true"> Modifier</i></a>
+                                                    <a class="btn btn-danger" title="Supprimer" data-toggle="modal"
+                                                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_post_delete', {'id': post.id, 'newsletter_id': newsletter.id, 'rubrique_id': rubrique.id}    ) }}"><i class="glyphicon glyphicon-trash" aria-hidden="true"> Supprimer</i></a>
+                                                    </div>
                                                 </h4>
+                                                <br>
                                             </div>
                                             <div id="post{{ post.id }}rubrique{{ rubrique.id }}" class="panel-collapse collapse">
                                                 <div class="panel-body">
@@ -48,12 +55,6 @@
                                                                     style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #2c87c3;"><span
                                                                         style="color: #2c87c3;text-decoration: none;">> {{ post.textelien }}</span></a>
                                                         {% endif %}
-                                                    </div>
-                                                    <div class="col-md-2 col-xs-3">
-                                                        <a class="btn btn-warning" href="{{ path('mh_newsletter_post_edit',  {'id': post.id, 'newsletter_id': newsletter.id}    ) }}">Modifier</a>
-                                                        <br>
-                                                        <br>
-                                                        <a class="btn btn-danger" href="{{ path('mh_newsletter_post_delete', {'id': post.id, 'newsletter_id': newsletter.id, 'rubrique_id': rubrique.id}    ) }}">Supprimer</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,6 +106,13 @@
 
         </div>
 
+    <div id="post-form-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="post-content">
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
 
@@ -141,6 +149,80 @@
                 });
             }
         });
+            /*$("#modalP").modal();
+            $("#show").click(function(){
+            $("#modalP").modal();
+            });
+            var tab = [];
+            var i;
+            $("form textarea").each(function(){
+            tab.push(new SimpleMDE({
+            spellChecker: false,
+            forceSync: true,
+            element: this
+            }));
+            });*/
+
+
+            var $postFormModal = $('#post-form-modal');
+
+            $postFormModal.on('show.bs.modal', function (e) {
+                console.log("Open the new One");
+
+                var $btn = $(e.relatedTarget);
+
+                var $modalContent = $postFormModal.find('#post-content');
+
+                $modalContent.load($btn.attr("href"), function () {
+                    var tab = [];
+                    var addname = $("input:first").val();
+
+                    $("form textarea").each(function(){
+                        tab.push(new SimpleMDE({
+                            spellChecker: false,
+                            forceSync: true,
+                            element: this
+                        }));
+                    });
+
+                    $postFormModal.find('form').submit(function (e) {
+
+                        var $form = $(this);
+
+                        $.ajax({
+                            type: "POST",
+                            url: $form.attr('action'),
+                            data: $form.serialize(),
+                            success: function (data) {
+                                console.log(data);
+                                var adddescription = $("input:first").val();
+                                var $panel = $("#panel-master");
+                                console.log($panel);
+                                var action = $form.attr('action');
+                                console.log(action);
+                                var findadd = action.search("add");
+                                console.log(findadd);
+                                console.log(addname);
+                                $url = $form.attr('action');
+                                console.log($url);
+                                if (findadd != -1) {
+                                    console.log("Ajout du panel");
+                                    var $newPost = $($panel.find('ul').find('li')[0]).clone();
+                                    console.log($newPost);
+                                    $newPost.find('.post-title').html(adddescription);
+                                    $newPost.find('.post-description').html(adddescription);
+                                    $newPost.hide().appendTo($panel.find('ul')).fadeIn();
+                                }
+                                $postFormModal.modal('hide');
+                            }
+                        });
+
+                        e.preventDefault();
+                    })
+                });
+            }).on('shown.bs.modal', function () {
+
+            });
     });
 </script>
 {% endblock %}

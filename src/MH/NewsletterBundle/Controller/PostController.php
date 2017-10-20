@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class PostController extends Controller
 {
-    public function editAction (Request $request, $id, $newsletter_id)
+    public function edit2Action (Request $request, $id, $newsletter_id)
     {
         $post = $this
             ->getDoctrine()
@@ -59,6 +59,49 @@ class PostController extends Controller
             'newsletter_id'=>$newsletter_id
         ));
 
+    }
+
+    public function editAction(Request $request,  $id, $newsletter_id){
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = $this
+            ->getDoctrine()
+            ->getRepository('MHNewsletterBundle:Post')
+            ->find($id);
+
+        $form = $this
+            ->get('form.factory')
+            ->create(PostType::class,$post, array(
+                'action' => $this->generateUrl('mh_newsletter_post_edit', array('id' => $id, 'newsletter_id' => $newsletter_id))));
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+
+            $em->persist($post);
+            $em->flush();
+
+            $this
+                ->addFlash(
+                    'notice','Post Bloc Texte modifiée'
+                );
+
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
+            ));
+        }
+
+        return $this->render('MHNewsletterBundle:Post:edit.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'post' => $post,
+            'newsletter_id'=>$newsletter_id
+        ));
     }
 
 
@@ -105,10 +148,11 @@ class PostController extends Controller
 
     public function deleteAction (Request $request, $id, $newsletter_id, $rubrique_id)
     {
-        $em = $this
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        $post = $this
             ->getDoctrine()
-            ->getManager();
-        $post = $em
             ->getRepository('MHNewsletterBundle:Post')
             ->find($id);
 
@@ -119,7 +163,13 @@ class PostController extends Controller
         $form = $this
             ->get('form.factory')
             ->create();
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+
 
             $post->getRubrique()->getNewsletter()->updateDate();
             $em->remove($post);
@@ -130,13 +180,14 @@ class PostController extends Controller
                 'Post supprimé'
             );
 
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$newsletter_id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 
         return $this
-            ->render('MHNewsletterBundle:Post:delete.html.twig',array(
+                ->render('MHNewsletterBundle:Post:delete.html.twig',array(
                 'post'=>$post,
                 'form'=>$form->createView(),
                 'newsletter_id'=>$newsletter_id,
