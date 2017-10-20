@@ -70,9 +70,13 @@ class PostController extends Controller
             ->getRepository('MHNewsletterBundle:Post')
             ->find($id);
 
+        if (null === $post) {
+            throw new NotFoundHttpException("Le Post ".$id." n'existe pas");
+        }
+
         $form = $this
             ->get('form.factory')
-            ->create(PostType::class,$post, array(
+            ->createNamed('mh_newsletterbundle_post_edit', PostType::class,$post, array(
                 'action' => $this->generateUrl('mh_newsletter_post_edit', array('id' => $id, 'newsletter_id' => $newsletter_id))));
 
         $form->handleRequest($request);

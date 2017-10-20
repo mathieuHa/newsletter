@@ -33,7 +33,7 @@
                                         <div class="panel panel-info">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title" >
-                                                    <a data-toggle="collapse" data-parent="#accordion{{ rubrique.id }}" href="#post{{ post.id }}rubrique{{ rubrique.id }}">
+                                                    <a class="link-title" data-toggle="collapse" data-parent="#accordion{{ rubrique.id }}" href="#post{{ post.id }}rubrique{{ rubrique.id }}">
                                                         {{ post.titre }}</a>
                                                     <div class="btn btn-group-xs pull-right">
                                                     <a class="btn btn-warning" title="Modifier" data-toggle="modal"
@@ -47,7 +47,9 @@
                                             <div id="post{{ post.id }}rubrique{{ rubrique.id }}" class="panel-collapse collapse">
                                                 <div class="panel-body">
                                                     <div class="col-md-10 col-xs-9">
-                                                        {{ post.content }}<br>
+                                                        <div class="content-update">
+                                                        {{ post.content }}
+                                                        </div><br>
                                                         {% if post.lien is not empty %}
                                                             <a
                                                                     href="{{ post.lien }}"
@@ -194,9 +196,23 @@
                             url: $form.attr('action'),
                             data: $form.serialize(),
                             success: function (data) {
+                                console.log("Name : " + $form.attr('name'));
+                                var $panel = $($btn.parents('.panel-info')[0]);
+
+                                switch ($form.attr('name')) {
+                                    case 'mh_newsletterbundle_post_edit':
+                                        $panel.find('.link-title').html($form.find('#mh_newsletterbundle_post_edit_titre').val());
+                                        $panel.find('.content-update').html($form.find('#mh_newsletterbundle_post_edit_content').val());
+                                        break;
+                                    case 'mh_newsletterbundle_post_delete':
+                                        $panel.parent().fadeOut(400, function () {
+                                            $(this).remove();
+                                        });
+                                        break;
+                                }
                                 console.log(data);
-                                var adddescription = $("input:first").val();
-                                var $panel = $("#panel-master");
+                                /*var adddescription = $("input:first").val();
+                                //var $panel = $("#panel-master");
                                 console.log($panel);
                                 var action = $form.attr('action');
                                 console.log(action);
@@ -212,7 +228,7 @@
                                     $newPost.find('.post-title').html(adddescription);
                                     $newPost.find('.post-description').html(adddescription);
                                     $newPost.hide().appendTo($panel.find('ul')).fadeIn();
-                                }
+                                }*/
                                 $postFormModal.modal('hide');
                             }
                         });
