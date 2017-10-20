@@ -1,23 +1,24 @@
-{% extends "MHNewsletterBundle::layout.html.twig" %}
+{{ form_start(form) }}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Ajout du Post</h4>
+</div>
 
-{% block title %}
-    Ajout - {{ parent() }}
-{% endblock %}
-
-{% block bundle_body %}
-    <h2>Ajout Post</h2>
-    <hr>
-    <div id="contain" >
-        <div class="well">
-            {{ form(form) }}
-        </div>
+<div class="modal-body">
+    <div class="well">
+        {{ form_row(form.titre) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.lien) }}
+        {{ form_row(form.textelien) }}
+        {{ form_row(form.date) }}
     </div>
-    <br>
-    <a class="btn btn-default" href="{{ path('mh_newsletter_edit', {'id': id}) }}">Retour</a>
+</div>
 
-{% endblock %}
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+</div>
 
-{% block bundle_javascript %}
-
-{% endblock %}
-
+{{ form_rest(form) }}
+{{ form_end(form) }}

@@ -5,7 +5,7 @@
             <span class="une" style="color:#4c4c4c">{{ post.titre }}</span>
         </h3>
         <p style="font-family: Helvetica, Arial, sans-serif;font-size: medium;line-height: 1.5;margin-top: 16px;margin-bottom: 24px;color: #4c4c4c;">
-            {{ post.content }}
+            {{ post.content|markdown|replace({'<p>':'', '</p>':''})|raw }}
             {% if post.lien is not empty %}
                 <a
                         href="{{ post.lien }}"

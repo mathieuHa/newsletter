@@ -13,20 +13,14 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <link rel="stylesheet" href="{{ asset('bundles/mhnewsletter/css/main.css') }}">
+
 
 
 
 
         <style>
-            body {
-                overflow-y: scroll;
-            }
-            .scroll {
-                position:relative;
-            }
-            .modal {
-                overflow-y: scroll;
-            }
+
         </style>
     {% endblock %}
 </head>
@@ -70,6 +64,7 @@
                 crossorigin="anonymous"></script>
         <script src="{{ asset('bundles/mhmail/js/jscolor.min.js') }}"></script>
         <script src="{{ asset('bundles/mhmail/bower_components/simplemde/dist/simplemde.min.js') }}"></script>
+
     {% endblock %}
 
 

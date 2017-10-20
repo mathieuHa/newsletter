@@ -111,14 +111,18 @@ class PostController extends Controller
 
     public function addAction(Request $request, $id, $newsletter_id)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         $post = new Post();
         $post->setTextelien('Lire');
         $form = $this
             ->get('form.factory')
-            ->create(PostType::class,$post);
+            ->createNamed('mh_newsletterbundle_post_add',PostType::class,$post, array(
+             'action' => $this->generateUrl('mh_newsletter_post_add', array('id' => $id, 'newsletter_id' => $newsletter_id))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -129,17 +133,17 @@ class PostController extends Controller
             $rubrique->getNewsletter()->updateDate();
             $post->setPosition(0);
             $rubrique->addPost($post);
-
             $em->persist($rubrique);
             $em->flush();
 
-            $this
-                ->addFlash(
-                    'notice','Post crée'
-                );
+            $this->addFlash(
+                'notice',
+                'Post ajouté'
+            );
 
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$newsletter_id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$post->getId()
             ));
         }
 

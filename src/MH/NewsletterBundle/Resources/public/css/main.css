@@ -1,0 +1,21 @@
+.ui-sortable-handle {
+  cursor: move;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+  min-height: 40px;
+}
+
+label.required:before {
+  content: "* ";
+}
+
+body {
+  overflow-y: scroll;
+}
+.scroll {
+  position:relative;
+}
+.modal {
+  overflow-y: scroll;
+}
