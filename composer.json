@@ -32,7 +32,8 @@
         "knplabs/knp-markdown-bundle": "^1.5",
         "coresphere/console-bundle": "~0.4",
         "javiereguiluz/easyadmin-bundle": "^1.16",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "deployer/deployer": "^4.3"
 
     },
     "require-dev": {
