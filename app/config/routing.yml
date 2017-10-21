@@ -12,3 +12,6 @@ mh_mail:
 mh_newsletter:
     resource: "@MHNewsletterBundle/Resources/config/routing.yml"
     prefix:   /newsletter
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

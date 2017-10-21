@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new MH\NewsletterBundle\MHNewsletterBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new MH\MailBundle\MHMailBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

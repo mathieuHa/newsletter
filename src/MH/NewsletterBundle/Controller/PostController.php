@@ -143,7 +143,9 @@ class PostController extends Controller
 
             return new JsonResponse(array(
                 'status' => 'ok',
-                'id'=>$post->getId()
+                'id'=>$post->getId(),
+                'rubrique'=>$rubrique->getId(),
+                'newsletter'=>$newsletter_id
             ));
         }
 

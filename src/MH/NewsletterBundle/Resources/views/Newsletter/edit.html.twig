@@ -120,6 +120,8 @@
 {% endblock %}
 
 {% block bundle_javascript %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".post-sortable").sortable({
@@ -218,23 +220,19 @@
                                     case 'mh_newsletterbundle_post_add':
                                         $panel = $($btn.parents('.panel-success')[0]);
                                         console.log($panel);
-                                        var $newPost = $($panel.find('ul').find('li')[0]).clone();
-                                        console.log($newPost.hasClass('toto'));
-                                        if ($newPost.hasClass('toto')===false){
-
                                             $newPost ="                                   <div class=\"panel panel-info\">\n" +
                                                 "                                            <div class=\"panel-heading\">\n" +
                                                 "                                                <h4 class=\"panel-title\">\n" +
-                                                "                                                    <a class=\"link-title\" data-toggle=\"collapse\" data-parent=\"#accordion7\" href=\"#post26rubrique7\">\n" +
+                                                "                                                    <a id=\"newposthref\" class=\"link-title\" data-toggle=\"collapse\" data-parent=\"#accordion7\" href=\"#\">\n" +
                                                 "                                                        aaaa</a>\n" +
                                                 "                                                    <div class=\"btn btn-group-xs pull-right\">\n" +
-                                                "                                                    <a class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"/newsletter/web/app_dev.php/newsletter/2/post/edit/26/\"><i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
-                                                "                                                    <a class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"/newsletter/web/app_dev.php/newsletter/rubrique/delete/26/2/7\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
+                                                "                                                    <a id=\"href_edit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
+                                                "                                                    <a id=\"href_delete\"class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
                                                 "                                                    </div>\n" +
                                                 "                                                </h4>\n" +
                                                 "                                                <br>\n" +
                                                 "                                            </div>\n" +
-                                                "                                            <div id=\"post26rubrique7\" class=\"panel-collapse collapse\">\n" +
+                                                "                                            <div id=\"newpostid\" class=\"panel-collapse collapse\">\n" +
                                                 "                                                <div class=\"panel-body\">\n" +
                                                 "                                                    <div class=\"col-md-10 col-xs-9\">\n" +
                                                 "                                                        <div class=\"content-update\">\n" +
@@ -244,13 +242,17 @@
                                                 "                                                </div>\n" +
                                                 "                                            </div>\n" +
                                                 "                                        </div>\n" +
-                                                "                                        <br>\n"
-                                        }
-                                        var $test = $("<li class='toto' id='post_'+data.id ></li>").append($newPost);
+                                                "                                        <br>\n";
+                                        var $test = $("<li class='toto' id='post_new_id'></li>").append($newPost);
 
                                         $test.find('.link-title').html($form.find('#mh_newsletterbundle_post_add_titre').val());
                                         $test.find('.content-update').html($form.find('#mh_newsletterbundle_post_add_content').val());
                                         $test.hide().appendTo($panel.find('ul')).fadeIn(1500);
+                                        $("#post_new_id").attr("id", "post_"+data.id);
+                                        $("#newpostid").attr("id", "post"+data.id+"rubrique"+data.rubrique);
+                                        $("#newposthref").attr("href", "#post"+data.id+"rubrique"+data.rubrique).attr('id', null);
+                                        $("#href_delete").attr("href", Routing.generate('mh_newsletter_post_delete', { id: data.id, newsletter_id: data.newsletter, rubrique_id: data.rubrique })).attr('id', null);
+                                        $("#href_edit").attr("href", Routing.generate('mh_newsletter_post_edit', { id: data.id, rubrique_id: data.rubrique })).attr('id', null);
                                         break;
                                 }
                                 console.log(data);
