@@ -204,6 +204,7 @@
                             url: $form.attr('action'),
                             data: $form.serialize(),
                             success: function (data) {
+                                console.log(data);
                                 console.log("Name : " + $form.attr('name'));
                                 var $panel = $($btn.parents('.panel-info')[0]);
 
@@ -251,12 +252,15 @@
                                         $("#post_new_id").attr("id", "post_"+data.id);
                                         $("#newpostid").attr("id", "post"+data.id+"rubrique"+data.rubrique);
                                         $("#newposthref").attr("href", "#post"+data.id+"rubrique"+data.rubrique).attr('id', null);
-                                        $("#href_delete").attr("href", Routing.generate('mh_newsletter_post_delete', { id: data.id, newsletter_id: data.newsletter, rubrique_id: data.rubrique })).attr('id', null);
-                                        $("#href_edit").attr("href", Routing.generate('mh_newsletter_post_edit', { id: data.id, rubrique_id: data.rubrique })).attr('id', null);
+                                        $("#href_delete").attr("href", Routing.generate('mh_newsletter_post_delete', { id: data.id, newsletter_id: data.newsletter_id, rubrique_id: data.rubrique_id })).attr('id', null);
+                                        $("#href_edit").attr("href", Routing.generate('mh_newsletter_post_edit', { id: data.id, rubrique_id: data.rubrique_id })).attr('id', null);
                                         break;
                                 }
                                 console.log(data);
                                 $postFormModal.modal('hide');
+                            },
+                            error :function(data){
+                                  console.log(data);
                             }
                         });
                         e.preventDefault();

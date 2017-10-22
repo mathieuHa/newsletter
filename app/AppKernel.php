@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new MH\NewsletterBundle\MHNewsletterBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -25,7 +27,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new CoreSphere\ConsoleBundle\CoreSphereConsoleBundle();
-            $bundles[] = new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle();
+            $bundles[] = new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle();
         }
 
         return $bundles;
