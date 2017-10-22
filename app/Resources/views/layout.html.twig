@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
               crossorigin="anonymous">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
@@ -39,8 +40,6 @@
                 <h3>Menu</h3>
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="{{ path('mh_newsletter_home') }}">Newsletter</a> </li>
-                    <li><a href="{{ path('mh_mail_home') }}">Mail</a> </li>
-                    <li><a href="{{ path('mh_mail_tool_home') }}">Outils</a> </li>
                 </ul>
             </div>
             <div id="content" class="col-md-10">
@@ -62,8 +61,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
                 crossorigin="anonymous"></script>
-        <script src="{{ asset('bundles/mhmail/js/jscolor.min.js') }}"></script>
-        <script src="{{ asset('bundles/mhmail/bower_components/simplemde/dist/simplemde.min.js') }}"></script>
+        <script src="{{ asset('bundles/mhnewsletter/bower_components/simplemde/dist/simplemde.min.js') }}"></script>
         <script src="https://use.fontawesome.com/f5bf701764.js"></script>
 
 

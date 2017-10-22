@@ -1,8 +1,0 @@
-services:
-#    mh_newsletter.example:
-#        class: MH\NewsletterBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-    twig.extension.sortbyfield:
-        class: Snilius\Twig\SortByFieldExtension
-        tags:
-            - { name: twig.extension }

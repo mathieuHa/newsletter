@@ -227,7 +227,7 @@ class NewsletterController extends Controller
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
 
-        $normalizer->setCircularReferenceHandler(function ($newsletter) {
+        $normalizer->setCircularReferenceHandler(function (Newsletter $newsletter) {
             return $newsletter->getName();
         });
 

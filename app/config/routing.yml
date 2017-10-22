@@ -5,10 +5,6 @@ root:
         path: /newsletter
         permanent: true
 
-mh_mail:
-    resource: "@MHMailBundle/Resources/config/routing.yml"
-    prefix:   /mail
-
 mh_newsletter:
     resource: "@MHNewsletterBundle/Resources/config/routing.yml"
     prefix:   /newsletter

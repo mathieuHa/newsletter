@@ -1,6 +1,7 @@
 {
     "name": "mat/newsletter",
-    "license": "proprietary",
+    "description": "Un outil qui facilite la création de newsletter par la communication du groupe ESIEA",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -10,11 +11,6 @@
             "app/AppKernel.php",
             "app/AppCache.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
     },
     "require": {
         "php": ">=5.5.9",
@@ -32,9 +28,7 @@
         "knplabs/knp-markdown-bundle": "^1.5",
         "coresphere/console-bundle": "~0.4",
         "javiereguiluz/easyadmin-bundle": "^1.16",
-        "friendsofsymfony/jsrouting-bundle": "^1.6",
-        "deployer/deployer": "^4.3"
-
+        "friendsofsymfony/jsrouting-bundle": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -62,7 +56,6 @@
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",
         "symfony-web-dir": "web",
-        "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"

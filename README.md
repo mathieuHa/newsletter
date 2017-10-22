@@ -4,7 +4,12 @@ Un outil qui facilite la création de newsletter par la communication du groupe 
 
 **Installation en production**
 
+
 `php composer.phar install --no-dev --optimize-autoloader`
+
+`php bin/console doctrine:database:create`
+
+`php bin/console doctrine:schema:update --force --dump-sql`
 
 `php bin/console cache:clear --env=prod --no-debug --no-warmup`
 
@@ -17,8 +22,4 @@ Un outil qui facilite la création de newsletter par la communication du groupe 
 `php bin/console cache:clear --no-warmup`
 
 `php bin/console cache:warmup`
-
-**Installation via deployer**
-
-`./bin/dep deploy prod`
 

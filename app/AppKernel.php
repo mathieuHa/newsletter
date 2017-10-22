@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new MH\NewsletterBundle\MHNewsletterBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new MH\MailBundle\MHMailBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         ];
 
