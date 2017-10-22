@@ -112,6 +112,8 @@ mh_newsletter_post_edit:
     requirements:
             id:   \d+
             newsletter_id:   \d+
+    options:
+            expose: true
 
 mh_newsletter_post_delete:
     path:     /{newsletter_id}/rubrique/{rubrique_id}/delete/{id}
@@ -121,3 +123,5 @@ mh_newsletter_post_delete:
             id:   \d+
             newsletter_id:   \d+
             rubrique_id:   \d+
+    options:
+            expose: true

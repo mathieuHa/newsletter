@@ -48,7 +48,7 @@
                                                 <div class="panel-body">
                                                     <div class="col-md-10 col-xs-9">
                                                         <div class="content-update">
-                                                        {{ post.content }}
+                                                        {{ post.content|markdown|replace({'<p>':'', '</p>':''})|raw }}
                                                         </div><br>
                                                         {% if post.lien is not empty %}
                                                             <a
@@ -154,19 +154,7 @@
                 });
             }
         });
-            /*$("#modalP").modal();
-            $("#show").click(function(){
-            $("#modalP").modal();
-            });
-            var tab = [];
-            var i;
-            $("form textarea").each(function(){
-            tab.push(new SimpleMDE({
-            spellChecker: false,
-            forceSync: true,
-            element: this
-            }));
-            });*/
+
         $('[data-toggle="tooltip"]').tooltip();
 
             var $postFormModal = $('#post-form-modal');
@@ -212,6 +200,8 @@
                                     case 'mh_newsletterbundle_post_edit':
                                         $panel.find('.link-title').html($form.find('#mh_newsletterbundle_post_edit_titre').val());
                                         $panel.find('.content-update').html($form.find('#mh_newsletterbundle_post_edit_content').val());
+                                        $panel.find('.link-content').attr("href", $form.find('#mh_newsletterbundle_post_edit_lien').val());
+                                        $panel.find('.link-text-content').html($form.find('#mh_newsletterbundle_post_edit_textelien').val());
                                         break;
                                     case 'mh_newsletterbundle_post_delete':
                                         $panel.parent().fadeOut(1500, function () {
@@ -228,7 +218,7 @@
                                                 "                                                        aaaa</a>\n" +
                                                 "                                                    <div class=\"btn btn-group-xs pull-right\">\n" +
                                                 "                                                    <a id=\"href_edit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
-                                                "                                                    <a id=\"href_delete\"class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
+                                                "                                                    <a id=\"href_delete\" class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
                                                 "                                                    </div>\n" +
                                                 "                                                </h4>\n" +
                                                 "                                                <br>\n" +
@@ -239,6 +229,8 @@
                                                 "                                                        <div class=\"content-update\">\n" +
                                                 "                                                        \n" +
                                                 "                                                        </div><br>\n" +
+                                                "                                                        <a id=\"link-content-new\" href=\"#\" target=\"_blank\" style=\"display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #2c87c3;\">\n" +
+                                                "                                                           <span id=\"link-text-content-new\" style=\"color: #2c87c3;text-decoration: none;\"> Lire</span></a>\n" +
                                                 "                                                                                                            </div>\n" +
                                                 "                                                </div>\n" +
                                                 "                                            </div>\n" +
@@ -251,9 +243,11 @@
                                         $test.hide().appendTo($panel.find('ul')).fadeIn(1500);
                                         $("#post_new_id").attr("id", "post_"+data.id);
                                         $("#newpostid").attr("id", "post"+data.id+"rubrique"+data.rubrique);
+                                        $("#link-content-new").attr("href", $form.find('#mh_newsletterbundle_post_add_lien').val()).attr('class', "link-content").attr('id', null);// not working
+                                        $("#link-text-content-new").html($form.find('#mh_newsletterbundle_post_add_textelien').val()).attr('class', "link-text-content").attr('id', null); // not working
                                         $("#newposthref").attr("href", "#post"+data.id+"rubrique"+data.rubrique).attr('id', null);
                                         $("#href_delete").attr("href", Routing.generate('mh_newsletter_post_delete', { id: data.id, newsletter_id: data.newsletter_id, rubrique_id: data.rubrique_id })).attr('id', null);
-                                        $("#href_edit").attr("href", Routing.generate('mh_newsletter_post_edit', { id: data.id, rubrique_id: data.rubrique_id })).attr('id', null);
+                                        $("#href_edit").attr("href", Routing.generate('mh_newsletter_post_edit', { id: data.id, newsletter_id: data.newsletter_id, rubrique_id: data.rubrique_id })).attr('id', null);
                                         break;
                                 }
                                 console.log(data);
