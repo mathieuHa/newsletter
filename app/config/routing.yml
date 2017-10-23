@@ -14,5 +14,5 @@ fos_js_routing:
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix:   /newsletter
+    prefix:   /newsletter 
 
