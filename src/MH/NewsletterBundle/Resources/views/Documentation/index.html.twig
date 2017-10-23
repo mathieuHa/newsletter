@@ -1,0 +1,82 @@
+{% extends "MHNewsletterBundle::layout.html.twig" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block bundle_body %}
+    <h2>Documentation</h2>
+    <hr>
+    <div class="well">
+        <h3>Introduction</h3>
+
+        Une newsletter HTML est composée de rubriques, (une image et des blocs de texte).
+        Une rubrique est elle même composé de posts (blocs de texte).<br>
+        Afin d'éviter que n'importe qui ne modifie ou supprime le travail sur les newsletter,
+        celui-ci est protégé par un système d'autentification. <br>
+        Si demandé, veuillez rentrer les indentifiants qui vous ont été fournis.<br>
+        <br>
+
+        <h3>Création d'une newsletter</h3>
+
+        La création d'une newsletter se fait en appuyant sur le bouton "Créer une newsletter" <br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-creation-newsletter-1.JPG') }}">
+        <br>
+        <br>
+
+        Il faut rentrer un nom pour la newsletter, le semaine concerné, ainsi que l'auteur.<br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-creation-newsletter-2.JPG') }}">
+        <br>
+        <br>
+        Une fois la newsletter crée, on arrive sur l'écran de modification de la newsletter.<br>
+        <br>
+
+        <h3>Modification d'une newsletter</h3>
+
+        L'écran de modification est le suivant:<br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-edition-newsletter-1.JPG') }}">
+        <br>
+        <br>
+
+        On peut y voir les différentes rubrique présentes :
+        <ul>
+            <li>Quoi de neuf</li>
+            <li>Les écoles dans la presse</li>
+            <li>Vie des Campus</li>
+            <li>Challenges et projets</li>
+            <li>A vos agendas</li>
+        </ul>
+        <br>
+        On peut Ouvrir une rubrique en cliquant sur le nom de la rubrique<br>
+        On peut Ajouter des posts en cliquant sur new Post.<br>
+        On peut Modifier une rubrique pour changer le texte en cliquant sur Modifier.<br>
+        On peut Supprimer une rubrique pour changer le texte en cliquant sur Supprimer.<br>
+        <br>
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-edition-newsletter-2.JPG') }}">
+
+        <br>
+        <br>
+        En appuyant sur new Post une fenetre s'ouvre et affiche un formulaire pour ajouter un nouveau Post<br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-ajout-post-1.JPG') }}">
+
+        <br>
+        <br>
+
+
+        <h3>Suppression d'une newsletter</h3>
+
+        <h3>Affichage d'une newsletter</h3>
+
+        <h3>Copier une newsletter</h3>
+
+        <h3>Envoi de la newsletter par mail</h3>
+    </div>
+{% endblock %}

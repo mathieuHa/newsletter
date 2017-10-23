@@ -305,7 +305,7 @@ class NewsletterController extends Controller
 
         $this->addFlash(
             'notice',
-            'Newsletter envoyé à '.$user->getMail()
+            'Newsletter envoyé à '.$user
         );
 
         return $this->redirectToRoute('mh_newsletter_home');

@@ -119,3 +119,8 @@ mh_newsletter_post_delete:
             id:   \d+
     options:
             expose: true
+
+mh_newsletter_doc_view:
+    path:    /documentation
+    defaults:
+        _controller: MHNewsletterBundle:Documentation:view
