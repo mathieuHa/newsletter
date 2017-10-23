@@ -53,6 +53,9 @@
             <li>A vos agendas</li>
         </ul>
         <br>
+        Il est possible de déplacer une rubrique avec un cliquer-déplacer.<br>
+        L'ordre des rubriques influe sur l'affiche dans visualisation de la newsletter.<br>
+        <br>
         On peut Ouvrir une rubrique en cliquant sur le nom de la rubrique<br>
         On peut Ajouter des posts en cliquant sur new Post.<br>
         On peut Modifier une rubrique pour changer le texte en cliquant sur Modifier.<br>
@@ -62,6 +65,9 @@
 
         <br>
         <br>
+
+        <h3>Ajout / Modification d'un Post</h3>
+
         En appuyant sur new Post une fenetre s'ouvre et affiche un formulaire pour ajouter un nouveau Post<br>
         <br>
 
@@ -70,13 +76,70 @@
         <br>
         <br>
 
+        En sauvegardant le post apparait dans la rubrique auquel elle est attaché.<br>
+        Les post fonctionne de la même manière que les rubrique, ils sont en bleu et peuvent être déplacés,
+        et ouvert par un clic pour en afficher le contenu.<br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-edition-post-1.JPG') }}">
+
+        <br>
+        <br>
+
+        Il est possible de modifier ce post en cliquant sur le bouton modifier et de le supprimer avec le bouton supprimer.<br>
+        Dans le formulaire pour le texte (content) il est possible de mettre le texte en gras, en italique ou encore de rajouter un lien.<br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-edition-post-2.JPG') }}">
+
+        <br>
+        <br>
+
+        Si la case date est coché, alors seul le titre sera affiché.<br>
+        <br>
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-edition-post-3.JPG') }}">
+
+        <br>
+        <br>
 
         <h3>Suppression d'une newsletter</h3>
 
+        Dans le cas de la suppression d'une newsletter les rubriques et posts associés sont supprimés aussi.<br>
+        <br>
+
         <h3>Affichage d'une newsletter</h3>
+
+        A tout moment il est possible de visualiser une newsletter avec le bouton afficher.<br>
+        <br>
+
+        <h3>Téléchargement d'une newsletter</h3>
+
+        A tout moment il est possible de télécharger le fichier HTML de la newsletter avec le bouton afficher.<br>
+        <br>
 
         <h3>Copier une newsletter</h3>
 
+        Afin de ne pas recommencer la création d'une newsletter de zéro il est possible de copier la newsletter, qui prendra alors l'ancien nom + copier.<br>
+        Il est conseillé de la renommé avec le bouton header.<br>
+        <br>
+
+        <h3>Gestion des newsletter :  Acceuil</h3>
+
+        Par un cliquer déplacer on peut organiser les newsletter.<br>
+        En cliquant sur le titre, on peut accéder à 5 boutons permettant de modifier, afficher, telecharger, copier ou supprimer une newsletter<br>
+        <br>
+
+
+        <img width="100%" src="{{ asset('bundles/mhnewsletter/img/capture-edition-newsletter-3.JPG') }}">
+
+        <br>
+        <br>
+
         <h3>Envoi de la newsletter par mail</h3>
+
+        Pas encore fonctionnel.<br>
+
     </div>
 {% endblock %}
+
