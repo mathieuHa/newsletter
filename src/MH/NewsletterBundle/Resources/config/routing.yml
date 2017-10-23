@@ -40,7 +40,7 @@ mh_newsletter_mail:
             id:   \d+
 
 mh_newsletter_edit_header:
-    path:     /edit/{id}/header/
+    path:     /edit/header/{id}
     defaults:
         _controller: MHNewsletterBundle:Newsletter:editheader
     requirements:
@@ -66,26 +66,24 @@ mh_newsletter_copy:
             id:   \d+
 
 mh_newsletter_rubrique_add:
-    path:     /{id}/rubrique/add
+    path:     /rubrique/add/{id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:add
     requirements:
             id:   \d+
 mh_newsletter_rubrique_edit:
-    path:     /edit/{newsletter_id}/rubrique/{id}
+    path:     /edit/rubrique/{id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:edit
     requirements:
             id:   \d+
-            newsletter_id:   \d+
 
 mh_newsletter_rubrique_delete:
-    path:     /delete/{newsletter_id}/rubrique/{id}
+    path:     /delete/rubrique/{id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:delete
     requirements:
             id:   \d+
-            newsletter_id:   \d+
 
 mh_newsletter_rubrique_order:
     path:     /order/rubrique/
@@ -93,12 +91,11 @@ mh_newsletter_rubrique_order:
         _controller: MHNewsletterBundle:Rubrique:order
 
 mh_newsletter_post_add:
-    path:     /add/{newsletter_id}/rubrique/{id}/post
+    path:     /add/post/{id}
     defaults:
         _controller: MHNewsletterBundle:Post:add
     requirements:
             id:   \d+
-            newsletter_id:   \d+
 
 mh_newsletter_post_order:
     path:     /order/post
@@ -106,22 +103,19 @@ mh_newsletter_post_order:
         _controller: MHNewsletterBundle:Post:order
 
 mh_newsletter_post_edit:
-    path:     /edit/{newsletter_id}/post/{id}
+    path:     /edit/post/{id}
     defaults:
         _controller: MHNewsletterBundle:Post:edit
     requirements:
             id:   \d+
-            newsletter_id:   \d+
     options:
             expose: true
 
 mh_newsletter_post_delete:
-    path:     /delete/{newsletter_id}/rubrique/{rubrique_id}/post/{id}
+    path:     /delete/post/{id}
     defaults:
         _controller: MHNewsletterBundle:Post:delete
     requirements:
             id:   \d+
-            newsletter_id:   \d+
-            rubrique_id:   \d+
     options:
             expose: true

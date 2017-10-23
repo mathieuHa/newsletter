@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class RubriqueController extends Controller
 {
-    public function editAction (Request $request, $id, $newsletter_id)
+    public function editAction (Request $request, $id)
     {
         $rubrique = $this
             ->getDoctrine()
@@ -37,8 +37,6 @@ class RubriqueController extends Controller
             $em = $this
                 ->getDoctrine()
                 ->getManager();
-
-
             $em->persist($rubrique);
             $em->flush();
 
@@ -56,13 +54,9 @@ class RubriqueController extends Controller
         return $this->render('MHNewsletterBundle:Rubrique:edit.html.twig', array(
             'form'=>$form->createView(),
             'rubrique'=>$rubrique,
-            'id'=>$id,
-            'newsletter_id'=>$newsletter_id
         ));
 
     }
-
-
 
     public function addAction(Request $request, $id)
     {
@@ -100,11 +94,10 @@ class RubriqueController extends Controller
         return $this->render('MHNewsletterBundle:Rubrique:add.html.twig', array(
             'form'=>$form->createView(),
             'rubrique'=>$rubrique,
-            'id'=>$id
         ));
     }
 
-    public function deleteAction (Request $request, $id, $newsletter_id)
+    public function deleteAction (Request $request, $id)
     {
         $em = $this
             ->getDoctrine()
@@ -131,15 +124,13 @@ class RubriqueController extends Controller
             );
 
             return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$newsletter_id
+                'id'=>$rubrique->getNewsletter()->getId()
             ));
         }
 
         return $this
             ->render('MHNewsletterBundle:Rubrique:delete.html.twig',array(
                 'rubrique'=>$rubrique,
-                'id'=>$id,
-                'newsletter_id'=>$newsletter_id,
                 'form'=>$form->createView()
             ));
     }

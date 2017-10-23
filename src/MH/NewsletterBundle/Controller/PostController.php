@@ -21,47 +21,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class PostController extends Controller
 {
-    public function edit2Action (Request $request, $id, $newsletter_id)
-    {
-        $post = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Post')
-            ->find($id);
-        $form = $this
-            ->get('form.factory')
-            ->create(PostType::class,$post);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
-            $post->getRubrique()->getNewsletter()->updateDate();
-            $em = $this
-                ->getDoctrine()
-                ->getManager();
-
-            $em->persist($post);
-            $em->flush();
-
-            $this
-                ->addFlash(
-                    'notice','Newsletter mise à jour'
-                );
-
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$newsletter_id
-            ));
-        }
-
-
-        return $this->render('MHNewsletterBundle:Post:edit.html.twig', array(
-            'form'=>$form->createView(),
-            'post'=>$post,
-            'id'=>$id,
-            'newsletter_id'=>$newsletter_id
-        ));
-
-    }
-
-    public function editAction(Request $request,  $id, $newsletter_id){
+    public function editAction(Request $request,  $id){
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
         }
@@ -77,7 +37,7 @@ class PostController extends Controller
         $form = $this
             ->get('form.factory')
             ->createNamed('mh_newsletterbundle_post_edit', PostType::class,$post, array(
-                'action' => $this->generateUrl('mh_newsletter_post_edit', array('id' => $id, 'newsletter_id' => $newsletter_id))));
+                'action' => $this->generateUrl('mh_newsletter_post_edit', array('id' => $id))));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,14 +62,12 @@ class PostController extends Controller
 
         return $this->render('MHNewsletterBundle:Post:edit.html.twig', array(
             'form' => $form->createView(),
-            'id' => $id,
             'post' => $post,
-            'newsletter_id'=>$newsletter_id
         ));
     }
 
 
-    public function addAction(Request $request, $id, $newsletter_id)
+    public function addAction(Request $request, $id)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
@@ -119,7 +77,7 @@ class PostController extends Controller
         $form = $this
             ->get('form.factory')
             ->createNamed('mh_newsletterbundle_post_add',PostType::class,$post, array(
-             'action' => $this->generateUrl('mh_newsletter_post_add', array('id' => $id, 'newsletter_id' => $newsletter_id))));
+             'action' => $this->generateUrl('mh_newsletter_post_add', array('id' => $id))));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -144,19 +102,18 @@ class PostController extends Controller
             return new JsonResponse(array(
                 'status' => 'ok',
                 'id'=>$post->getId(),
-                'rubrique_id'=>$rubrique->getId(),
-                'newsletter_id'=>$newsletter_id
+                'rubrique_id'=>$post->getRubrique()->getId(),
+                'newsletter_id'=>$post->getRubrique()->getNewsletter()->getId()
             ));
         }
 
         return $this->render('MHNewsletterBundle:Post:add.html.twig', array(
             'form'=>$form->createView(),
             'post'=>$post,
-            'id'=>$newsletter_id,
         ));
     }
 
-    public function deleteAction (Request $request, $id, $newsletter_id, $rubrique_id)
+    public function deleteAction (Request $request, $id)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
@@ -200,8 +157,6 @@ class PostController extends Controller
                 ->render('MHNewsletterBundle:Post:delete.html.twig',array(
                 'post'=>$post,
                 'form'=>$form->createView(),
-                'newsletter_id'=>$newsletter_id,
-                'rubrique_id'=>$rubrique_id
             ));
     }
 

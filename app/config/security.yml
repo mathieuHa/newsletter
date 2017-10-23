@@ -28,5 +28,3 @@ security:
                   target:     fos_user_security_login
     access_control:
          - { path: ^/newsletter/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/newsletter/edit, role: ROLE_USER }
-         - { path: ^/newsletter/delete, role: ROLE_ADMIN }

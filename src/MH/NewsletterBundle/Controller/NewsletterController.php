@@ -286,43 +286,29 @@ class NewsletterController extends Controller
             throw new NotFoundHttpException("La newsletter ".$id." n'existe pas");
         }
 
-        $user = new User();
-        $user->setMail('hanotaux@et.esiea.fr')->setNom('Mathieu');
+        $user = $this->getUser();
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Email Ebdo Test')
+            ->setFrom('hanotaux@et.esiea.fr')
+            ->setTo("mathieu.hanotaux@gmail.com")
+            ->setBody(
+                $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                    'MHNewsletterBundle:Template:newsletter.html.twig',
+                    array('newsletter' => $newsletter)
+                ),
+                'text/html'
+            )
 
-        $form = $this
-            ->get('form.factory')
-            ->create(UserType::class,$user);
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Email Ebdo Test')
-                ->setFrom('hanotaux@et.esiea.fr')
-                ->setTo($user->getMail())
-                ->setBody(
-                    $this->renderView(
-                    // app/Resources/views/Emails/registration.html.twig
-                        'MHNewsletterBundle:Template:newsletter.html.twig',
-                        array('newsletter' => $newsletter)
-                    ),
-                    'text/html'
-                )
+        ;
+        $this->get('mailer')->send($message);
 
-            ;
-            $this->get('mailer')->send($message);
+        $this->addFlash(
+            'notice',
+            'Newsletter envoyé à '.$user->getMail()
+        );
 
-            $this->addFlash(
-                'notice',
-                'Newsletter envoyé à '.$user->getMail()
-            );
-
-            return $this->redirectToRoute('mh_newsletter_home');
-        }
-
-        return $this
-            ->render('MHNewsletterBundle:Newsletter:mail.html.twig',array(
-                'newsletter'=>$newsletter,
-                'user'=>$user,
-                'form'=>$form->createView()
-            ));
+        return $this->redirectToRoute('mh_newsletter_home');
     }
 
     public function orderAction(Request $request)
