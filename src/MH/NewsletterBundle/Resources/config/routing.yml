@@ -72,7 +72,7 @@ mh_newsletter_rubrique_add:
     requirements:
             id:   \d+
 mh_newsletter_rubrique_edit:
-    path:     /{newsletter_id}/rubrique/edit/{id}
+    path:     /edit/{newsletter_id}/rubrique/{id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:edit
     requirements:
@@ -80,7 +80,7 @@ mh_newsletter_rubrique_edit:
             newsletter_id:   \d+
 
 mh_newsletter_rubrique_delete:
-    path:     /{newsletter_id}/rubrique/delete/{id}
+    path:     /delete/{newsletter_id}/rubrique/{id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:delete
     requirements:
@@ -88,12 +88,12 @@ mh_newsletter_rubrique_delete:
             newsletter_id:   \d+
 
 mh_newsletter_rubrique_order:
-    path:     /rubrique/order
+    path:     /order/rubrique/
     defaults:
         _controller: MHNewsletterBundle:Rubrique:order
 
 mh_newsletter_post_add:
-    path:     /{newsletter_id}/rubrique/{id}/post/add
+    path:     /add/{newsletter_id}/rubrique/{id}/post
     defaults:
         _controller: MHNewsletterBundle:Post:add
     requirements:
@@ -101,12 +101,12 @@ mh_newsletter_post_add:
             newsletter_id:   \d+
 
 mh_newsletter_post_order:
-    path:     /post/order
+    path:     /order/post
     defaults:
         _controller: MHNewsletterBundle:Post:order
 
 mh_newsletter_post_edit:
-    path:     /{newsletter_id}/rubrique/post/edit/{id}
+    path:     /edit/{newsletter_id}/post/{id}
     defaults:
         _controller: MHNewsletterBundle:Post:edit
     requirements:
@@ -116,7 +116,7 @@ mh_newsletter_post_edit:
             expose: true
 
 mh_newsletter_post_delete:
-    path:     /{newsletter_id}/rubrique/{rubrique_id}/delete/{id}
+    path:     /delete/{newsletter_id}/rubrique/{rubrique_id}/post/{id}
     defaults:
         _controller: MHNewsletterBundle:Post:delete
     requirements:

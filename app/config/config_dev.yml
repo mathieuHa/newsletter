@@ -44,3 +44,4 @@ easy_admin:
         - MH\NewsletterBundle\Entity\Newsletter
         - MH\NewsletterBundle\Entity\Rubrique
         - MH\NewsletterBundle\Entity\Post
+        - MH\NewsletterBundle\Entity\User
