@@ -17,9 +17,8 @@ class RubriqueType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('Icone')
-            ->add('Image')
-            ->add('save',SubmitType::class);
+            ->add('icone')
+            ->add('image');
     }
     
     /**

@@ -113,23 +113,21 @@ class NewsletterController extends Controller
         ));
     }
 
-    public function viewAction ($id)
+    public function viewAction (Newsletter $newsletter)
     {
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
+        if (null === $newsletter) {
+            throw new NotFoundHttpException("La newsletter n'existe pas");
+        }
         return $this->render('MHNewsletterBundle:Template:newsletter.html.twig',array(
             'newsletter'=>$newsletter
         ));
     }
 
-    public function downloadAction ($id)
+    public function downloadAction (Newsletter $newsletter)
     {
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
+        if (null === $newsletter) {
+            throw new NotFoundHttpException("La newsletter n'existe pas");
+        }
         $file = $this->renderView('MHNewsletterBundle:Template:newsletter.html.twig',array(
             'newsletter'=>$newsletter
         ));
@@ -145,24 +143,18 @@ class NewsletterController extends Controller
         return $response;
     }
 
-    public function editAction ($id)
+    public function editAction (Newsletter $newsletter)
     {
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
-
         return $this->render('MHNewsletterBundle:Newsletter:edit.html.twig', array(
             'newsletter'=>$newsletter,
         ));
     }
 
-    public function copyAction ($id)
+    public function copyAction (Newsletter $newsletter)
     {
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
+        if (null === $newsletter) {
+            throw new NotFoundHttpException("La newsletter n'existe pas");
+        }
         $new = clone $newsletter;
         $new->setName($newsletter->getName().' copie');
         $new->setDate(new \DateTime());
@@ -180,19 +172,18 @@ class NewsletterController extends Controller
         return $this->redirectToRoute('mh_newsletter_home');
     }
 
-    public function editHeaderAction (Request $request, $id)
+    public function editHeaderAction (Request $request, Newsletter $newsletter)
     {
-        $newsletter = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
+        if (null === $newsletter) {
+            throw new NotFoundHttpException("La newsletter n'existe pas");
+        }
         $form = $this
             ->get('form.factory')
             ->create(NewsletterType::class,$newsletter);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
-            $newsletter->udpateDate();
+            $newsletter->updateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -214,7 +205,6 @@ class NewsletterController extends Controller
             'form'=>$form->createView(),
             'newsletter'=>$newsletter,
         ));
-
     }
 
     public function getAction(Request $request)
@@ -234,22 +224,16 @@ class NewsletterController extends Controller
         $serializer = new Serializer(array($normalizer), array($encoder));
         $json = $serializer->serialize($newsletter, 'json');
         return new Response($json);
-
     }
 
-    public function deleteAction (Request $request, $id)
+    public function deleteAction (Request $request, Newsletter $newsletter)
     {
+        if (null === $newsletter) {
+            throw new NotFoundHttpException("La newsletter n'existe pas");
+        }
         $em = $this
             ->getDoctrine()
             ->getManager();
-        $newsletter = $em
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
-
-        if (null === $newsletter) {
-            throw new NotFoundHttpException("La newsletter ".$id." n'existe pas");
-        }
-
         $form = $this
             ->get('form.factory')
             ->create();
@@ -262,7 +246,6 @@ class NewsletterController extends Controller
                 'notice',
                 'Newsletter supprimée'
             );
-
             return $this->redirectToRoute('mh_newsletter_home');
         }
 
@@ -273,17 +256,10 @@ class NewsletterController extends Controller
             ));
     }
 
-    public function mailAction (Request $request, $id)
+    public function mailAction (Newsletter $newsletter)
     {
-        $em = $this
-            ->getDoctrine()
-            ->getManager();
-        $newsletter = $em
-            ->getRepository('MHNewsletterBundle:Newsletter')
-            ->find($id);
-
         if (null === $newsletter) {
-            throw new NotFoundHttpException("La newsletter ".$id." n'existe pas");
+            throw new NotFoundHttpException("La newsletter n'existe pas");
         }
 
         $user = $this->getUser();

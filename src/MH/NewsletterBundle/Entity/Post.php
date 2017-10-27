@@ -261,11 +261,7 @@ class Post
         return $this;
     }
 
-    /**
-     * @ORM\PostUpdate
-     * @ORM\PostRemove
-     * @ORM\PostPersist
-     */
+
     public function updateDate ()
     {
         $this->getRubrique()->getNewsletter()->updateDate();

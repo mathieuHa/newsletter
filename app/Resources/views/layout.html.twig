@@ -13,8 +13,12 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-        <link rel="stylesheet" href="{{ asset('bundles/mhnewsletter/css/main.css') }}">
+        {% stylesheets
+        'bundles/mhnewsletter/css/simplemde/dist/simplemde.min.css'
+        'bundles/mhnewsletter/css/main.css'
+            output='css/compiled/main.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
 
 
 
@@ -52,18 +56,26 @@
         <hr>
 
         <footer>
-            <p>Hanotaux Mathieu - Webmaster du Groupe ESIEA 2017- <a href="mailto:hanotaux@et.esiea.fr">hanotaux@et.esiea.fr</a></p>
+            <p>Hanotaux Mathieu - Tanguy Giton - François Delville, Webmasters du Groupe ESIEA</p>
         </footer>
     </div>
 
     {% block javascript %}
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
                 crossorigin="anonymous"></script>
-        <script src="{{ asset('bundles/mhnewsletter/bower_components/simplemde/dist/simplemde.min.js') }}"></script>
         <script src="https://use.fontawesome.com/f5bf701764.js"></script>
+        {% javascripts
+        'bundles/mhnewsletter/js/simplemde/dist/simplemde.min.js'
+        '@MHNewsletterBundle/Resources/public/js/*'
+        'bundles/fosjsrouting/js/router.js'
+        'js/fos_js_routes.js'
+        output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
 
 
     {% endblock %}

@@ -20,20 +20,24 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class RubriqueController extends Controller
 {
-    public function editAction (Request $request, $id)
+    public function editAction (Request $request, Rubrique $rubrique)
     {
-        $rubrique = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Rubrique')
-            ->find($id);
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
+        if (null === $rubrique) {
+            throw new NotFoundHttpException("La Rubrique n'existe pas");
+        }
+
 
         $form = $this
             ->get('form.factory')
-            ->create(RubriqueType::class,$rubrique);
+            ->createNamed('mh_newsletterbundle_rubrique_edit', RubriqueType::class,$rubrique, array(
+                'action' => $this->generateUrl('mh_newsletter_rubrique_edit', array('id' => $rubrique->getId()))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
-            $rubrique->getNewsletter()->updateDate();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rubrique->updateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -42,14 +46,14 @@ class RubriqueController extends Controller
 
             $this
                 ->addFlash(
-                    'notice','Rubrique mise à jour'
+                    'notice','Rubrique modifiée'
                 );
 
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$rubrique->getNewsletter()->getId()
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$rubrique->getId()
             ));
         }
-
 
         return $this->render('MHNewsletterBundle:Rubrique:edit.html.twig', array(
             'form'=>$form->createView(),
@@ -58,36 +62,37 @@ class RubriqueController extends Controller
 
     }
 
-    public function addAction(Request $request, $id)
+    public function addAction(Request $request, Newsletter $newsletter)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         $rubrique = new Rubrique();
         $form = $this
             ->get('form.factory')
-            ->create(RubriqueType::class,$rubrique);
+            ->createNamed('mh_newsletterbundle_rubrique_add',RubriqueType::class,$rubrique, array(
+                'action' => $this->generateUrl('mh_newsletter_rubrique_add', array('id' => $newsletter->getId()))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
-            $newsletter = $this
-                ->getDoctrine()
-                ->getRepository('MHNewsletterBundle:Newsletter')
-                ->find($id);
             $newsletter->updateDate();
-            $rubrique->setPosition(0); // TEMPORAIRE A ENLEVER
+            $rubrique->setPosition(0);
             $newsletter->addRubrique($rubrique);
-
             $em->persist($newsletter);
             $em->flush();
 
-            $this
-                ->addFlash(
-                    'notice','Rubrique crée'
-                );
+            $this->addFlash(
+                'notice',
+                'Rubrique ajouté'
+            );
 
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$id
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$rubrique->getId(),
+                'newsletter_id'=>$rubrique->getNewsletter()->getId()
             ));
         }
 
@@ -97,24 +102,23 @@ class RubriqueController extends Controller
         ));
     }
 
-    public function deleteAction (Request $request, $id)
+    public function deleteAction (Request $request, Rubrique $rubrique)
     {
-        $em = $this
-            ->getDoctrine()
-            ->getManager();
-        $rubrique = $em
-            ->getRepository('MHNewsletterBundle:Rubrique')
-            ->find($id);
-
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         if (null === $rubrique) {
-            throw new NotFoundHttpException("La Rubrique ".$id." n'existe pas");
+            throw new NotFoundHttpException("La Rubrique n'existe pas");
         }
 
         $form = $this
             ->get('form.factory')
             ->create();
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-            $rubrique->getNewsletter()->updateDate();
+            $em = $this
+                ->getDoctrine()
+                ->getManager();
+            $rubrique->updateDate();
             $em->remove($rubrique);
             $em->flush();
 
@@ -123,8 +127,9 @@ class RubriqueController extends Controller
                 'Rubrique supprimée'
             );
 
-            return $this->redirectToRoute('mh_newsletter_edit',array(
-                'id'=>$rubrique->getNewsletter()->getId()
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'id'=>$rubrique->getId()
             ));
         }
 
@@ -146,6 +151,7 @@ class RubriqueController extends Controller
             foreach ((array)$rubriques as $i => $rubrique_id) {
                 $rubrique = $repository->find($rubrique_id);
                 $rubrique->setPosition($i);
+                $rubrique->updateDate();
             }
             $em->flush();
             return new JsonResponse(array(

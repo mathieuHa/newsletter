@@ -26,16 +26,16 @@ class Rubrique
     /**
      * @var string
      *
-     * @ORM\Column(name="Icone", type="string", length=255)
+     * @ORM\Column(name="icone", type="string", length=255)
      */
-    private $Icone;
+    private $icone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255)
      */
-    private $Image;
+    private $image;
 
     /**
      * @ORM\ManyToOne(targetEntity="MH\NewsletterBundle\Entity\Newsletter",inversedBy="rubriques", cascade={"persist"})
@@ -102,6 +102,8 @@ class Rubrique
         }
     }
 
+   
+
     /**
      * Set icone
      *
@@ -111,7 +113,7 @@ class Rubrique
      */
     public function setIcone($icone)
     {
-        $this->Icone = $icone;
+        $this->icone = $icone;
 
         return $this;
     }
@@ -123,7 +125,7 @@ class Rubrique
      */
     public function getIcone()
     {
-        return $this->Icone;
+        return $this->icone;
     }
 
     /**
@@ -135,7 +137,7 @@ class Rubrique
      */
     public function setImage($image)
     {
-        $this->Image = $image;
+        $this->image = $image;
 
         return $this;
     }
@@ -147,67 +149,7 @@ class Rubrique
      */
     public function getImage()
     {
-        return $this->Image;
-    }
-
-    /**
-     * Set newsletter
-     *
-     * @param \MH\NewsletterBundle\Entity\Newsletter $newsletter
-     *
-     * @return Rubrique
-     */
-    public function setNewsletter(\MH\NewsletterBundle\Entity\Newsletter $newsletter = null)
-    {
-        $this->newsletter = $newsletter;
-
-        return $this;
-    }
-
-    /**
-     * Get newsletter
-     *
-     * @return \MH\NewsletterBundle\Entity\Newsletter
-     */
-    public function getNewsletter()
-    {
-        return $this->newsletter;
-    }
-
-    /**
-     * Add post
-     *
-     * @param \MH\NewsletterBundle\Entity\Post $post
-     *
-     * @return Rubrique
-     */
-    public function addPost(\MH\NewsletterBundle\Entity\Post $post)
-    {
-        $this->posts[] = $post;
-
-        $post->setRubrique($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove post
-     *
-     * @param \MH\NewsletterBundle\Entity\Post $post
-     */
-    public function removePost(\MH\NewsletterBundle\Entity\Post $post)
-    {
-        $this->posts->removeElement($post);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPosts()
-    {
-        return $this->posts;
+        return $this->image;
     }
 
     /**
@@ -273,16 +215,6 @@ class Rubrique
     }
 
     /**
-     * @ORM\PostUpdate
-     * @ORM\PostRemove
-     * @ORM\PostPersist
-     */
-    public function updateDate ()
-    {
-        $this->getNewsletter()->updateDate();
-    }
-
-    /**
      * Get soustitre
      *
      * @return string
@@ -290,5 +222,70 @@ class Rubrique
     public function getSoustitre()
     {
         return $this->soustitre;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param \MH\NewsletterBundle\Entity\Newsletter $newsletter
+     *
+     * @return Rubrique
+     */
+    public function setNewsletter(\MH\NewsletterBundle\Entity\Newsletter $newsletter = null)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return \MH\NewsletterBundle\Entity\Newsletter
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
+     * Add post
+     *
+     * @param \MH\NewsletterBundle\Entity\Post $post
+     *
+     * @return Rubrique
+     */
+    public function addPost(\MH\NewsletterBundle\Entity\Post $post)
+    {
+        $this->posts[] = $post;
+
+        $post->setRubrique($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \MH\NewsletterBundle\Entity\Post $post
+     */
+    public function removePost(\MH\NewsletterBundle\Entity\Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    public function updateDate ()
+    {
+        $this->getNewsletter()->updateDate();
     }
 }

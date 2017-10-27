@@ -21,26 +21,23 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class PostController extends Controller
 {
-    public function editAction(Request $request,  $id){
+    public function editAction(Request $request, Post $post){
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
         }
-        $post = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Post')
-            ->find($id);
 
         if (null === $post) {
-            throw new NotFoundHttpException("Le Post ".$id." n'existe pas");
+            throw new NotFoundHttpException("Le Post n'existe pas");
         }
 
         $form = $this
             ->get('form.factory')
             ->createNamed('mh_newsletterbundle_post_edit', PostType::class,$post, array(
-                'action' => $this->generateUrl('mh_newsletter_post_edit', array('id' => $id))));
+                'action' => $this->generateUrl('mh_newsletter_post_edit', array('id' => $post->getId()))));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->updateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
@@ -67,28 +64,23 @@ class PostController extends Controller
     }
 
 
-    public function addAction(Request $request, $id)
+    public function addAction(Request $request, Rubrique $rubrique)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
         }
         $post = new Post();
-        $post->setTextelien('Lire');
         $form = $this
             ->get('form.factory')
             ->createNamed('mh_newsletterbundle_post_add',PostType::class,$post, array(
-             'action' => $this->generateUrl('mh_newsletter_post_add', array('id' => $id))));
+             'action' => $this->generateUrl('mh_newsletter_post_add', array('id' => $rubrique->getId()))));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this
                 ->getDoctrine()
                 ->getManager();
-            $rubrique = $this
-                ->getDoctrine()
-                ->getRepository('MHNewsletterBundle:Rubrique')
-                ->find($id);
-            $rubrique->getNewsletter()->updateDate();
+            $rubrique->updateDate();
             $post->setPosition(0);
             $rubrique->addPost($post);
             $em->persist($rubrique);
@@ -113,18 +105,13 @@ class PostController extends Controller
         ));
     }
 
-    public function deleteAction (Request $request, $id)
+    public function deleteAction (Request $request,Post $post)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new BadRequestHttpException('Only ajax accepted');
         }
-        $post = $this
-            ->getDoctrine()
-            ->getRepository('MHNewsletterBundle:Post')
-            ->find($id);
-
         if (null === $post) {
-            throw new NotFoundHttpException("Le Post ".$id." n'existe pas");
+            throw new NotFoundHttpException("Le Post n'existe pas");
         }
 
         $form = $this
@@ -138,7 +125,7 @@ class PostController extends Controller
                 ->getManager();
 
 
-            $post->getRubrique()->getNewsletter()->updateDate();
+            $post->updateDate();
             $em->remove($post);
             $em->flush();
 
@@ -171,6 +158,7 @@ class PostController extends Controller
             foreach ((array)$posts as $i => $post_id) {
                 $post = $repository->find($post_id);
                 $post->setPosition($i);
+                $post->updateDate();
             }
             $em->flush();
             return new JsonResponse(array(

@@ -12,14 +12,14 @@
     <h2>Edition Newsletter</h2>
     <hr>
         <div class="panel-group" id="accordion">
-            <ul class="list-unstyled rubrique-sortable">
+            <ul id="add_rubrique_ul" class="list-unstyled rubrique-sortable">
             {% for rubrique in newsletter.rubriques | sortbyfield('position') %}
             <li  id="rubrique_{{ rubrique.id }}">
                 <div class="panel panel-success">
 
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#rubrique{{ rubrique.id }}">
+                            <a class="link-title-rubrique" data-toggle="collapse" data-parent="#accordion" href="#rubrique{{ rubrique.id }}">
                                 {{ rubrique.name }}</a>
                         </h4>
                     </div>
@@ -73,8 +73,16 @@
                                        data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_post_add', {'id': rubrique.id}    ) }}">new Post</a>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-xs-6">
-                                    <a class="btn btn-warning" href="{{ path('mh_newsletter_rubrique_edit',  {'id': rubrique.id}    ) }}">Modifier</a>
-                                    <a class="btn btn-danger" href="{{ path('mh_newsletter_rubrique_delete', {'id': rubrique.id}    ) }}">Supprimer</a>
+                                    <a class="btn btn-warning" title="Modifier" data-toggle="modal"
+                                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_edit',  {'id': rubrique.id}    ) }}"><i class="glyphicon glyphicon-edit" aria-hidden="true"> Modifier</i></a>
+                                    <a class="btn btn-danger" title="Modifier" data-toggle="modal"
+                                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_delete',  {'id': rubrique.id}    ) }}"><i class="glyphicon glyphicon-trash" aria-hidden="true"> Supprimer</i></a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="{{ rubrique.image }}">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +96,8 @@
             <br>
             <div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12">
-                    <a class="btn btn-primary" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" >Ajouter une rubrique</a>
+                    <a class="btn btn-primary" data-toggle="modal"
+                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" >Ajouter une rubrique</a>
                 </div>
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
@@ -117,47 +126,11 @@
     </div>
 
 
+
+
 {% endblock %}
 
 {% block bundle_javascript %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $(".post-sortable").sortable({
-            cursor: "move",
-            update: function () {
-                var order_serialize = $(this).sortable("serialize", {key: "posts[]"});
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ path('mh_newsletter_post_order') }}",
-                    data: order_serialize,
-                    error: function () {
-                        console.log('error');
-                    }
-                });
-            }
-            });
-            $(".rubrique-sortable").sortable({
-                cursor: "move",
-                update: function () {
-                    var order_serialize = $(this).sortable("serialize", {key: "rubriques[]"});
-
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ path('mh_newsletter_rubrique_order') }}",
-                        data: order_serialize,
-                        error: function () {
-                            console.log('error');
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    <script src="{{ asset('bundles/mhnewsletter/js/main.js') }}"></script>
-
+    {{ parent() }}
 {% endblock %}
 
