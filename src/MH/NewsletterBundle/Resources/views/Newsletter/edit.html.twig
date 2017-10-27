@@ -120,6 +120,41 @@
 {% endblock %}
 
 {% block bundle_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".post-sortable").sortable({
+            cursor: "move",
+            update: function () {
+                var order_serialize = $(this).sortable("serialize", {key: "posts[]"});
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('mh_newsletter_post_order') }}",
+                    data: order_serialize,
+                    error: function () {
+                        console.log('error');
+                    }
+                });
+            }
+            });
+            $(".rubrique-sortable").sortable({
+                cursor: "move",
+                update: function () {
+                    var order_serialize = $(this).sortable("serialize", {key: "rubriques[]"});
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('mh_newsletter_rubrique_order') }}",
+                        data: order_serialize,
+                        error: function () {
+                            console.log('error');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('bundles/mhnewsletter/js/main.js') }}"></script>

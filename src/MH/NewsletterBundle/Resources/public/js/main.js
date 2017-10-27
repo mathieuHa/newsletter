@@ -1,35 +1,4 @@
 $(document).ready(function () {
-    $(".post-sortable").sortable({
-        cursor: "move",
-        update: function () {
-            var order_serialize = $(this).sortable("serialize", {key: "posts[]"});
-
-            $.ajax({
-                type: "POST",
-                url: "{{ path('mh_newsletter_post_order') }}",
-                data: order_serialize,
-                error: function () {
-                    console.log('error');
-                }
-            });
-        }
-    });
-    $(".rubrique-sortable").sortable({
-        cursor: "move",
-        update: function () {
-            var order_serialize = $(this).sortable("serialize", {key: "rubriques[]"});
-
-            $.ajax({
-                type: "POST",
-                url: "{{ path('mh_newsletter_rubrique_order') }}",
-                data: order_serialize,
-                error: function () {
-                    console.log('error');
-                }
-            });
-        }
-    });
-
     $('[data-toggle="tooltip"]').tooltip();
 
     var $postFormModal = $('#post-form-modal');
