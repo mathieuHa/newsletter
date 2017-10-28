@@ -5,77 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title %}Titre{% endblock %}</title>
-
     {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-              crossorigin="anonymous">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {% if app.debug %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-        {% stylesheets
-        'bundles/mhnewsletter/css/simplemde/dist/simplemde.min.css'
-        'bundles/mhnewsletter/css/main.css'
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <link rel="stylesheet" href="{{ asset('bundles/mhnewsletter/css/main.css') }}">
+    {% else %}
+       {% stylesheets
+        '@bootstrap_css'
+        '@jquery_ui_css'
+        '@main_css'
+        '@font_awesome_css'
+        '@simplemde_css'
             output='css/compiled/main.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+    {% endif %}
 
 
-
-
-
-        <style>
-
-        </style>
     {% endblock %}
 </head>
 
 <body>
-    <div class="container">
-        <div id="header" class="jumbotron">
-            <h1><a href="{{ path('mh_newsletter_home') }}">NewsletterProcessor</a></h1>
-            <p>
-                Un outil de création de newsletters et de mail HTML pour le service de Communication du Groupe ESIEA
-            </p>
-        </div>
-
-        <div class="row">
-            <div id="menu" class="col-md-2">
-                <h3>Menu</h3>
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="{{ path('mh_newsletter_home') }}">Newsletter</a> </li>
-                    <li><a href="{{ path('mh_newsletter_doc_view') }}">Documentation</a> </li>
-                </ul>
-            </div>
-            <div id="content" class="col-md-10">
-                {% block body %}
-                {% endblock %}
-            </div>
-        </div>
-
-        <hr>
-
-        <footer>
-            <p>Hanotaux Mathieu - Tanguy Giton - François Delville, Webmasters du Groupe ESIEA</p>
-        </footer>
+<nav class="navbar navbar-expand-md navbar-dark  bg-dark">
+    <a class="navbar-brand" href="{{ path('mh_newsletter_home') }}">NewsletterProcessor</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            <li class="nav-item"><a class="nav-link" href="{{ path('mh_newsletter_home') }}">Accueil </a> </li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('mh_newsletter_doc_view') }}">Documentation</a> </li>
+            <li class="nav-item">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    Connecté en tant que {{ app.user.username }}
+                    <a class="nav-link" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="nav-link" href="{{ path('fos_user_security_login') }}">Connexion</a>
+                {% endif %}
+            </li>
+        </ul>
     </div>
+</nav>
+<div class="bg"></div>
+<div id="header" class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <h1 class="display-3">
+            <a href="{{ path('mh_newsletter_home') }}" style="color: wheat">NewsletterProcessor</a>
+        </h1>
+        <p class="lead">
+            Un outil de création de newsletters et de mail HTML pour le service de Communication du Groupe ESIEA<br><br>
+            <a href="{{ path('mh_newsletter_create') }}" class="btn btn-light">Créer une newsletter</a>
+
+        </p>
+    </div>
+</div>
+
+<br>
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+
+<hr>
+
+<footer>
+    <p>Hanotaux Mathieu - Tanguy Giton - François Delville, Webmasters du Groupe ESIEA</p>
+</footer>
 
     {% block javascript %}
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    {% if app.debug %}
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script
+                src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+                integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                 crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/f5bf701764.js"></script>
+        <script  src="{{ asset('bundles/mhnewsletter/js/main.js') }}"></script>
+        <script  src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+
+        <script  src="{{ asset('js/fos_js_routes.js') }}"></script>
+        <script  src="{{ asset('bundles/mhnewsletter/bower_components/simplemde/dist/simplemde.min.js') }}"></script>
+
+    {% else %}
+
         {% javascripts
-        'bundles/mhnewsletter/js/simplemde/dist/simplemde.min.js'
-        '@MHNewsletterBundle/Resources/public/js/*'
-        'bundles/fosjsrouting/js/router.js'
-        'js/fos_js_routes.js'
-        output='js/compiled/main.js' %}
+        '@bootstrap_jquery_js'
+        '@simplemde_js'
+        '@main_js'
+        '@jsrouter_js'
+        output='js/compiled/main.js'
+        filter='jsqueeze' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
+    {% endif %}
 
 
     {% endblock %}

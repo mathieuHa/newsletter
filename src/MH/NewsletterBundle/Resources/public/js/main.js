@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    var jumboHeight = $('.jumbotron').outerHeight();
+    function parallax(){
+        var scrolled = $(window).scrollTop();
+        $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+    }
+    $(window).scroll(function(e){
+        parallax();
+    });
 
     $(".post-sortable").sortable({
         cursor: "move",
@@ -32,16 +40,12 @@ $(document).ready(function () {
     });
 
     var $postFormModal = $('#post-form-modal');
-
     var loading = '<div class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div>';
-
 
     $postFormModal.on('show.bs.modal', function (e) {
         console.log("Open the new One");
         var $btn = $(e.relatedTarget);
-
         var $modalContent = $postFormModal.find('#post-content');
-
         $modalContent.html(loading);
 
         $modalContent.load($btn.attr("href"), function () {
@@ -67,11 +71,11 @@ $(document).ready(function () {
                     success: function (data) {
                         console.log(data);
                         console.log("Name : " + $form.attr('name'));
-                        var $panel = $($btn.parents('.panel-info')[0]);
+                        var $panel = $($btn.parents('.border-info')[0]);
                         switch ($form.attr('name')) {
                             case 'mh_newsletterbundle_rubrique_edit':
                                 console.log("In rubrique edit");
-                                $panel = $($btn.parents('.panel-success')[0]);
+                                $panel = $($btn.parents('.border-success')[0]);
                                 console.log($form.find('#mh_newsletterbundle_rubrique_edit_name').val());
                                 $panel.find('.link-title-rubrique').html($form.find('#mh_newsletterbundle_rubrique_edit_name').val());
                                 break;
@@ -89,7 +93,7 @@ $(document).ready(function () {
                                 });
                                 break;
                             case 'mh_newsletterbundle_rubrique_delete':
-                                $panel = $($btn.parents('.panel-success')[0]);
+                                $panel = $($btn.parents('.border-success')[0]);
                                 $panel.parent().fadeTo("slow", 0.00, function(){
                                     $(this).slideUp("slow", function() {
                                         $(this).remove();
@@ -97,28 +101,28 @@ $(document).ready(function () {
                                 });
                                 break;
                             case 'mh_newsletterbundle_post_add':
-                                $panel = $($btn.parents('.panel-success')[0]);
-                                $newPost ="                                   <div class=\"panel panel-info\">\n" +
-                                    "                                            <div class=\"panel-heading\">\n" +
-                                    "                                                <h4 class=\"panel-title\">\n" +
-                                    "                                                    <a id=\"newposthref\" class=\"link-title\" data-toggle=\"collapse\" data-parent=\"#accordion7\" href=\"#\">\n" +
+                                $panel = $($btn.parents('.border-success')[0]);
+                                $newPost ="                                   <div class=\"card border-info\">\n" +
+                                    "                                            <div class=\"card-header\">\n" +
+                                    "                                                <h4 class=\"card-title\">\n" +
+                                    "                                                    <a id=\"newposthref\" class=\"link-title text-info\" data-toggle=\"collapse\" data-parent=\"#accordion7\" href=\"#\">\n" +
                                     "                                                        aaaa</a>\n" +
                                     "                                                    <div class=\"btn btn-group-xs pull-right\">\n" +
-                                    "                                                    <a id=\"href_edit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
-                                    "                                                    <a id=\"href_delete\" class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
+                                    "                                                    <a id=\"href_edit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
+                                    "                                                    <a id=\"href_delete\" class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
                                     "                                                    </div>\n" +
                                     "                                                </h4>\n" +
                                     "                                                <br>\n" +
                                     "                                            </div>\n" +
-                                    "                                            <div id=\"newpostid\" class=\"panel-collapse collapsed\">\n" +
-                                    "                                                <div class=\"panel-body\">\n" +
+                                    "                                            <div id=\"newpostid\" class=\"collapsed\">\n" +
+                                    "                                                <div class=\"card-body\">\n" +
                                     "                                                    <div class=\"col-md-10 col-xs-9\">\n" +
                                     "                                                        <div class=\"content-update\">\n" +
                                     "                                                        \n" +
                                     "                                                        </div><br>\n" +
                                     "                                                        <a id=\"link-content-new\" href=\"#\" target=\"_blank\" style=\"display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #2c87c3;\">\n" +
                                     "                                                           <span id=\"link-text-content-new\" style=\"color: #2c87c3;text-decoration: none;\"></span></a>\n" +
-                                    "                                                                                                            </div>\n" +
+                                    "                                                        </div>\n" +
                                     "                                                </div>\n" +
                                     "                                            </div>\n" +
                                     "                                        </div>\n" +
@@ -138,29 +142,28 @@ $(document).ready(function () {
                             case 'mh_newsletterbundle_rubrique_add':
                                 $panel = $($btn.parents('.panel-group')[0]);
                                 $newRubrique = "" +
-                                    "                <div class=\"panel panel-success\">\n" +
+                                    "                <div class=\"card border-success\">\n" +
                                     "\n" +
-                                    "                    <div class=\"panel-heading\">\n" +
-                                    "                        <h4 class=\"panel-title\">\n" +
-                                    "                            <a class=\"link-title-rubrique\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#\">\n" +
+                                    "                    <div class=\"card-header\">\n" +
+                                    "                        <h4 class=\"card-title\">\n" +
+                                    "                            <a class=\"link-title-rubrique text-success\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#\">\n" +
                                     "                                </a>\n" +
                                     "                        </h4>\n" +
                                     "                    </div>\n" +
-                                    "                    <div id=\"rubriquenew\" class=\"panel-collapse collapsed\">\n" +
-                                    "                        <div class=\"panel-body\">\n" +
+                                    "                    <div id=\"rubriquenew\" class=\"collapsed\">\n" +
+                                    "                        <div class=\"card-body\">\n" +
                                     "                            <div class=\"panel-group\" id=\"accordionnew\">\n" +
                                     "                                <ul class=\"list-unstyled post-sortable ui-sortable\">\n" +
-                                    "\n" +
                                     "                                </ul>\n" +
                                     "                            </div>\n" +
-                                    "\n" +
                                     "                            <div class=\"row\">\n" +
-                                    "                                <div class=\"col-lg-9 col-md-6 col-xs-6\">\n" +
-                                    "                                    <a id=\"newpostinrub\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\">new Post</a>\n" +
+                                    "                                <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-8\">\n" +
+                                    "                                    <img width='100%' src=\"https://www.esiea.fr/wp-content/uploads/2017/01/actu-ebdo-2.jpg\">\n" +
                                     "                                </div>\n" +
-                                    "                                <div class=\"col-lg-3 col-md-6 col-xs-6\">\n" +
-                                    "                                    <a id=\"newrubedit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
-                                    "                                    <a id=\"newrubdelete\"class=\"btn btn-danger\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
+                                    "                                <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-4 btn-group-sm\">\n" +
+                                    "                                    <a id=\"newpostinrub\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-edit\" aria-hidden=\"true\"> new Post</i></a>\n" +
+                                    "                                    <a id=\"newrubedit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
+                                    "                                    <a id=\"newrubdelete\"class=\"btn btn-danger\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
                                     "                                </div>\n" +
                                     "                            </div>\n" +
                                     "                        </div>\n" +
@@ -169,6 +172,7 @@ $(document).ready(function () {
                                     "                <br>";
                                 $rubrique = $("<li class='ui-sortable' id='new_rubrique_id'></li>").attr('id', 'rubrique_'+data.id).append($newRubrique);
                                 $rubrique.find('.link-title-rubrique').html($form.find('#mh_newsletterbundle_rubrique_add_name').val()).attr('href', '#rubrique'+data.id);
+                                $rubrique.find('img').attr("src", $form.find('#mh_newsletterbundle_rubrique_add_image'));
                                 $rubrique.hide().appendTo($panel.find('#add_rubrique_ul')).slideDown('slow');
                                 $("#newpostinrub").attr("href", Routing.generate('mh_newsletter_post_add', { id: data.id })).attr('id', null);
                                 $("#rubriquenew").attr('id','rubrique'+data.id);
@@ -177,7 +181,6 @@ $(document).ready(function () {
                                 $("#newrubdelete").attr("href", Routing.generate('mh_newsletter_rubrique_delete', { id: data.id })).attr('id', null);
                                 break;
                         }
-                        console.log(data);
                         $postFormModal.modal('hide');
                     },
                     error :function(data){
@@ -191,5 +194,4 @@ $(document).ready(function () {
     }).on('shown.bs.modal', function () {
 
     });
-
 });

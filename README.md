@@ -16,6 +16,10 @@ _Création/Mise à jour du schéma de la BDD_
 ```
 php bin/console doctrine:schema:update --force --dump-sql
 ```
+_Installation des fichiers Assetics_
+```
+php bin/console assetic:dump -e prod
+```
 _Vidage du Cache_
 ```
 php bin/console cache:clear --env=prod --no-debug --no-warmup
@@ -26,7 +30,7 @@ php bin/console cache:warmup --env=prod
 ```
 _Création d'un utilisateur pour la base de donnée_
 ```
-php bin/console fos:create:user
+php bin/console fos:user:create
 ```
 
 ##**Installation en developpement**
@@ -43,6 +47,10 @@ _Création/Mise à jour du schéma de la BDD_
 ```
 php bin/console doctrine:schema:update --force --dump-sql
 ```
+_Installation des fichiers Assetics_
+```
+php bin/console assetic:dump -e prod
+```
 _Vidage du Cache_
 ```
 php bin/console cache:clear --no-warmup
@@ -53,7 +61,7 @@ php bin/console cache:warmup
 ```
 _Création d'un utilisateur pour la base de donnée_
 ```
-php bin/console fos:create:user
+php bin/console fos:user:create
 ```
 
 

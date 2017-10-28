@@ -82,3 +82,43 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite:
+            apply_to: '\.css$'
+        jsqueeze:
+            apply_to: '\.js$'
+    bundles:        [ 'MHNewsletterBundle' ]
+    assets:
+        bootstrap_jquery_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/jquery/jquery.js
+                - %kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js
+                - %kernel.root_dir%/../web/bundles/mhnewsletter/bower_components/popper.js/dist/umd/popper.min.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
+        main_js:
+            inputs:
+                - %kernel.root_dir%/../web/bundles/mhnewsletter/js/main.js
+        simplemde_js:
+            inputs:
+                - %kernel.root_dir%/../web/bundles/mhnewsletter/bower_components/simplemde/dist/simplemde.min.js
+        jsrouter_js:
+            inputs:
+                - %kernel.root_dir%/../web/bundles/fosjsrouting/js/router.js
+                - %kernel.root_dir%/../web/js/fos_js_routes.js
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
+        simplemde_css:
+            inputs:
+                - %kernel.root_dir%/../web/bundles/mhnewsletter/bower_components/simplemde/dist/simplemde.min.css
+        main_css:
+            inputs:
+                - %kernel.root_dir%/../web/bundles/mhnewsletter/css/main.css
+        jquery_ui_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css
+        font_awesome_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/font-awesome/css/font-awesome.min.css
+                - %kernel.root_dir%/../vendor/components/font-awesome/fonts/fontawesome-webfont.ttf
+                - %kernel.root_dir%/../vendor/components/font-awesome/fonts/fontawesome-webfont.woff
+                - %kernel.root_dir%/../vendor/components/font-awesome/fonts/fontawesome-webfont.woff2
+

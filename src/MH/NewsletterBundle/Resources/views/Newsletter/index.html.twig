@@ -5,63 +5,47 @@
 {% endblock %}
 
 {% block bundle_body %}
-        <a href="{{ path('mh_newsletter_create') }}" class="btn btn-primary">Créer une newsletter</a>
     <h2>Liste des newsletters</h2>
     <hr>
-    <ul class="list-unstyled newsletter-sortable">
-        {% for newsletter in listNewsletter | sortbyfield('position') %}
-            <li  id="newsletter_{{ newsletter.id }}">
-                <div class="panel panel-default">
+        <ul class="list-unstyled newsletter-sortable">
+            {% for newsletter in listNewsletter | sortbyfield('position') %}
+                <li id="newsletter_{{ newsletter.id }}">
+                    <div class="card bg-light border-dark">
 
-                    <div class="panel-body" data-toggle="collapse" data-target="#info{{ newsletter.id }}">
-                        <h3>{{ newsletter.name }} {{ newsletter.week }}</h3>
-                        <i>   crée le {{ newsletter.date|date("d/m/Y à H:i:s", "Europe/Paris")|raw }} par {{ newsletter.auteur }}</i>
-                        <br>
-                        <br>
+                        <div class="card-header">
+                            <h4 class="card-title">{{ newsletter.name }} {{ newsletter.week }}</h4>
+                        </div>
 
-                        <div id="info{{ newsletter.id }}" class="collapse">
-                            <i>Dernière Modification {{ newsletter.updateat|date("d/m/Y à H:i:s", "Europe/Paris")|raw }}</i>
-                            <div class="row">
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_edit',{'id':newsletter.id}) }}" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                        Modifier
-                                    </a>
-                                    <br>
+                            <div id="info{{ newsletter.id }}">
+                                <div class="card-body">
+                                    <i> Crée le {{ newsletter.date|date("d/m/Y à H:i:s", "Europe/Paris")|raw }} par {{ newsletter.auteur }}</i><br>
+                                    <i>Dernière Modification {{ newsletter.updateat|date("d/m/Y à H:i:s", "Europe/Paris")|raw }}</i>
+                                    <div class="btn-group-sm float-right">
+                                            <a href="{{ path('mh_newsletter_edit',{'id':newsletter.id}) }}" class="btn btn-warning">
+                                                <i class="fa fa-edit" aria-hidden="true"> Modifier</i>
+                                            </a>
+                                            <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
+                                                <i class="fa fa-print" aria-hidden="true"> Afficher</i>
+
+                                            </a>
+                                            <a href="{{ path('mh_newsletter_download',{'id':newsletter.id}) }}" class="btn btn-success">
+                                                <i class="fa fa-download" aria-hidden="true"> Telecharger</i>
+                                            </a>
+                                            <a href="{{ path('mh_newsletter_copy',{'id':newsletter.id}) }}" class="btn btn-secondary">
+                                                <i class="fa fa-copy" aria-hidden="true"> Copier</i>
+                                            </a>
+                                            <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"> Supprimer</i>
+                                            </a>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
-                                        <span class="glyphicon glyphicon-expand"></span>
-                                        Afficher
-                                    </a>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_download',{'id':newsletter.id}) }}" class="btn btn-success">
-                                        <span class="glyphicon glyphicon-download"></span>
-                                        Telecharger
-                                    </a>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_copy',{'id':newsletter.id}) }}" class="btn btn-warning">
-                                        <span class="glyphicon glyphicon-copy"></span>
-                                        Copier
-                                    </a>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                        Supprimer
-                                    </a>
-                                </div>
-                                <br>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </li>
+                    <br>
+                </li>
 
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
     <hr>
  {% endblock %}
 
