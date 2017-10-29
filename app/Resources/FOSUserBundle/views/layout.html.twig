@@ -9,11 +9,13 @@
         {% block fos_title %}
         {% endblock %}
         </h2>
+    <hr>
+    <br>
 
 
     {% if app.request.hasPreviousSession %}
         {% for type, messages in app.session.flashbag.all() %}
-            <div class="card">
+            <div class="card border-info">
                 <div class="card-body">
                     {% for message in messages %}
                         <div class="alert alert-success">
@@ -25,7 +27,7 @@
         {% endfor %}
     {% endif %}
 
-    <div class="card">
+    <div class="card border-success">
         <div class="card-body">
             {% block fos_user_content %}
             {% endblock fos_user_content %}

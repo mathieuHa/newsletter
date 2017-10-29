@@ -66,7 +66,7 @@ mh_newsletter_copy:
             id:   \d+
 
 mh_newsletter_rubrique_add:
-    path:     /rubrique/add/{id}
+    path:     /add/rubrique/{id}
     defaults:
         _controller: MHNewsletterBundle:Rubrique:add
     requirements:
