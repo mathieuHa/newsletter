@@ -22,7 +22,7 @@
                                     <i>Dernière Modification {{ newsletter.updateat|date("d/m/Y à H:i:s", "Europe/Paris")|raw }}</i>
                                     <div class="btn-group-sm float-right">
                                             <a href="{{ path('mh_newsletter_edit',{'id':newsletter.id}) }}" class="btn btn-warning">
-                                                <i class="fa fa-edit" aria-hidden="true"> Modifier</i>
+                                                <i class="fa fa-edit" style="color: #FFFFFF" aria-hidden="true"> Modifier</i>
                                             </a>
                                             <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
                                                 <i class="fa fa-print" aria-hidden="true"> Afficher</i>
@@ -34,6 +34,9 @@
                                             <a href="{{ path('mh_newsletter_copy',{'id':newsletter.id}) }}" class="btn btn-secondary">
                                                 <i class="fa fa-copy" aria-hidden="true"> Copier</i>
                                             </a>
+                                            <a data-toggle="modal" data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_mail',{'id':newsletter.id}) }}" class="btn btn-dark" target="_blank">
+                                                <i class="fa fa-envelope"  aria-hidden="true"> Mail</i>
+                                             </a>
                                             <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
                                                 <i class="fa fa-trash" aria-hidden="true"> Supprimer</i>
                                             </a>
@@ -46,6 +49,12 @@
 
             {% endfor %}
         </ul>
+    <div id="post-form-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="post-content">
+            </div>
+        </div>
+    </div>
     <hr>
  {% endblock %}
 

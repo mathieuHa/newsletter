@@ -256,35 +256,52 @@ class NewsletterController extends Controller
             ));
     }
 
-    public function mailAction (Newsletter $newsletter)
+    public function mailAction (Request $request, Newsletter $newsletter)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         if (null === $newsletter) {
             throw new NotFoundHttpException("La newsletter n'existe pas");
         }
-
         $user = $this->getUser();
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Email Ebdo Test')
-            ->setFrom('hanotaux@et.esiea.fr')
-            ->setTo("mathieu.hanotaux@gmail.com")
-            ->setBody(
-                $this->renderView(
-                // app/Resources/views/Emails/registration.html.twig
-                    'MHNewsletterBundle:Template:newsletter.html.twig',
-                    array('newsletter' => $newsletter)
-                ),
-                'text/html'
-            )
+        $form = $this
+            ->get('form.factory')
+            ->createNamed('mh_newsletterbundle_mail', UserType::class,$user, array(
+                'action' => $this->generateUrl('mh_newsletter_mail', array('id' => $newsletter->getId()))));
 
-        ;
-        $this->get('mailer')->send($message);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        $this->addFlash(
-            'notice',
-            'Newsletter envoyé à '.$user
-        );
+            $message = \Swift_Message::newInstance()
+                ->setSubject($newsletter->getName() . ' ' . $newsletter->getWeek())
+                ->setFrom('newsletter@hanotaux.fr')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'MHNewsletterBundle:Template:newsletter.html.twig',
+                        array('newsletter' => $newsletter)
+                    ),
+                    'text/html'
+                )
 
-        return $this->redirectToRoute('mh_newsletter_home');
+            ;
+            $this->get('mailer')->send($message);
+            $this
+                ->addFlash(
+                    'notice','Email Envoyé'
+                );
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'op' => 'mail envoyé',
+                'id'=>$newsletter->getId()
+            ));
+        }
+        return $this->render('MHNewsletterBundle:Newsletter:mail.html.twig', array(
+            'form'=>$form->createView(),
+            'newsletter'=>$newsletter,
+            'user' => $user
+        ));
     }
 
     public function orderAction(Request $request)

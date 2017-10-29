@@ -1,23 +1,23 @@
-{% extends "MHNewsletterBundle::layout.html.twig" %}
+{{ form_start(form) }}
+<div class="modal-header">
+    <h4 class="modal-title">Envoi de la Newsletter</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
-{% block title %}
-    Envoi - {{ parent() }}
-{% endblock %}
-
-{% block bundle_body %}
-    <h2>Envoyer une Newsletter</h2>
-    <hr>
-
-    <i>Newsletter : {{ newsletter.name }} crée le {{ newsletter.date|date("m/d/Y à H:i:s", "Europe/Paris") }} par {{ newsletter.auteur }}</i>
-
-    <div class="card">
-        <div class="card-body border-light">
-            <a href="{{ path('mh_newsletter_home') }}" class="btn btn-default">
-                <i class="glyphicon glyphicon-chevron-left"></i>
-                Retour à la liste
-            </a>
-            {{ form(form) }}
+<div class="modal-body">
+    <div class="card border-primary">
+        <div class="card-body">
+            {{ form_row(form.email) }}
         </div>
     </div>
-    <hr>
-{% endblock %}
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+</div>
+
+{{ form_rest(form) }}
+{{ form_end(form) }}

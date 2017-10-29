@@ -71,7 +71,7 @@ $(document).ready(function () {
                     success: function (data) {
                         console.log(data);
                         console.log("Name : " + $form.attr('name'));
-                        var $panel = $($btn.parents('.border-info')[0]);
+                        console.log("BUG");
                         switch ($form.attr('name')) {
                             case 'mh_newsletterbundle_rubrique_edit':
                                 console.log("In rubrique edit");
@@ -80,12 +80,14 @@ $(document).ready(function () {
                                 $panel.find('.link-title-rubrique').html($form.find('#mh_newsletterbundle_rubrique_edit_name').val());
                                 break;
                             case 'mh_newsletterbundle_post_edit':
+                                $panel = $($btn.parents('.border-info')[0]);
                                 $panel.find('.link-title').html($form.find('#mh_newsletterbundle_post_edit_titre').val());
                                 $panel.find('.content-update').html($form.find('#mh_newsletterbundle_post_edit_content').val());
                                 $panel.find('.link-content').attr("href", $form.find('#mh_newsletterbundle_post_edit_lien').val());
                                 $panel.find('.link-text-content').html($form.find('#mh_newsletterbundle_post_edit_textelien').val());
                                 break;
                             case 'mh_newsletterbundle_post_delete':
+                                $panel = $($btn.parents('.border-info')[0]);
                                 $panel.parent().fadeTo("slow", 0.00, function(){
                                     $(this).slideUp("slow", function() {
                                         $(this).remove();
@@ -107,7 +109,7 @@ $(document).ready(function () {
                                     "                                                <h4 class=\"card-title\">\n" +
                                     "                                                    <a id=\"newposthref\" class=\"link-title text-info\" data-toggle=\"collapse\" data-parent=\"#accordion7\" href=\"#\">\n" +
                                     "                                                        aaaa</a>\n" +
-                                    "                                                    <div class=\"btn btn-group-xs pull-right\">\n" +
+                                    "                                                    <div class=\"btn btn-group-sm float-right\">\n" +
                                     "                                                    <a id=\"href_edit\" class=\"btn btn-warning\" title=\"Modifier\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-edit\" aria-hidden=\"true\"> Modifier</i></a>\n" +
                                     "                                                    <a id=\"href_delete\" class=\"btn btn-danger\" title=\"Supprimer\" data-toggle=\"modal\" data-target=\"#post-form-modal\" data-remote=\"false\" href=\"#\"><i class=\"fa fa-trash\" aria-hidden=\"true\"> Supprimer</i></a>\n" +
                                     "                                                    </div>\n" +
@@ -140,7 +142,8 @@ $(document).ready(function () {
                                 $("#href_edit").attr("href", Routing.generate('mh_newsletter_post_edit', { id: data.id })).attr('id', null);
                                 break;
                             case 'mh_newsletterbundle_rubrique_add':
-                                $panel = $($btn.parents('.panel-group')[0]);
+                                $panel = $("#add_rubrique_ul");
+                                console.log("In Rubrique ADD");
                                 $newRubrique = "" +
                                     "                <div class=\"card border-success\">\n" +
                                     "\n" +
@@ -173,7 +176,7 @@ $(document).ready(function () {
                                 $rubrique = $("<li class='ui-sortable' id='new_rubrique_id'></li>").attr('id', 'rubrique_'+data.id).append($newRubrique);
                                 $rubrique.find('.link-title-rubrique').html($form.find('#mh_newsletterbundle_rubrique_add_name').val()).attr('href', '#rubrique'+data.id);
                                 $rubrique.find('img').attr("src", $form.find('#mh_newsletterbundle_rubrique_add_image'));
-                                $rubrique.hide().appendTo($panel.find('#add_rubrique_ul')).slideDown('slow');
+                                $rubrique.hide().appendTo($panel).slideDown('slow');
                                 $("#newpostinrub").attr("href", Routing.generate('mh_newsletter_post_add', { id: data.id })).attr('id', null);
                                 $("#rubriquenew").attr('id','rubrique'+data.id);
                                 $("#accordionnew").attr('id', 'accordion'+data.id);
@@ -185,6 +188,7 @@ $(document).ready(function () {
                     },
                     error :function(data){
                         console.log(data);
+                        console.log("Erreur");
                     }
                 });
                 e.preventDefault();

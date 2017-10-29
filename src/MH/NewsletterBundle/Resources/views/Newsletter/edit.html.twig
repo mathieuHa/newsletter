@@ -16,7 +16,6 @@
             {% for rubrique in newsletter.rubriques | sortbyfield('position') %}
             <li  id="rubrique_{{ rubrique.id }}">
                 <div class="card border-success">
-
                     <div class="card-header">
                         <h4 class="card-title ">
                             <a class="link-title-rubrique text-success" data-toggle="collapse" data-parent="#accordion" href="#rubrique{{ rubrique.id }}">
@@ -27,7 +26,6 @@
                         <div class="card-body">
                             <div class="panel-group" id="accordion{{ rubrique.id }}">
                             <ul class="list-unstyled post-sortable">
-
                                 {% for post in rubrique.posts | sortbyfield('position') %}
                                     <li class="toto" id="post_{{ post.id }}">
                                         <div class="card border-info ">
@@ -66,7 +64,6 @@
                                 {% endfor %}
                             </ul>
                             </div>
-
                             <br>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
@@ -90,30 +87,31 @@
 
             {% endfor %}
             </ul>
-            <br>
-            <div class="row">
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <a class="btn btn-primary" data-toggle="modal"
-                       data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" >Ajouter une rubrique</a>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
-                        <span class="fa fa-expand"></span>
-                        Afficher
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <a class="btn btn-warning" href="{{ path('mh_newsletter_edit_header',  {'id': newsletter.id}    ) }}">Modifier L'entête</a>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <a href="{{ path('mh_newsletter_mail',{'id':newsletter.id}) }}" class="btn btn-default" target="_blank">
-                        <span class="fa fa-envelope"></span>
-                        Mail
-                    </a>
-                </div>
-            </div>
-
         </div>
+
+        <br>
+        <div class="btn-group-sm float-right">
+            <a class="btn btn-primary" data-toggle="modal"
+               data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" ><i class="fa fa-plus" aria-hidden="true"> Ajouter une rubrique</i></a>
+
+            <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
+                <i class="fa fa-print" aria-hidden="true"> Afficher</i>
+
+            </a>
+            <a href="{{ path('mh_newsletter_download',{'id':newsletter.id}) }}" class="btn btn-success">
+                <i class="fa fa-download" aria-hidden="true"> Telecharger</i>
+            </a>
+            <a href="{{ path('mh_newsletter_copy',{'id':newsletter.id}) }}" class="btn btn-secondary">
+                <i class="fa fa-copy" aria-hidden="true"> Copier</i>
+            </a>
+            <a data-toggle="modal" data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_mail',{'id':newsletter.id}) }}" class="btn btn-dark" target="_blank">
+                <i class="fa fa-envelope"  aria-hidden="true"> Mail</i>
+            </a>
+            <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
+                <i class="fa fa-trash" aria-hidden="true"> Supprimer</i>
+            </a>
+        </div>
+
 
     <div id="post-form-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
