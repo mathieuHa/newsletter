@@ -6,6 +6,7 @@ use MH\NewsletterBundle\Entity\Newsletter;
 use MH\NewsletterBundle\Entity\Post;
 use MH\NewsletterBundle\Entity\Rubrique;
 use MH\NewsletterBundle\Entity\User;
+use MH\NewsletterBundle\Form\HeaderType;
 use MH\NewsletterBundle\Form\NewsletterType;
 use MH\NewsletterBundle\Form\RubriqueType;
 use MH\NewsletterBundle\Form\UserType;
@@ -174,33 +175,34 @@ class NewsletterController extends Controller
 
     public function editHeaderAction (Request $request, Newsletter $newsletter)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new BadRequestHttpException('Only ajax accepted');
+        }
         if (null === $newsletter) {
             throw new NotFoundHttpException("La newsletter n'existe pas");
         }
         $form = $this
             ->get('form.factory')
-            ->create(NewsletterType::class,$newsletter);
+            ->createNamed('mh_newsletterbundle_newsletter_edit', HeaderType::class,$newsletter, array(
+                'action' => $this->generateUrl('mh_newsletter_edit_header', array('id' => $newsletter->getId()))));
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
-        {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $newsletter->updateDate();
             $em = $this
                 ->getDoctrine()
                 ->getManager();
-
             $em->persist($newsletter);
             $em->flush();
-
             $this
                 ->addFlash(
-                    'notice','Newsletter mise à jour'
+                    'notice','Entete newsletter modifié'
                 );
-
-            return $this->redirectToRoute('mh_newsletter_edit',array(
+            return new JsonResponse(array(
+                'status' => 'ok',
                 'id'=>$newsletter->getId()
             ));
         }
-
         return $this->render('MHNewsletterBundle:Newsletter:edit-header.html.twig', array(
             'form'=>$form->createView(),
             'newsletter'=>$newsletter,

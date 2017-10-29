@@ -92,23 +92,25 @@
         <br>
         <div class="btn-group-sm float-right">
             <a class="btn btn-primary" data-toggle="modal"
-               data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" ><i class="fa fa-plus" aria-hidden="true"> Ajouter une rubrique</i></a>
+               data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_rubrique_add', {'id': newsletter.id}    ) }}" ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter une rubrique</a>
+            <a class="btn btn-warning" data-toggle="modal"
+               data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_edit_header',  {'id': newsletter.id}    ) }}"><i class="fa fa-edit" aria-hidden="true"></i> Modifier L'entête</a>
 
             <a href="{{ path('mh_newsletter_view',{'id':newsletter.id}) }}" class="btn btn-info" target="_blank">
-                <i class="fa fa-print" aria-hidden="true"> Afficher</i>
+                <i class="fa fa-print" aria-hidden="true"></i> Afficher
 
             </a>
             <a href="{{ path('mh_newsletter_download',{'id':newsletter.id}) }}" class="btn btn-success">
-                <i class="fa fa-download" aria-hidden="true"> Telecharger</i>
+                <i class="fa fa-download" aria-hidden="true"></i> Telecharger
             </a>
             <a href="{{ path('mh_newsletter_copy',{'id':newsletter.id}) }}" class="btn btn-secondary">
-                <i class="fa fa-copy" aria-hidden="true"> Copier</i>
+                <i class="fa fa-copy" aria-hidden="true"></i> Copier
             </a>
             <a data-toggle="modal" data-target="#post-form-modal" data-remote="false" href="{{ path('mh_newsletter_mail',{'id':newsletter.id}) }}" class="btn btn-dark" target="_blank">
-                <i class="fa fa-envelope"  aria-hidden="true"> Mail</i>
+                <i class="fa fa-envelope"  aria-hidden="true"></i> Mail
             </a>
             <a href="{{ path('mh_newsletter_delete',{'id':newsletter.id}) }}" class="btn btn-danger">
-                <i class="fa fa-trash" aria-hidden="true"> Supprimer</i>
+                <i class="fa fa-trash" aria-hidden="true"></i> Supprimer
             </a>
         </div>
 

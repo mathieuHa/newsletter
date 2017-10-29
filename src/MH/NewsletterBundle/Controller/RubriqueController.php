@@ -28,8 +28,6 @@ class RubriqueController extends Controller
         if (null === $rubrique) {
             throw new NotFoundHttpException("La Rubrique n'existe pas");
         }
-
-
         $form = $this
             ->get('form.factory')
             ->createNamed('mh_newsletterbundle_rubrique_edit', RubriqueType::class,$rubrique, array(

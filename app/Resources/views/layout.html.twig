@@ -8,13 +8,13 @@
     {% block stylesheets %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-    {% if app.debug %}
+        {#{% if app.debug %}#}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
         <link rel="stylesheet" href="{{ asset('bundles/mhnewsletter/css/main.css') }}">
-    {% else %}
+        {#{% else %}
        {% stylesheets
        '@jquery_ui_css'
        '@bootstrap_css'
@@ -24,7 +24,7 @@
             output='css/compiled/main.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-    {% endif %}
+    {% endif %}#}
 
 
     {% endblock %}
@@ -99,7 +99,7 @@
 
     {% block javascript %}
 
-    {% if app.debug %}
+        {#{% if app.debug %}#}
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -117,7 +117,8 @@
         <script  src="{{ asset('js/fos_js_routes.js') }}"></script>
         <script  src="{{ asset('bundles/mhnewsletter/bower_components/simplemde/dist/simplemde.min.js') }}"></script>
 
-    {% else %}
+        {#{% else %}
+        <script src="https://use.fontawesome.com/f5bf701764.js"></script>
 
         {% javascripts
         '@bootstrap_jquery_js'
@@ -128,7 +129,7 @@
         filter='jsqueeze' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
-    {% endif %}
+    {% endif %}#}
 
 
     {% endblock %}
