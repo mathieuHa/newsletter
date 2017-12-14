@@ -277,7 +277,8 @@ class NewsletterController extends Controller
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($newsletter->getName() . ' ' . $newsletter->getWeek())
-                ->setFrom('newsletter@hanotaux.fr')
+                ->setFrom('communication@esiea.fr')
+                ->setReplyTo('communication@esiea.fr')
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
